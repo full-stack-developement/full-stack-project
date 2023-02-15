@@ -43,6 +43,109 @@ const theme = {
         random10: "#6100FF",
         random11: "#5700E3",
         random12: "#30007D"
+    },
+
+    font: {
+        "Heading-1-700": {
+            size: "44px",
+            weigth: 700
+        },
+
+        "Heading-2-600": {
+            size: "36px",
+            weigth: 600
+        },
+
+        "Heading-3-600": {
+            size: "32px",
+            weigth: 600
+        },
+
+        "Heading-3-500": {
+            size: "32px",
+            weigth: 500
+        },
+
+        "Heading-4-600": {
+            size: "28px",
+            weigth: 600
+        },
+
+        "Heading-4-500": {
+            size: "28px",
+            weigth: 500
+        },
+
+        "Heading-5-600": {
+            size: "24px",
+            weigth: 600
+        },
+
+        "Heading-5-500": {
+            size: "24px",
+            weigth: 500
+        },
+
+        "Heading-6-600": {
+            size: "20px",
+            weigth: 600
+        },
+
+        "Heading-6-500": {
+            size: "20px",
+            weigth: 500
+        },
+
+        "Heading-7-600": {
+            size: "16px",
+            weigth: 600
+        },
+
+        "Heading-7-500": {
+            size: "16px",
+            weigth: 500
+        },
+
+        "body-1-400": {
+            size: "16px",
+            weigth: 400
+        },
+
+        "body-1-600": {
+            size: "16px",
+            weigth: 600
+        },
+
+        "body-2-400": {
+            size: "14px",
+            weigth: 400
+        },
+
+        "body-2-500": {
+            size: "14px",
+            weigth: 500
+        },
+
+        "button-big-text": {
+            size: "16px",
+            weigth: 600
+        },
+
+        "button-medium-text": {
+            size: "14px",
+            weigth: 600
+        },
+
+        "input-placeholder": {
+            size: "16px",
+            weigth: 400
+        },
+
+        "input-label": {
+            size: "14px",
+            weigth: 500
+        }
     }
+
 }
 export default theme
