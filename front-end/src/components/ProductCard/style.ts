@@ -2,19 +2,19 @@ import styled from "@emotion/styled";
 import theme from "../../theme";
 
 export const ProductCardContainer = styled.div`
-  height: 391px;
-  width: 315px;
+  width: 300px;
+  height: 340px;
 
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-evenly;
+  justify-content: space-between;
 
   padding: 2px 10px;
 
   .vehicleImg {
-    width: 312px;
-    height: 152px;
+    width: 100%;
+    height: 142px;
 
     display: flex;
     align-items: center;
@@ -23,84 +23,44 @@ export const ProductCardContainer = styled.div`
     background-color: ${() => theme.greyScale.grey7};
   }
 
+  .vehicleImg:hover {
+    border: solid 2px ${() => theme.brand.brand1};
+
+    transform: scale(1.05);
+  }
+
   img {
-    width: 260px;
-    height: 150px;
+    width: 90%;
+    height: 100%;
   }
 
   .vehicleTitle {
+    width: 100%;
+    height: 20px;
+
+    margin: 0;
+
     font-family: "Lexend", sans-serif;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 15px;
 
     color: ${() => theme.greyScale.grey0};
   }
 
   .vehicleDescription {
     width: 100%;
-    height: 30px;
+    height: 48px;
 
-    white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
-    text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+
+    margin: 0;
 
     font-family: "Inter", sans-serif;
     font-weight: 400;
     font-size: 14px;
 
     color: ${() => theme.greyScale.grey2};
-  }
-
-  .vehicleAvatar {
-    font-family: "Inter", sans-serif;
-    font-weight: 500;
-    font-size: 14px;
-
-    color: ${() => theme.greyScale.grey2};
-  }
-
-  .vehicleInfo {
-    width: 100%;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .vehicleInfoDetails {
-    width: 100%;
-
-    display: flex;
-    flex-direction: row;
-
-    gap: 10px;
-  }
-
-  .vehicleDetails {
-    width: 51px;
-    height: 32px;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
-    background: ${() => theme.brand.brand4};
-    border-radius: 4px;
-
-    font-family: "Inter", sans-serif;
-    font-weight: 500;
-    font-size: 14px;
-
-    color: ${() => theme.brand.brand2};
-  }
-
-  .vehiclePrice {
-    font-family: "Lexend", sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-
-    color: ${() => theme.greyScale.grey0};
   }
 `;
