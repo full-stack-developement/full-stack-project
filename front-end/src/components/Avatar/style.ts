@@ -21,20 +21,19 @@ export const AvatarContainer = styled.div`
     justify-content: center;
     align-items: center;
 
-    background: ${() => theme.brand.brand2};
+    background: ${() => theme.colors.brand.brand2};
     border-radius: 150px;
 
-    color: ${() => theme.greyScale.whiteFixed};
+    color: ${() => theme.colors.greyScale.whiteFixed};
   }
 
   .avatarType {
-    width: 68px;
     height: 24px;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
 
-    color: ${() => theme.greyScale.grey2};
+    color: ${() => theme.colors.greyScale.grey2};
   }
 `;

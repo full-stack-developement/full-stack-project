@@ -26,14 +26,14 @@ export const VehicleInfoContainer = styled.div`
     justify-content: center;
     align-items: center;
 
-    background: ${() => theme.brand.brand4};
+    background: ${() => theme.colors.brand.brand4};
     border-radius: 4px;
 
     font-family: "Inter", sans-serif;
     font-weight: 500;
     font-size: 14px;
 
-    color: ${() => theme.brand.brand2};
+    color: ${() => theme.colors.brand.brand2};
   }
 
   .vehiclePrice {
@@ -41,6 +41,6 @@ export const VehicleInfoContainer = styled.div`
     font-weight: 500;
     font-size: 16px;
 
-    color: ${() => theme.greyScale.grey0};
+    color: ${() => theme.colors.greyScale.grey0};
   }
 `;
