@@ -1,8 +1,4 @@
-import { extendTheme } from '@chakra-ui/react'
-const theme = extendTheme({
-    components : {
-        
-    },
+const theme = {
     colors : {
         brand: {
         brand1: "#4529E6",
@@ -52,6 +48,10 @@ const theme = extendTheme({
 },
 
     font: {
+        family : {
+            Inter : "Inter, sans-serif",
+            Lexend : "Lexend, sans-serif"
+        },
         "Heading-1-700": {
             size: "44px",
             weight: 700
@@ -151,7 +151,13 @@ const theme = extendTheme({
             size: "14px",
             weight: 500
         }
+    },
+    mediaQueries : {
+        phone : "min-width:340px",
+        tablet : "min-width:600px",
+        desktopSmall : "min-width:992px",
+        desktopLarge : "min-width:1200px",
     }
 
-})
+}
 export default theme
