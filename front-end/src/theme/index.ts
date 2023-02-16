@@ -1,5 +1,10 @@
-const theme = {
-    brand: {
+import { extendTheme } from '@chakra-ui/react'
+const theme = extendTheme({
+    components : {
+        
+    },
+    colors : {
+        brand: {
         brand1: "#4529E6",
         brand2: "#5126EA",
         brand3: "#B0A6F0",
@@ -43,7 +48,8 @@ const theme = {
         random10: "#6100FF",
         random11: "#5700E3",
         random12: "#30007D"
-    },
+    }
+},
 
     font: {
         "Heading-1-700": {
@@ -147,5 +153,5 @@ const theme = {
         }
     }
 
-}
+})
 export default theme
