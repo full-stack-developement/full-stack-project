@@ -1,8 +1,7 @@
-function App() {
+import { InputText } from "./components/InputText";
 
-  return (
-    <></>
-  )
+function App() {
+  return <></>;
 }
 
-export default App
+export default App;
