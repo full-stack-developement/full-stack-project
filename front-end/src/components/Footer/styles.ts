@@ -4,8 +4,9 @@ import theme from "../../theme";
 export const Footer1 = styled.div`
   background-color: ${() => theme.greyScale.grey0};
   color: #ffffff;
-  font-size: ${() => theme.font["body-2-400"]};
-  font-weight: ${() => theme.font["body-2-400"]};
+  font-family: "Inter", sans-serif;
+  font-size: ${() => theme.font["body-2-400"].size};
+  font-weight: ${() => theme.font["body-2-400"].weigth};
 
   display: flex;
   flex-direction: row;
