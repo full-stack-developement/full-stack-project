@@ -28,7 +28,6 @@ export const AvatarContainer = styled.div`
   }
 
   .avatarType {
-    width: 68px;
     height: 24px;
 
     display: flex;
