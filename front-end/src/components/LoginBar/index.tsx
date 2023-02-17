@@ -4,7 +4,7 @@ import {
   BreadcrumbLink,
 } from "@chakra-ui/breadcrumb";
 import { Button, chakra } from "@chakra-ui/react";
-import theme from "../../theme";
+import theme from "../../theme/sc";
 import { useState } from "react";
 import { MenuProfile } from "../MenuProfile";
 
@@ -15,7 +15,7 @@ export const LoginBar = () => {
     <chakra.div
       pl="44px"
       borderLeft="2px solid"
-      borderLeftColor={theme.greyScale.grey6}
+      borderLeftColor={theme.colors.greyScale.grey6}
       height="full"
       display="flex"
       alignItems="center"
