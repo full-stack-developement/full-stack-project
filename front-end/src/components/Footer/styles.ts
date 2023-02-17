@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import theme from "../../theme";
+import {customTheme} from "../../theme"
 
 export const Footer1 = styled.div`
-  background-color: ${() => theme.greyScale.grey0};
+  background-color: ${() => customTheme.colors.greyScale.grey0};
   color: #ffffff;
   font-family: "Inter", sans-serif;
-  font-size: ${() => theme.font["body-2-400"].size};
-  font-weight: ${() => theme.font["body-2-400"].weigth};
+  font-size: ${() => customTheme.font["body-2-400"].size};
+  font-weight: ${() => customTheme.font["body-2-400"].weight};
 
   display: flex;
   flex-direction: row;
@@ -16,7 +16,7 @@ export const Footer1 = styled.div`
   gap: 10px;
 
   button {
-    background-color: ${() => theme.greyScale.grey1};
+    background-color: ${() => customTheme.colors.greyScale.grey1};
     color: #ffffff;
 
     width: 53px;
