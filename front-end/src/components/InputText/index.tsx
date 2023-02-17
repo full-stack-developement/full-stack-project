@@ -1,5 +1,5 @@
 import { Input, InputProps } from "@chakra-ui/react";
-import theme from "../../theme/chakra";
+import theme from "../../theme";
 
 export const InputText = (args: InputProps) => {
   return (
