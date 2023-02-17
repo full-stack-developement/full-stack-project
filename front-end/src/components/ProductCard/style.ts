@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import theme from "../../theme";
+import theme from "../../theme/chakra";
 
 export const ProductCardContainer = styled.div`
   width: 300px;
@@ -20,11 +20,11 @@ export const ProductCardContainer = styled.div`
     align-items: center;
     justify-content: center;
 
-    background-color: ${() => theme.greyScale.grey7};
+    background-color: ${() => theme.colors.greyScale.grey7};
   }
 
   .vehicleImg:hover {
-    border: solid 2px ${() => theme.brand.brand1};
+    border: solid 2px ${() => theme.colors.brand.brand1};
 
     transform: scale(1.05);
   }
@@ -44,7 +44,7 @@ export const ProductCardContainer = styled.div`
     font-weight: 600;
     font-size: 15px;
 
-    color: ${() => theme.greyScale.grey0};
+    color: ${() => theme.colors.greyScale.grey0};
   }
 
   .vehicleDescription {
@@ -61,6 +61,6 @@ export const ProductCardContainer = styled.div`
     font-weight: 400;
     font-size: 14px;
 
-    color: ${() => theme.greyScale.grey2};
+    color: ${() => theme.colors.greyScale.grey2};
   }
 `;
