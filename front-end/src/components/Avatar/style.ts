@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import theme from "../../theme";
+import theme from "../../theme/chakra";
 
 export const AvatarContainer = styled.div`
   display: flex;
@@ -20,20 +20,16 @@ export const AvatarContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    background: ${() => theme.colors.brand.brand2};
+    background: ${props=> props.theme.colors.brand.brand2};
     border-radius: 150px;
-
-    color: ${() => theme.colors.greyScale.whiteFixed};
+    color: ${(props)=> props.theme.colors.greyScale.whiteFixed}
   }
 
   .avatarType {
     height: 24px;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
-
-    color: ${() => theme.colors.greyScale.grey2};
+    color: ${props=> props.theme.colors.greyScale.whiteFixed};
   }
 `;
