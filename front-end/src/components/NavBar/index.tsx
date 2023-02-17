@@ -1,6 +1,7 @@
 import { chakra } from "@chakra-ui/react";
 import logo from "../../assets/logo.svg";
 import { customTheme } from "../../theme";
+import Avatar from "../Avatar";
 import { LoginBar } from "../LoginBar";
 import { NavBarButtons } from "../NavBarButtons";
 

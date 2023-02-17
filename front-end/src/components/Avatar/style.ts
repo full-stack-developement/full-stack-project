@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import theme from "../../theme";
 
 export const AvatarContainer = styled.div`
   display: flex;
@@ -20,9 +19,9 @@ export const AvatarContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: ${props=> props.theme.colors.brand.brand2};
+    background: ${(props) => props.theme.colors.brand.brand2};
     border-radius: 150px;
-    color: ${(props)=> props.theme.colors.greyScale.whiteFixed}
+    color: ${(props) => props.theme.colors.greyScale.whiteFixed};
   }
 
   .avatarType {
@@ -30,6 +29,6 @@ export const AvatarContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: ${props=> props.theme.colors.greyScale.whiteFixed};
+    color: ${(props) => props.theme.colors.greyScale.whiteFixed};
   }
 `;

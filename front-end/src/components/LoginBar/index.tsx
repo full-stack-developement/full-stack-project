@@ -4,7 +4,7 @@ import {
   BreadcrumbLink,
 } from "@chakra-ui/breadcrumb";
 import { Button, chakra } from "@chakra-ui/react";
-import { customTheme } from "../../theme/";
+import { customTheme } from "../../theme";
 import { useState } from "react";
 import { MenuProfile } from "../MenuProfile";
 
