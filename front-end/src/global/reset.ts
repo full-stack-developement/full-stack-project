@@ -35,6 +35,7 @@ body {
 	line-height: 1;
 }
 #root{
+	font-family: "Inter", sans-serif;
     width: 100vw;
     height: 100vh;
 }

@@ -17,23 +17,10 @@ export const StyledDiv = styled.div`
         fill : ${props=> props.theme.colors.brand.brand1}
     }
 
-    @media(${props=>props.theme.mediaQueries.phone}){
-            gap : 0.5rem;
-        }
-
 `
 export const StyledP = styled.p`
     font-family : ${props=>props.theme.font.family.Lexend};
     font-size : ${props=> props.theme.font["body-2-400"].size};
     font-weight : ${props=>props.theme.font["body-2-400"].weight};
     color : ${props=> props.theme.colors.greyScale.grey1};
-
-    @media(min-width:340px){
-            p{
-                font-size : ${props=> props.theme.font["Heading-7-500"].size};
-                font-weight : ${props=>props.theme.font["Heading-7-500"].weight};
-            }
-
-        }
-
 `
