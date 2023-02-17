@@ -1,4 +1,3 @@
-import Avatar from "../Avatar";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -16,7 +15,7 @@ export const LoginBar = () => {
     <chakra.div
       pl="44px"
       borderLeft="2px solid"
-      borderLeftColor={theme.colors.greyScale.grey6}
+      borderLeftColor={theme.greyScale.grey6}
       height="full"
       display="flex"
       alignItems="center"
@@ -32,7 +31,6 @@ export const LoginBar = () => {
           </BreadcrumbItem>
         </Breadcrumb>
       ) : (
-        // <Avatar></Avatar>
         <MenuProfile></MenuProfile>
       )}
     </chakra.div>
