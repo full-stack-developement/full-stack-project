@@ -25,14 +25,12 @@ export const VehicleInfoContainer = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-
     background: ${(props) => props.theme.colors.brand.brand4};
     border-radius: 4px;
 
     font-family: "Inter", sans-serif;
     font-weight: 500;
     font-size: 14px;
-
     color: ${(props) => props.theme.colors.brand.brand2};
   }
 
@@ -40,7 +38,6 @@ export const VehicleInfoContainer = styled.div`
     font-family: "Lexend", sans-serif;
     font-weight: 500;
     font-size: 16px;
-
     color: ${(props) => props.theme.colors.greyScale.whiteFixed};
   }
 `;
