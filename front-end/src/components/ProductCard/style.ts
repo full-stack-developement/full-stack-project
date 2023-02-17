@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import theme from "../../theme/chakra";
+import theme from "../../theme";
 
 export const ProductCardContainer = styled.div`
   width: 300px;
