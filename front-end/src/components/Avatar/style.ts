@@ -21,10 +21,10 @@ export const AvatarContainer = styled.div`
     justify-content: center;
     align-items: center;
 
-    background: ${() => theme.brand.brand2};
+    background: ${props=> props.theme.colors.brand.brand2};
     border-radius: 150px;
 
-    color: ${() => theme.greyScale.whiteFixed};
+    color: ${(props)=> props.theme.colors.greyScale.whiteFixed};
   }
 
   .avatarType {
@@ -34,6 +34,6 @@ export const AvatarContainer = styled.div`
     flex-direction: column;
     justify-content: center;
 
-    color: ${() => theme.greyScale.grey2};
+    color: ${props=> props.theme.colors.greyScale.whiteFixed};
   }
 `;

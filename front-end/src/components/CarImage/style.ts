@@ -12,6 +12,7 @@ export const StyledDiv = styled.div`
         background-size :auto;
     }
     ::before{
+        border-radius : 5px;
         background: linear-gradient(180deg, rgba(0, 0, 0, 0.29) 0%, #000000 100%);
         content: '';
         display: block;

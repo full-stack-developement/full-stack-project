@@ -4,15 +4,18 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import themeChakra from "./theme/chakra";
 import themeSC from "./theme/sc"
-import { ThemeProvider } from "styled-components";
+import {ThemeProvider as ThemeProviderSC} from "styled-components";
+import {ThemeProvider as ThemeProviderEmotion} from "@emotion/react"
 import { Reset } from "./global/reset";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <ChakraProvider theme={themeChakra}>
-      <ThemeProvider theme={themeSC}>
-        <App/>
-      </ThemeProvider>
+      <ThemeProviderSC theme={themeSC}>
+        <ThemeProviderEmotion theme={themeSC}>
+          <App/>
+        </ThemeProviderEmotion>
+      </ThemeProviderSC>
     </ChakraProvider>
     <Reset></Reset>
   </React.StrictMode>
