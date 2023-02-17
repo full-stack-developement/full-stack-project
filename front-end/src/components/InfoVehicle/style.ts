@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import theme from "../../theme";
+import theme from "../../theme/chakra";
 
 export const VehicleInfoContainer = styled.div`
   width: 100%;
@@ -25,22 +25,19 @@ export const VehicleInfoContainer = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-
-    background: ${() => theme.colors.brand.brand4};
+    background: ${(props) => props.theme.colors.brand.brand4};
     border-radius: 4px;
 
     font-family: "Inter", sans-serif;
     font-weight: 500;
     font-size: 14px;
-
-    color: ${() => theme.colors.brand.brand2};
+    color: ${(props) => props.theme.colors.brand.brand2};
   }
 
   .vehiclePrice {
     font-family: "Lexend", sans-serif;
     font-weight: 500;
     font-size: 16px;
-
-    color: ${() => theme.colors.greyScale.grey0};
+    color: ${(props) => props.theme.colors.greyScale.whiteFixed};
   }
 `;
