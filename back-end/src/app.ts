@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import "express-async-errors";
 import express from "express";
+import { Router } from "./routes";
 //import userRouter from "./routes/user.routes";
 //import handleErrorMiddleware from "./middlewares/handleError.middleware";
 
