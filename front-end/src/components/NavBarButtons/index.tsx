@@ -15,9 +15,10 @@ export const NavBarButtons = () => {
         <BreadcrumbLink href="#">Motos</BreadcrumbLink>
       </BreadcrumbItem>
 
-      <BreadcrumbItem isCurrentPage>
+      <BreadcrumbItem>
         <BreadcrumbLink href="#">Leilão</BreadcrumbLink>
       </BreadcrumbItem>
+
       <BreadcrumbItem></BreadcrumbItem>
     </Breadcrumb>
   );

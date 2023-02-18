@@ -1,11 +1,10 @@
-import Avatar from "../Avatar";
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
 } from "@chakra-ui/breadcrumb";
 import { Button, chakra } from "@chakra-ui/react";
-import {customTheme} from "../../theme"
+import { customTheme } from "../../theme";
 import { useState } from "react";
 import { MenuProfile } from "../MenuProfile";
 
@@ -17,7 +16,7 @@ export const LoginBar = () => {
       pl="44px"
       borderLeft="2px solid"
       borderLeftColor={customTheme.colors.greyScale.grey6}
-      height="full"
+      height="80px"
       display="flex"
       alignItems="center"
       onClick={() => setClicked(false)}
@@ -25,10 +24,10 @@ export const LoginBar = () => {
       {clicked ? (
         <Breadcrumb separator="" spacing="22">
           <BreadcrumbItem>
-            <BreadcrumbLink>Fazer Login</BreadcrumbLink>
+            <BreadcrumbLink href="#">Fazer Login</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbItem>
-            <Button variant="outline">Cadastrar</Button>
+            <Button variant="solid">Cadastrar</Button>
           </BreadcrumbItem>
         </Breadcrumb>
       ) : (
