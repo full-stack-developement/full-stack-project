@@ -1,11 +1,15 @@
 import { Button, chakra } from "@chakra-ui/react";
 import { AvatarContainer } from "./style";
 
-const Avatar = () => {
+export interface IAvatarProps {
+  colorClass: string;
+}
+
+const Avatar = (props: IAvatarProps) => {
   return (
     <AvatarContainer>
-      <div className="avatarLetter">R</div>
-      <span className="avatarType">Anunciante</span>
+      <div className='avatarLetter'>R</div>
+      <span className={props.colorClass}>Anunciante</span>
     </AvatarContainer>
   );
 };
