@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-
+import { customTheme } from "../../theme";
 
 export const AvatarContainer = styled.div`
   display: flex;
@@ -20,16 +20,24 @@ export const AvatarContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: ${props=> props.theme.colors.brand.brand2};
+    background: ${customTheme.colors.brand.brand2};
     border-radius: 150px;
-    color: ${(props)=> props.theme.colors.greyScale.whiteFixed}
+    color: ${customTheme.colors.greyScale.whiteFixed};
   }
 
-  .avatarType {
+  .avatarName-grey {
     height: 24px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: ${props=> props.theme.colors.greyScale.whiteFixed};
+    color: ${customTheme.colors.greyScale.grey2};
+  }
+
+  .avatarName-white {
+    height: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: ${customTheme.colors.greyScale.whiteFixed};
   }
 `;
