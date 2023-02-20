@@ -41,4 +41,7 @@ export class Announcement{
 
     @OneToMany(()=> AnnouncementGallery,(gallery)=> gallery.announcement)
     announcementGallery: AnnouncementGallery[]
+
+    @Column("int")
+    user_id : number
 }
