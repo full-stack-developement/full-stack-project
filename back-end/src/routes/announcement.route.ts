@@ -1,11 +1,20 @@
 import { Router } from "express";
-import { announcementPostController } from "../controllers/announcement.controller";
+import {
+  announcementPostController,
+  announcementsListControllers,
+} from "../controllers/announcement.controller";
 import { schemaValidationMiddleware } from "../middlewares/schemaValidation.middleware";
 import { announcementSchema } from "../schemas/announcement.schema";
 
-const announcementRoute = Router()
-const routeName = "/announcement"
+const announcementRoute = Router();
+const routeName = "/announcement";
 
-announcementRoute.post(routeName,schemaValidationMiddleware(announcementSchema),announcementPostController)
+announcementRoute.get(routeName, announcementsListControllers);
 
-export default announcementRoute
+announcementRoute.post(
+  routeName,
+  schemaValidationMiddleware(announcementSchema),
+  announcementPostController
+);
+
+export default announcementRoute;
