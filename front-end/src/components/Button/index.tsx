@@ -10,10 +10,11 @@ interface IButtonProps{
     size : "small" | "small-100%" |"large" | "large-100%" | "large-auto" | "small-auto"
     variant : typeVariants
     onClick?: React.MouseEventHandler<HTMLButtonElement>
+    type?: 'submit' | 'reset' | 'button' | undefined;
 }
 
 export function Button(props: IButtonProps){
     return (
-    <ButtonChakra onClick={props.onClick} variant={props.variant} size={props.size} >{props.text}</ButtonChakra>
+    <ButtonChakra type={props.type} onClick={props.onClick} variant={props.variant} size={props.size} >{props.text}</ButtonChakra>
 )
 }

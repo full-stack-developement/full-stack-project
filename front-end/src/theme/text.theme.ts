@@ -19,6 +19,14 @@ const textTheme : ComponentStyleConfig = {
             fontWeight : "input-label.weight",
             fontSize: "input-label.size"
         },
+        "errors-form":{
+            color : "feedback.alert1",
+            marginTop : "10px",
+            marginBottom: "18px",
+            fontFamily : "inter",
+            fontWeight : "input-label.weight",
+            fontSize: "0.7rem"
+        }
     }
 }
 

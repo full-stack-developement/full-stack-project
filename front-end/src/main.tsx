@@ -6,13 +6,16 @@ import { customTheme, theme } from "./theme";
 import { ThemeProvider as ThemeProviderSC } from "styled-components";
 import { ThemeProvider as ThemeProviderEmotion } from "@emotion/react";
 import { Reset } from "./global/reset";
+import { AnnouncementProvider } from "./contexts/announcement.context";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
       <ThemeProviderSC theme={customTheme}>
         <ThemeProviderEmotion theme={customTheme}>
           <ChakraProvider theme={theme}>
-            <App />
+            <AnnouncementProvider>
+              <App />
+            </AnnouncementProvider>
           </ChakraProvider>
         </ThemeProviderEmotion>
       </ThemeProviderSC>
