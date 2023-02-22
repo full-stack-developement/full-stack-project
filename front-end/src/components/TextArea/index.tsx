@@ -1,17 +1,17 @@
-import { Box, Input, InputProps } from "@chakra-ui/react";
+import { Box, Textarea } from "@chakra-ui/react";
 import {customTheme} from "../../theme"
 import { Text } from "../Text";
 
-interface IInputText{
+interface ITextArea{
   text : string
   placeholder : string;
 }
 
-export const InputText = (props : IInputText) => {
+export const TextArea = (props : ITextArea) => {
   return (
     <Box>
       <Text text={props.text} variant="label-content-form"></Text>
-      <Input
+      <Textarea
         fontFamily={"inter"}
         fontSize={"1rem"}
         placeholder={props.placeholder}
@@ -21,7 +21,7 @@ export const InputText = (props : IInputText) => {
         _hover={{ backgroundColor: customTheme.colors.greyScale.grey8 }}
         color={customTheme.colors.greyScale.grey1}
         _placeholder={{ color: customTheme.colors.greyScale.grey3 }}
-      ></Input>
+      ></Textarea>
     </Box>
   );
 };

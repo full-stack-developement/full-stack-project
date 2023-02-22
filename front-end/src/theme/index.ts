@@ -1,7 +1,14 @@
 import { extendTheme} from '@chakra-ui/react'
+import buttonTheme from './button.theme'
+import modalTheme from './modal.theme'
+import textTheme from './text.theme'
 
 const customTheme ={
-
+    components : {
+        Button : buttonTheme,
+        Modal : modalTheme,
+        Text: textTheme
+    },
     colors : {
         brand: {
         brand1: "#4529E6",
@@ -49,12 +56,11 @@ const customTheme ={
         random12: "#30007D"
     }
 },
+    fonts: {
 
-    font: {
-        family : {
-            Inter : "Inter, sans-serif",
-            Lexend : "Lexend, sans-serif"
-        },
+        inter : "Inter, sans-serif",
+        lexend : "Lexend, sans-serif",
+        
         "Heading-1-700": {
             size: "44px",
             weight: 700
@@ -154,12 +160,214 @@ const customTheme ={
             size: "14px",
             weight: 500
         },
-        mediaQueries : {
-            phone : "min-width:340px",
-            tablet : "min-width:600px",
-            desktopSmall : "min-width:992px",
-            desktopLarge : "min-width:1200px",
-        }
+    },
+    fontSizes : {
+        "Heading-1-700": {
+            size: "44px",
+            weight: 700
+        },
+
+        "Heading-2-600": {
+            size: "36px",
+            weight: 600
+        },
+
+        "Heading-3-600": {
+            size: "32px",
+            weight: 600
+        },
+
+        "Heading-3-500": {
+            size: "32px",
+            weight: 500
+        },
+
+        "Heading-4-600": {
+            size: "28px",
+            weight: 600
+        },
+
+        "Heading-4-500": {
+            size: "28px",
+            weight: 500
+        },
+
+        "Heading-5-600": {
+            size: "24px",
+            weight: 600
+        },
+
+        "Heading-5-500": {
+            size: "24px",
+            weight: 500
+        },
+
+        "Heading-6-600": {
+            size: "20px",
+            weight: 600
+        },
+
+        "Heading-6-500": {
+            size: "20px",
+            weight: 500
+        },
+
+        "Heading-7-600": {
+            size: "16px",
+            weight: 600
+        },
+
+        "Heading-7-500": {
+            size: "16px",
+            weight: 500
+        },
+
+        "body-1-400": {
+            size: "16px",
+            weight: 400
+        },
+
+        "body-1-600": {
+            size: "16px",
+            weight: 600
+        },
+
+        "body-2-400": {
+            size: "14px",
+            weight: 400
+        },
+
+        "body-2-500": {
+            size: "14px",
+            weight: 500
+        },
+
+        "button-big-text": {
+            size: "16px",
+            weight: 600
+        },
+
+        "button-medium-text": {
+            size: "14px",
+            weight: 600
+        },
+
+        "input-placeholder": {
+            size: "16px",
+            weight: 400
+        },
+
+        "input-label": {
+            size: "14px",
+            weight: 500
+        },
+    },
+    fontWeights : {
+        "Heading-1-700": {
+            size: "44px",
+            weight: 700
+        },
+
+        "Heading-2-600": {
+            size: "36px",
+            weight: 600
+        },
+
+        "Heading-3-600": {
+            size: "32px",
+            weight: 600
+        },
+
+        "Heading-3-500": {
+            size: "32px",
+            weight: 500
+        },
+
+        "Heading-4-600": {
+            size: "28px",
+            weight: 600
+        },
+
+        "Heading-4-500": {
+            size: "28px",
+            weight: 500
+        },
+
+        "Heading-5-600": {
+            size: "24px",
+            weight: 600
+        },
+
+        "Heading-5-500": {
+            size: "24px",
+            weight: 500
+        },
+
+        "Heading-6-600": {
+            size: "20px",
+            weight: 600
+        },
+
+        "Heading-6-500": {
+            size: "20px",
+            weight: 500
+        },
+
+        "Heading-7-600": {
+            size: "16px",
+            weight: 600
+        },
+
+        "Heading-7-500": {
+            size: "16px",
+            weight: 500
+        },
+
+        "body-1-400": {
+            size: "16px",
+            weight: 400
+        },
+
+        "body-1-600": {
+            size: "16px",
+            weight: 600
+        },
+
+        "body-2-400": {
+            size: "14px",
+            weight: 400
+        },
+
+        "body-2-500": {
+            size: "14px",
+            weight: 500
+        },
+
+        "button-big-text": {
+            size: "16px",
+            weight: 600
+        },
+
+        "button-medium-text": {
+            size: "14px",
+            weight: 600
+        },
+
+        "input-placeholder": {
+            size: "16px",
+            weight: 400
+        },
+
+        "input-label": {
+            size: "14px",
+            weight: 500
+        },
+    },
+    breakpoints : {
+        phone : "340px",
+        tablet : "600px",
+        desktopSmall : "992px",
+        desktopLarge : "1200px",
     }
 }
 const theme = extendTheme(customTheme)
