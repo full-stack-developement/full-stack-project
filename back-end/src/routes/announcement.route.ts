@@ -1,6 +1,9 @@
+import announcementsListControllers from "../controllers/announcements/announcementsList.controller";
 import { Router } from "express";
 
-const announcementRoute = Router()
-const routeName = "/announcement"
+const announcementRoute = Router();
+const routeName = "/announcement";
 
-export default announcementRoute
+announcementRoute.get(routeName, announcementsListControllers);
+
+export default announcementRoute;

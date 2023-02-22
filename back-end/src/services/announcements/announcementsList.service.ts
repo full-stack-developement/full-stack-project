@@ -1,5 +1,5 @@
 import AppDataSource from "../../data-source";
-import { Announcement } from "./../../entities/announcement";
+import { Announcement } from "../../entities/announcement";
 
 const announcementsListService = async (): Promise<Announcement[]> => {
   const announcementRepository = AppDataSource.getRepository(Announcement);
