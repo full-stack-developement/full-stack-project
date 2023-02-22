@@ -4,12 +4,11 @@ import express from "express";
 import announcementRoute from "./routes/announcement.route";
 //import userRouter from "./routes/user.routes";
 //import handleErrorMiddleware from "./middlewares/handleError.middleware";
+import { mainRoutes } from "./routes";
 
 const app = express();
 app.use(express.json());
 
-//app.use("/users", userRouter);
-app.use("", announcementRoute);
-//app.use(handleErrorMiddleware);
+mainRoutes(app);
 
 export default app;
