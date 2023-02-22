@@ -1,10 +1,12 @@
 import { Box, Input, InputProps } from "@chakra-ui/react";
+import { UseFormRegisterReturn } from "react-hook-form";
 import {customTheme} from "../../theme"
 import { Text } from "../Text";
 
 interface IInputText{
   text : string
   placeholder : string;
+  register? : UseFormRegisterReturn<"title"|"year"|"km"|"price"|"coverImage">
 }
 
 export const InputText = (props : IInputText) => {
@@ -12,6 +14,7 @@ export const InputText = (props : IInputText) => {
     <Box>
       <Text text={props.text} variant="label-content-form"></Text>
       <Input
+        {...props.register}
         fontFamily={"inter"}
         fontSize={"1rem"}
         placeholder={props.placeholder}

@@ -1,10 +1,12 @@
 import { Box, Textarea } from "@chakra-ui/react";
+import { UseFormRegisterReturn } from "react-hook-form";
 import {customTheme} from "../../theme"
 import { Text } from "../Text";
 
 interface ITextArea{
   text : string
   placeholder : string;
+  register? : UseFormRegisterReturn<"description">
 }
 
 export const TextArea = (props : ITextArea) => {
@@ -12,6 +14,7 @@ export const TextArea = (props : ITextArea) => {
     <Box>
       <Text text={props.text} variant="label-content-form"></Text>
       <Textarea
+        {...props.register}
         fontFamily={"inter"}
         fontSize={"1rem"}
         placeholder={props.placeholder}
