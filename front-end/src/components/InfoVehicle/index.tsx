@@ -1,7 +1,7 @@
 import { VehicleInfoContainer } from "./style";
 
 export interface IInfoVehicleProps {
-  colorClass: string;
+  colorClass: "vehiclePrice-grey" | "vehiclePrice-white"
 }
 
 const InfoVehicle = (props: IInfoVehicleProps) => {
