@@ -13,8 +13,8 @@ interface IAnnouncementContext {
   announcements: IAnnouncement[];
   setAnnouncements: Dispatch<SetStateAction<IAnnouncement[]>>;
 }
-interface IAnnouncementProviderProps {
-  children: ReactElement;
+interface IAnnouncementProviderProps{
+    children : ReactElement[] | ReactElement
 }
 
 export const AnnouncementContext = createContext({} as IAnnouncementContext);

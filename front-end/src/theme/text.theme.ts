@@ -34,7 +34,14 @@ const textTheme : ComponentStyleConfig = {
             fontFamily : "inter",
             fontWeight : "body-1-400",
             fontSize: "body-1-400"
-        }
+        },
+        "title-card" :{
+            color : "greyScale.grey1",
+            marginBottom : "28px",
+            fontFamily : "lexend",
+            fontWeight : "Heading-6-600.weight",
+            fontSize: "Heading-6-600.size"
+        },
     }
 }
 

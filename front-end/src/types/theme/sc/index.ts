@@ -1,3 +1,3 @@
-import theme from "../../../theme/sc";
+import {customTheme} from "../../../theme/"
 
-export type ThemeType = typeof theme
+export type ThemeType = typeof customTheme
