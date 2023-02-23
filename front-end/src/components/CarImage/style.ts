@@ -1,6 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { ICardImageProps } from ".";
 
-export const StyledDiv = styled.div`
+export const StyledDiv = styled.div<ICardImageProps>`
     position: relative;
     display: flex;
     align-items : center;
@@ -9,8 +10,12 @@ export const StyledDiv = styled.div`
     height: 100%;
     img{
         background-position:center;
-        background-size :auto;
+        background-size :cover;
     }
+    ${props=> props.background ?
+    `background-color : ${props.galleryImage ? props.theme.colors.greyScale.grey7  : props.theme.colors.greyScale.grey10};`
+
+    :css`
     ::before{
         border-radius : 5px;
         background: linear-gradient(180deg, rgba(0, 0, 0, 0.29) 0%, #000000 100%);
@@ -21,4 +26,7 @@ export const StyledDiv = styled.div`
         position: absolute;
         top: 0;
     }
+    `
+    }
+
 `
