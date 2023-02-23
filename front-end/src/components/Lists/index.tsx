@@ -12,12 +12,19 @@ export const AuctionList = (props: IListTypeProps) => {
   const { announcements } = useContext(AnnouncementContext);
 
   return (
-    <chakra.section className="carousel" overflowX="scroll" overscroll="auto">
+    <chakra.section
+      className="carousel"
+      overflowX="scroll"
+      overscroll="auto"
+      marginBottom="100px"
+    >
       <Text
         fontFamily="fonts.lexend"
         fontWeight="600"
         fontSize="24px"
         lineHeight="30px"
+        marginTop="30px"
+        marginBottom="60px"
       >
         {props.announcementType}
       </Text>
@@ -39,12 +46,19 @@ export const SaleList = (props: IListTypeProps) => {
   const { announcements } = useContext(AnnouncementContext);
 
   return (
-    <chakra.section className="carousel" overflowX="scroll" overscroll="auto">
+    <chakra.section
+      className="carousel"
+      overflowX="scroll"
+      overscroll="auto"
+      marginBottom="100px"
+    >
       <Text
         fontFamily="fonts.lexend"
         fontWeight="600"
         fontSize="24px"
         lineHeight="30px"
+        marginTop="30px"
+        marginBottom="60px"
       >
         {props.announcementType}
       </Text>
