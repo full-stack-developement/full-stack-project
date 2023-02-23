@@ -33,6 +33,22 @@ export const announcementDeleteService = async (id: string): Promise<void> => {
     
   } catch (error) {
     throw new Error(error)
-  }
-      
+  };
 }
+
+export const announcementListEspecificService = async (id: string) => {
+  try {
+    const announcementsRepository = AppDataSource.getRepository(Announcement);
+
+  const announcement= await announcementsRepository.findOneBy({ id });
+
+  if (!announcement) {
+    throw new Error("Announcement is not found"); //400
+  }
+
+  return announcement;
+
+  } catch (error) {
+    throw new Error(error)
+  }
+};

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   announcementDeleteController,
+  announcementListEspecificController,
   announcementPostController,
   announcementsListControllers,
 } from "../controllers/announcement.controller";
@@ -19,5 +20,7 @@ announcementRoute.post(
 );
 
 announcementRoute.delete(routeName + "/:id", announcementDeleteController)
+
+announcementRoute.get(routeName + "/:id", announcementListEspecificController)
 
 export default announcementRoute;
