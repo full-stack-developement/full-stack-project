@@ -1,6 +1,6 @@
 import { NavBar } from "../../components/NavBar";
-import { ProductCardAuction } from "../../components/ProductCardAuction";
-import { Box, Text, Button, Flex, chakra } from "@chakra-ui/react";
+import { Text, Button, Flex, chakra, Box } from "@chakra-ui/react";
+import { AuctionList, SaleList } from "../../components/Lists";
 
 const Home = () => {
   return (
@@ -10,6 +10,7 @@ const Home = () => {
         className="header"
         width="100vw"
         height="500px"
+        marginBottom="100px"
         bg="brand.brand2"
         alignItems="center"
         justifyContent="space-evenly"
@@ -52,36 +53,11 @@ const Home = () => {
           </Flex>
         </Flex>
       </Flex>
-      <chakra.section className="carousel">
-        <Text
-          fontFamily="fonts.lexend"
-          fontWeight="600"
-          fontSize="24px"
-          lineHeight="30px"
-        >
-          Leilão
-        </Text>
-      </chakra.section>
-      <chakra.section className="cars">
-        <Text
-          fontFamily="fonts.lexend"
-          fontWeight="600"
-          fontSize="24px"
-          lineHeight="30px"
-        >
-          Carros
-        </Text>
-      </chakra.section>
-      <chakra.section className="motorcycle">
-        <Text
-          fontFamily="fonts.lexend"
-          fontWeight="600"
-          fontSize="24px"
-          lineHeight="30px"
-        >
-          Motos
-        </Text>
-      </chakra.section>
+      <chakra.main className="main" margin="0 auto 0 60px" overflow="hidden">
+        <AuctionList announcementType="Leilão" />
+        <SaleList announcementType="Carros" />
+        <SaleList announcementType="Motos" />
+      </chakra.main>
     </>
   );
 };

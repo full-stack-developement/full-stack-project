@@ -1,11 +1,15 @@
-import carImg from "../../assets/carImg.png";
 import Avatar from "../Avatar";
+import { useContext } from "react";
+import { AnnouncementContext } from "../../contexts/announcement.context";
 import InfoVehicle from "../InfoVehicle";
 import { Box, Text, Image } from "@chakra-ui/react";
 
-const ProductCard = () => {
-  return (
+const ProductCard = ({ announcementsData }: any) => {
+  const { announcements } = useContext(AnnouncementContext);
+
+  return announcementsData.map((announcement: any, index: any) => (
     <Box
+      key={index}
       width="300px"
       height="340px"
       marginTop="10px"
@@ -28,11 +32,11 @@ const ProductCard = () => {
         }}
       >
         <Image
-          src={carImg}
+          src={announcement.coverImage}
           alt="A car image"
           width="90%"
           height="100%"
-          _hover={{ transform: "scale(1.3)", transition: "650ms" }}
+          _hover={{ transform: "scale(1.1)", transition: "650ms" }}
         />
       </Box>
       <Text
@@ -44,7 +48,7 @@ const ProductCard = () => {
         fontSize="15px"
         color="greyScale.grey0"
       >
-        Product title stays here - max 1 line
+        {announcement.title}
       </Text>
       <Text
         width="100%"
@@ -58,14 +62,12 @@ const ProductCard = () => {
         fontSize="14px"
         color="greyScale.grey2"
       >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, sint
-        vero. Sunt magnam quae et dolorem sequi aut beatae recusandae, assumenda
-        iste ad ab quod, aliquid dignissimos harum qui maiores?
+        {announcement.description}
       </Text>
       <Avatar colorClass="avatarName-grey" />
       <InfoVehicle colorClass="vehiclePrice-grey" />
     </Box>
-  );
+  ));
 };
 
 export default ProductCard;
