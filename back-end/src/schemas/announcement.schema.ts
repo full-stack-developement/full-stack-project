@@ -11,3 +11,14 @@ export const announcementSchema = yup.object({
     coverImage : yup.string().url().required("A imagem de fundo do anúncio é obrigatória"),
     user_id : yup.number().required()
 })
+export const announcementUpdateSchema = yup.object({
+    type : yup.string().oneOf(["sale","auction"],"Tipos de anúncio: sale(venda), auction(leilão)").optional(),
+    vehicleType : yup.string().oneOf(["car","motorcycle"],"Tipos de veículo: car(carro), motorcycle(moto)").optional(),
+    title : yup.string().optional(),
+    year : yup.number().optional(),
+    km : yup.number().optional(),
+    price : yup.number().optional(),
+    description: yup.string().optional(),
+    coverImage : yup.string().url().optional(),
+    user_id : yup.number().optional()
+})
