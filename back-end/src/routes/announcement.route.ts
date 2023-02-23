@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  announcementDeleteController,
   announcementPostController,
   announcementsListControllers,
 } from "../controllers/announcement.controller";
@@ -16,5 +17,7 @@ announcementRoute.post(
   schemaValidationMiddleware(announcementSchema),
   announcementPostController
 );
+
+announcementRoute.delete(routeName + "/:id", announcementDeleteController)
 
 export default announcementRoute;

@@ -17,3 +17,22 @@ export const announcementsListService = async (): Promise<Announcement[]> => {
 
   return announcements;
 };
+
+export const announcementDeleteService = async (id: string): Promise<void> => {
+  try {
+    const announcementRepository = AppDataSource.getRepository(Announcement)
+    const findAnnouncement = await announcementRepository.findOneBy({
+        id
+    })
+        
+    if(!findAnnouncement){
+        throw new Error('Announcement not found') //404
+    }
+
+    await announcementRepository.remove(findAnnouncement)
+    
+  } catch (error) {
+    throw new Error(error)
+  }
+      
+}
