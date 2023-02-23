@@ -26,6 +26,14 @@ const textTheme : ComponentStyleConfig = {
             fontFamily : "inter",
             fontWeight : "input-label.weight",
             fontSize: "0.7rem"
+        },
+        "text-delete": {
+            color : "greyScale.grey2",
+            marginTop : "18px",
+            marginBottom: "18px",
+            fontFamily : "inter",
+            fontWeight : "body-1-400",
+            fontSize: "body-1-400"
         }
     }
 }
