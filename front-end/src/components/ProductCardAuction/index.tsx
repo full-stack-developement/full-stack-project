@@ -5,21 +5,14 @@ import Avatar from "../Avatar";
 import InfoVehicle from "../InfoVehicle";
 import { AiOutlineArrowRight } from "react-icons/ai";
 
-interface ICardImageProps {
-  image: string;
-  title: string;
-  description: string;
-  colorClass: string;
-}
-
-export function ProductCardAuction(props: ICardImageProps) {
-  return (
-    <StyledDiv>
+export function ProductCardAuction({ announcements }: any) {
+  return announcements.map((announcement: any, index: any) => (
+    <StyledDiv key={index}>
       <div className="box__content">
         <Timer></Timer>
         <div className="content">
-          <h3 className="content_title">{props.title}</h3>
-          <p className="content_description">{props.description}</p>
+          <h3 className="content_title">{announcement.title}</h3>
+          <p className="content_description">{announcement.description}</p>
           <Avatar colorClass="avatarName-white"></Avatar>
           <InfoVehicle colorClass="vehiclePrice-white"></InfoVehicle>
         </div>
@@ -28,7 +21,7 @@ export function ProductCardAuction(props: ICardImageProps) {
           <AiOutlineArrowRight className="navigation_icon"></AiOutlineArrowRight>
         </div>
       </div>
-      <CarImage image={props.image}></CarImage>
+      <CarImage image={announcement.coverImage}></CarImage>
     </StyledDiv>
-  );
+  ));
 }
