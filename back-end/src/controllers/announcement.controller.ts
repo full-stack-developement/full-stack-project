@@ -2,6 +2,7 @@ import { Response, Request } from "express";
 import { IAnnouncementRequest } from "../interfaces/requests.interface";
 import {
   announcementDeleteService,
+  announcementListEspecificService,
   announcementPostService,
   announcementsListService,
 } from "../services/announcement.service";
@@ -34,4 +35,17 @@ export async function announcementDeleteController(req: Request, res: Response){
     message: "Announcement deleted",
   });
   
+}
+
+export const announcementListEspecificController = async (req: Request, res: Response) => {
+  try {
+      const id = req.params.id
+
+      const announcement = await announcementListEspecificService(id)
+
+      return res.json(announcement)
+      
+  } catch (error) {
+      return res.status(400).json({message: error.message})
+  }
 }
