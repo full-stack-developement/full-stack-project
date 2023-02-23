@@ -6,7 +6,7 @@ interface IBackgroundProps{
     children : ReactElement
 }
 export function Background(props : IBackgroundProps){
-   return <Box mt={"40px"} width={"100vw"} height={"100vh"} backgroundColor="greyScale.grey8">
+   return <Box mt={"40px"} width={"100vw"} minHeight={"100%"} backgroundColor="greyScale.grey8">
             <Box top={"20"} width={"100%"} height={props.purpleHeight} position={"absolute"} backgroundColor="brand.brand1"></Box>
             {props.children}
           </Box>

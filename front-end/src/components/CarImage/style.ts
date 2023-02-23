@@ -8,10 +8,6 @@ export const StyledDiv = styled.div<ICardImageProps>`
     justify-content : center;
     width: 100%;
     height: 100%;
-    img{
-        background-position:center;
-        background-size :cover;
-    }
     ${props=> props.background ?
     `background-color : ${props.galleryImage ? props.theme.colors.greyScale.grey7  : props.theme.colors.greyScale.grey10};`
 
