@@ -103,7 +103,15 @@ const buttonTheme: ComponentStyleConfig = {
       borderColor: "solid 1px greyScale.grey10",
       fontFamily: "fonts.inter",
     },
+    "buy-vehicle":{
+      backgroundColor : "brand.brand1",
+      color : "greyScale.whiteFixed",
+      borderColor : "brand.brand3",
+      marginTop: "2rem",
+      _hover : {
+          backgroundColor : "brand.brand2"
+      }
+    }
   },
 };
-
-export default buttonTheme;
+export default buttonTheme

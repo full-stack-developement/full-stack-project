@@ -3,7 +3,7 @@ import {Button as ButtonChakra} from "@chakra-ui/react"
 type typeVariants = "open-modal-announcement" | "create-announcement:enable" 
 | "create-announcement:disable" | "exclude/cancel-announcement" 
 | "select-type-announcement:disabled" | "select-type-announcement:enable" 
-| "create-field-image-announcement" | "exclude-announcement" // tipe suas variantes aqui
+| "create-field-image-announcement" | "exclude-announcement" | "buy-vehicle" // tipe suas variantes aqui
 
 interface IButtonProps{
     text: string;

@@ -1,10 +1,13 @@
-import RoutesMain from "./routes";
+import { RouterProvider } from "react-router-dom";
+import { AnnouncementProvider } from "./contexts/announcement.context";
+import { Route } from "./routes";
 
 function App() {
   return (
-    <>
-      <RoutesMain />
-    </>
-  );
+    <AnnouncementProvider>
+        <RouterProvider router={Route}></RouterProvider>
+    </AnnouncementProvider>
+  )
 }
-export default App;
+
+export default App

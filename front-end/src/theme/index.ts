@@ -364,7 +364,7 @@ const customTheme ={
         },
     },
     breakpoints : {
-        phone : "340px",
+        phone : "0px",
         tablet : "600px",
         desktopSmall : "992px",
         desktopLarge : "1200px",

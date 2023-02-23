@@ -1,12 +1,14 @@
-import { Routes, Route } from "react-router-dom";
-import Home from "../pages/home";
+import { createBrowserRouter } from "react-router-dom";
+import { Vehicle } from "../components/Vehicle";
+import { VehiclePage } from "../pages/VehiclePage";
 
-export default function RoutesMain() {
-    return (
-        <Routes>
-            <Route path="*" element={<Home/>} />
-            <Route path="/" element={<Home/>} />
-            <Route path="/home" element={<Home/>} />
-        </Routes>
-    )
-}
+export const Route = createBrowserRouter([{
+
+    path : "vehicle",
+    element : <VehiclePage></VehiclePage>,
+    children : [{
+        path : ":vehicle_id",
+        element : <Vehicle></Vehicle>
+    }]
+},
+])

@@ -15,7 +15,7 @@ export const NavBar = () => {
       borderBottom="2px solid"
       borderBottomColor={customTheme.colors.greyScale.grey6}
     >
-      <chakra.img src={logo} alt="logo" height="full" />
+      <chakra.img src={logo} alt="logo" height="26px" />
       <chakra.div height="full" display="flex" alignItems="center">
         <NavBarButtons />
         <LoginBar />
