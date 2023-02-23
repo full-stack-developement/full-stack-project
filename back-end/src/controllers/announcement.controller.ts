@@ -1,10 +1,11 @@
 import { Response, Request } from "express";
-import { IAnnouncementRequest } from "../interfaces/requests.interface";
+import { IAnnouncementRequest, ISchemaRequest } from "../interfaces/requests.interface";
 import {
   announcementDeleteService,
   announcementListSpecificService,
   announcementPostService,
   announcementsListService,
+  announcementUpdateService,
 } from "../services/announcement.service";
 
 export async function announcementPostController(
@@ -26,6 +27,7 @@ export const announcementsListControllers = async (
 
   return res.status(200).send(announcementList);
 };
+
 
 export async function announcementDeleteController(req: Request, res: Response){
   const { id } = req.params;
@@ -49,3 +51,20 @@ export const announcementListSpecificController = async (req: Request, res: Resp
       return res.status(400).json({message: error.message})
   }
 }
+export const announcementsUpdateController = async (
+  req: IAnnouncementRequest,
+  res: Response
+) => {
+  try{
+    const {id} = req.params
+  
+    const data = req.data
+  
+    const announcementUpdated = await announcementUpdateService(id,data);
+  
+    return res.status(200).send(announcementUpdated);
+  }
+  catch(error){
+    return res.status(400).json({message: error.message})
+  }
+};

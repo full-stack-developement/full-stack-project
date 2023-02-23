@@ -1,6 +1,7 @@
+import { QueryFailedError } from "typeorm";
 import AppDataSource from "../data-source";
 import { Announcement } from "../entities/announcement";
-import { IAnnouncement } from "../interfaces/announcement.inteface";
+import { IAnnouncement } from "../interfaces/announcement.interface";
 
 const announcementRepository = AppDataSource.getRepository(Announcement);
 
@@ -11,7 +12,6 @@ export async function announcementPostService(data: IAnnouncement) {
 }
 
 export const announcementsListService = async (): Promise<Announcement[]> => {
-  const announcementRepository = AppDataSource.getRepository(Announcement);
 
   const announcements = announcementRepository.find();
 
@@ -20,7 +20,6 @@ export const announcementsListService = async (): Promise<Announcement[]> => {
 
 export const announcementDeleteService = async (id: string): Promise<void> => {
   try {
-    const announcementRepository = AppDataSource.getRepository(Announcement)
     const findAnnouncement = await announcementRepository.findOneBy({
         id
     })
@@ -49,6 +48,28 @@ export const announcementListSpecificService = async (id: string) => {
   return announcement;
 
   } catch (error) {
+    throw new Error(error)
+  }
+};
+
+export const announcementUpdateService = async (id: string,data : IAnnouncement) => {
+  try {
+
+  const announcement = await announcementRepository.findOneBy({id : id})
+
+  if (!announcement) {
+    throw new Error("Announcement is not found"); //400
+  }
+  for(const props in data){
+    announcement[props] = data[props]
+  }
+
+  return await announcementRepository.save(announcement)
+
+  } catch (error) {
+    if(error instanceof QueryFailedError){
+      throw new Error("Formato de id inválido")
+    }
     throw new Error(error)
   }
 };
