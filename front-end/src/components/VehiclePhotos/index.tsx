@@ -1,4 +1,4 @@
-import { Box, Center, Wrap, WrapItem} from "@chakra-ui/react";
+import { Box,Wrap, WrapItem} from "@chakra-ui/react";
 import image from "../../assets/carImg.png"
 import { CarImage } from "../CarImage";
 

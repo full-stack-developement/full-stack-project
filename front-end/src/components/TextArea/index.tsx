@@ -1,19 +1,19 @@
-import { Box, Input, InputProps } from "@chakra-ui/react";
+import { Box, Textarea } from "@chakra-ui/react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import {customTheme} from "../../theme"
 import { Text } from "../Text";
 
-interface IInputText{
+interface ITextArea{
   text : string
   placeholder : string;
-  register? : UseFormRegisterReturn<"title"|"year"|"km"|"price"|"coverImage">
+  register? : UseFormRegisterReturn<"description">
 }
 
-export const InputText = (props : IInputText) => {
+export const TextArea = (props : ITextArea) => {
   return (
     <Box>
       <Text text={props.text} variant="label-content-form"></Text>
-      <Input
+      <Textarea
         {...props.register}
         fontFamily={"inter"}
         fontSize={"1rem"}
@@ -24,7 +24,7 @@ export const InputText = (props : IInputText) => {
         _hover={{ backgroundColor: customTheme.colors.greyScale.grey8 }}
         color={customTheme.colors.greyScale.grey1}
         _placeholder={{ color: customTheme.colors.greyScale.grey3 }}
-      ></Input>
+      ></Textarea>
     </Box>
   );
 };

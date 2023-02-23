@@ -1,7 +1,14 @@
 import { extendTheme} from '@chakra-ui/react'
+import buttonTheme from './button.theme'
+import modalTheme from './modal.theme'
+import textTheme from './text.theme'
 
 const customTheme ={
-
+    components : {
+        Button : buttonTheme,
+        Modal : modalTheme,
+        Text: textTheme
+    },
     colors : {
         brand: {
         brand1: "#4529E6",
@@ -49,12 +56,11 @@ const customTheme ={
         random12: "#30007D"
     }
 },
+    fonts: {
 
-    font: {
-        family : {
-            Inter : "Inter, sans-serif",
-            Lexend : "Lexend, sans-serif"
-        },
+        inter : "Inter, sans-serif",
+        lexend : "Lexend, sans-serif",
+        
         "Heading-1-700": {
             size: "44px",
             weight: 700
