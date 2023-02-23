@@ -7,6 +7,7 @@ function App() {
     <AnnouncementProvider>
         <RouterProvider router={Route}></RouterProvider>
     </AnnouncementProvider>
-  );
+  )
 }
-export default App;
+
+export default App
