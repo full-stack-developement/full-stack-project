@@ -7,11 +7,7 @@ interface IAnnouncementContext{
 
 }
 interface IAnnouncementProviderProps{
-<<<<<<< HEAD
     children : ReactElement[] | ReactElement
-=======
-    children : ReactElement
->>>>>>> develop
 }
 
 export const AnnouncementContext = createContext({} as IAnnouncementContext)
