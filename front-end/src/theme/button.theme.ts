@@ -100,6 +100,15 @@ const buttonTheme : ComponentStyleConfig = {
             backgroundColor : "brand.brand4",
             color : "brand.brand1",
             borderColor : "brand.brand4",
+        },
+        "exclude-announcement":{
+            backgroundColor : "feedback.alert3",
+            color : "feedback.alert1",
+            borderColor : "feedback.alert2",
+            _hover : {
+                backgroundColor : "feedback.alert2",
+            }
+
         }
         
     }
