@@ -20,7 +20,7 @@ export const VehicleInfoContainer = styled.div`
   .vehicleDetails {
     width: 51px;
     height: 32px;
-
+    text-align: center; 
     display: flex;
     flex-direction: row;
     justify-content: center;

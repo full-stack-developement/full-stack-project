@@ -15,6 +15,6 @@ interface IButtonProps{
 
 export function Button(props: IButtonProps){
     return (
-    <ButtonChakra type={props.type} onClick={props.onClick} variant={props.variant} size={props.size} >{props.text}</ButtonChakra>
+    <ButtonChakra zIndex={1} type={props.type} onClick={props.onClick} variant={props.variant} size={props.size} >{props.text}</ButtonChakra>
 )
 }

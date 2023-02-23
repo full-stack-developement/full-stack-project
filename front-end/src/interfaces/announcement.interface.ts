@@ -1,9 +1,9 @@
 export interface IAnnouncement{
-
+    id : string  
     type : "sale" | "auction"
     vehicleType : "car" | "motorcycle" 
     title : string
-    year : number
+    year : string
     km : number
     price : number
     description?: string
