@@ -18,9 +18,9 @@ export const VehicleInfoContainer = styled.div`
   }
 
   .vehicleDetails {
-    width: 51px;
+    width: 75px;
     height: 32px;
-    text-align: center; 
+    text-align: center;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -29,8 +29,8 @@ export const VehicleInfoContainer = styled.div`
     border-radius: 4px;
 
     font-family: "Inter", sans-serif;
-    font-weight: 500;
-    font-size: 14px;
+    font-weight: 400;
+    font-size: 13px;
     color: ${customTheme.colors.brand.brand2};
   }
 

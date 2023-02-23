@@ -14,14 +14,19 @@ export function ProductCardAuction({ announcements }: any) {
           <h3 className="content_title">{announcement.title}</h3>
           <p className="content_description">{announcement.description}</p>
           <Avatar colorClass="avatarName-white"></Avatar>
-          <InfoVehicle colorClass="vehiclePrice-white"></InfoVehicle>
+          <InfoVehicle
+            colorClass="vehiclePrice-white"
+            km={announcement.km}
+            price={announcement.price}
+            year={announcement.year}
+          ></InfoVehicle>
         </div>
         <div className="navigation">
           <p className="navigation_title">Acessar página do leilão</p>
           <AiOutlineArrowRight className="navigation_icon"></AiOutlineArrowRight>
         </div>
       </div>
-      <CarImage image={announcement.coverImage}></CarImage>
+      <CarImage image={announcement.coverImage} galleryImage={false}></CarImage>
     </StyledDiv>
   ));
 }

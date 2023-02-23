@@ -1,8 +1,22 @@
 import { NavBar } from "../../components/NavBar";
 import { Text, Button, Flex, chakra, Box } from "@chakra-ui/react";
 import { AuctionList, SaleList } from "../../components/Lists";
+import { useEffect, useContext } from "react";
+import { apiAnnouncement } from "../../api";
+import { AnnouncementContext } from "../../contexts/announcement.context";
 
 const Home = () => {
+  const { announcements, setAnnouncements } = useContext(AnnouncementContext);
+
+  useEffect(() => {
+    apiAnnouncement
+      .get("")
+      .then((res) => {
+        setAnnouncements(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <>
       <NavBar />

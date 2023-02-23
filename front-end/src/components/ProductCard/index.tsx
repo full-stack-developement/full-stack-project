@@ -35,7 +35,7 @@ const ProductCard = ({ announcementsData }: any) => {
           src={announcement.coverImage}
           alt="A car image"
           width="90%"
-          height="100%"
+          height="90%"
           _hover={{ transform: "scale(1.1)", transition: "650ms" }}
         />
       </Box>
@@ -65,7 +65,12 @@ const ProductCard = ({ announcementsData }: any) => {
         {announcement.description}
       </Text>
       <Avatar colorClass="avatarName-grey" />
-      <InfoVehicle colorClass="vehiclePrice-grey" />
+      <InfoVehicle
+        colorClass="vehiclePrice-grey"
+        km={announcement.km}
+        price={announcement.price}
+        year={announcement.year}
+      />
     </Box>
   ));
 };

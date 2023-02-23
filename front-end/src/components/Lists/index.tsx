@@ -34,7 +34,7 @@ export const AuctionList = (props: IListTypeProps) => {
         display="flex"
         flexDirection="row"
         flexWrap="nowrap"
-        gap="15px"
+        gap="25px"
       >
         <ProductCardAuction announcements={announcements} />
       </chakra.div>
