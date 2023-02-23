@@ -36,7 +36,7 @@ export const announcementDeleteService = async (id: string): Promise<void> => {
   };
 }
 
-export const announcementListEspecificService = async (id: string) => {
+export const announcementListSpecificService = async (id: string) => {
   try {
     const announcementsRepository = AppDataSource.getRepository(Announcement);
 

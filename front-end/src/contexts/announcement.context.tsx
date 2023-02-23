@@ -22,15 +22,6 @@ export const AnnouncementContext = createContext({} as IAnnouncementContext);
 export function AnnouncementProvider(props: IAnnouncementProviderProps) {
   const [announcements, setAnnouncements] = useState([] as IAnnouncement[]);
 
-  useEffect(() => {
-    apiAnnouncement
-      .get("")
-      .then((res) => {
-        setAnnouncements(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
   return (
     <AnnouncementContext.Provider value={{ announcements, setAnnouncements }}>
       {props.children}

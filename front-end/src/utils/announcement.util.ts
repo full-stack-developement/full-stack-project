@@ -20,3 +20,18 @@ export async function createAnnouncement(data : FieldValues ){
         }
     }
 }
+export async function getSpecificAnnouncement(id : string){
+    let responseSpecificGet = {data : {} as IAnnouncement,message : "" as "success" | "error"}
+    try{
+        const response = await apiAnnouncement.get(`/${id}`)
+        responseSpecificGet.data = response.data
+        responseSpecificGet.message = "success"
+        return responseSpecificGet
+    }
+    catch(err){
+        if(err instanceof AxiosError){
+            responseSpecificGet.message = "error"
+            return responseSpecificGet
+        }
+    }
+}
