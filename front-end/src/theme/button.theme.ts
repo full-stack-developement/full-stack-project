@@ -109,7 +109,17 @@ const buttonTheme : ComponentStyleConfig = {
                 backgroundColor : "feedback.alert2",
             }
 
-        }
+        },
+        "buy-vehicle":{
+            backgroundColor : "brand.brand1",
+            color : "greyScale.whiteFixed",
+            borderColor : "brand.brand3",
+            marginTop: "2rem",
+            _hover : {
+                backgroundColor : "brand.brand2"
+            }
+        },
+
         
     }
 }

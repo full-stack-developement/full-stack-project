@@ -6,7 +6,7 @@ export function VehiclePage(){
     return (
         <>
             <NavBar></NavBar>
-            <Background purpleHeight="60%">
+            <Background purpleHeight="55%">
                 <Outlet></Outlet>
             </Background>
         </>
