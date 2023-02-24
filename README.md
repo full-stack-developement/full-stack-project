@@ -106,9 +106,10 @@ Para conseguir utilizar o projeto localmente,siga os passos abaixo.
 
 - Projeto Front End Rodando perfeitamente!
 
-### Utilzando o projeto
+### Utilizando o projeto
 
 1.  A Utilização é simples, primeiro crie uma conta na aplicação.
 2.  Com uma conta você terá as seguintes possibilidades:
+    - Criação de anúncios,deleção e update;
     - Criação de uma conta comprador ou anunciante;
-    - Edição e deleção da própria conta(comprador ou anunciante)
+    - Edição e deleção da própria conta(comprador ou anunciante).
