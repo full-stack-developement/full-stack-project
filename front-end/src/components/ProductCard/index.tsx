@@ -1,12 +1,8 @@
 import Avatar from "../Avatar";
-import { useContext } from "react";
-import { AnnouncementContext } from "../../contexts/announcement.context";
 import InfoVehicle from "../InfoVehicle";
 import { Box, Text, Image } from "@chakra-ui/react";
 
 const ProductCard = ({ announcementsData }: any) => {
-  const { announcements } = useContext(AnnouncementContext);
-
   return announcementsData.map((announcement: any, index: any) => (
     <Box
       key={index}

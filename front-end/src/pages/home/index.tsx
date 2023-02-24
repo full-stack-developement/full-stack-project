@@ -1,9 +1,14 @@
 import { NavBar } from "../../components/NavBar";
 import { Text, Button, Flex, chakra, Box } from "@chakra-ui/react";
-import { AuctionList, SaleList } from "../../components/Lists";
+import {
+  AuctionList,
+  CarSaleList,
+  MotorcycleSaleList,
+} from "../../components/Lists";
 import { useEffect, useContext } from "react";
 import { apiAnnouncement } from "../../api";
 import { AnnouncementContext } from "../../contexts/announcement.context";
+import Footer from "../../components/Footer";
 
 const Home = () => {
   const { announcements, setAnnouncements } = useContext(AnnouncementContext);
@@ -16,6 +21,22 @@ const Home = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const announcementTypeCar = announcements.filter((announcement, index) => {
+    if (announcement.vehicleType === "car") {
+      const car = announcement;
+      return car;
+    }
+  });
+
+  const announcementTypeMotorcycle = announcements.filter(
+    (announcement, index) => {
+      if (announcement.vehicleType === "motorcycle") {
+        const motorcycle = announcement;
+        return motorcycle;
+      }
+    }
+  );
 
   return (
     <>
@@ -78,14 +99,17 @@ const Home = () => {
         </Flex>
       </Flex>
       <chakra.main className="main" margin="0 auto 0 60px" overflow="hidden">
-        <AuctionList announcementType="Leilão" />
+        <AuctionList />
         <Box id="carSale">
-          <SaleList announcementType="Carros" />
+          <CarSaleList announcementTypeCar={announcementTypeCar} />
         </Box>
         <Box id="motorcycleSale">
-          <SaleList announcementType="Motos" />
+          <MotorcycleSaleList
+            announcementTypeMotorcycle={announcementTypeMotorcycle}
+          />
         </Box>
       </chakra.main>
+      <Footer />
     </>
   );
 };

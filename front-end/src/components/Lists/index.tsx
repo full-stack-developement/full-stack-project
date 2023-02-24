@@ -4,11 +4,7 @@ import { AnnouncementContext } from "../../contexts/announcement.context";
 import { ProductCardAuction } from "../../components/ProductCardAuction";
 import ProductCard from "../ProductCard";
 
-interface IListTypeProps {
-  announcementType: string;
-}
-
-export const AuctionList = (props: IListTypeProps) => {
+export const AuctionList = () => {
   const { announcements } = useContext(AnnouncementContext);
 
   return (
@@ -26,7 +22,7 @@ export const AuctionList = (props: IListTypeProps) => {
         marginTop="30px"
         marginBottom="60px"
       >
-        {props.announcementType}
+        Leilão
       </Text>
       <chakra.div
         width="fit-content"
@@ -42,12 +38,10 @@ export const AuctionList = (props: IListTypeProps) => {
   );
 };
 
-export const SaleList = (props: IListTypeProps) => {
-  const { announcements } = useContext(AnnouncementContext);
-
+export const CarSaleList = ({ announcementTypeCar }: any) => {
   return (
     <chakra.section
-      className="carousel"
+      className="carsList"
       overflowX="scroll"
       overscroll="auto"
       marginBottom="100px"
@@ -60,7 +54,7 @@ export const SaleList = (props: IListTypeProps) => {
         marginTop="30px"
         marginBottom="60px"
       >
-        {props.announcementType}
+        Carros
       </Text>
       <chakra.div
         width="fit-content"
@@ -70,7 +64,39 @@ export const SaleList = (props: IListTypeProps) => {
         flexWrap="nowrap"
         gap="15px"
       >
-        <ProductCard announcementsData={announcements} />
+        <ProductCard announcementsData={announcementTypeCar} />
+      </chakra.div>
+    </chakra.section>
+  );
+};
+
+export const MotorcycleSaleList = ({ announcementTypeMotorcycle }: any) => {
+  return (
+    <chakra.section
+      className="motorcyclesList"
+      overflowX="scroll"
+      overscroll="auto"
+      marginBottom="100px"
+    >
+      <Text
+        fontFamily="fonts.lexend"
+        fontWeight="600"
+        fontSize="24px"
+        lineHeight="30px"
+        marginTop="30px"
+        marginBottom="60px"
+      >
+        Motos
+      </Text>
+      <chakra.div
+        width="fit-content"
+        height="400px"
+        display="flex"
+        flexDirection="row"
+        flexWrap="nowrap"
+        gap="15px"
+      >
+        <ProductCard announcementsData={announcementTypeMotorcycle} />
       </chakra.div>
     </chakra.section>
   );
