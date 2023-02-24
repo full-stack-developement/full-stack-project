@@ -110,5 +110,5 @@ Para conseguir utilizar o projeto localmente,siga os passos abaixo.
 
 1.  A Utilização é simples, primeiro crie uma conta comprador ou anunciante na aplicação.
 2.  Com uma conta você terá as seguintes possibilidades:
-    - Criação de anúncios,deleção e update;
+    - Com a conta anunciante a criação de anúncios,deleção e update;
     - Edição e deleção da própria conta(comprador ou anunciante).
