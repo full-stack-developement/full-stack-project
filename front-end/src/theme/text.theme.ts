@@ -42,6 +42,21 @@ const textTheme : ComponentStyleConfig = {
             fontWeight : "Heading-6-600.weight",
             fontSize: "Heading-6-600.size"
         },
+        "info-card":{
+            backgroundColor : "brand.brand4",
+            padding : "4px 8px",
+            color : "brand.brand1",
+            fontFamily : "inter",
+            fontWeight : "body-2-500.weight",
+            fontSize: "body-2-500.size"
+        },
+        "profile-description":{
+            marginTop : "2rem",
+            color : "greyScale.grey2",
+            fontFamily : "inter",
+            fontWeight : "body-1-400.weight",
+            fontSize: "body-1-400.size"
+        }
     }
 }
 

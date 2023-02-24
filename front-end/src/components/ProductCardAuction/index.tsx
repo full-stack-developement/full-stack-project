@@ -1,32 +1,60 @@
 import { StyledDiv } from "./style";
 import { CarImage } from "../CarImage";
 import { Timer } from "../Timer";
-import Avatar from "../Avatar";
+import Avatar from "../AvatarIcon";
 import InfoVehicle from "../InfoVehicle";
 import { AiOutlineArrowRight } from "react-icons/ai";
+import { useLocation, useNavigate } from "react-router-dom";
+import { IAnnouncement } from "../../interfaces/announcement.interface";
+import { ButtonGroup } from "@chakra-ui/react";
+import { Button } from "../Button";
+import { ModalAnnouncementUpdate } from "../ModalAnnouncementUpdate";
 
-export function ProductCardAuction({ announcements }: any) {
-  return announcements.map((announcement: any, index: any) => (
-    <StyledDiv key={index}>
+interface IProductCardAuctionProps{
+  id : string
+  title : string
+  description? : string
+  km: number
+  price : number
+  year : string
+  coverImage : string
+}
+
+export function ProductCardAuction(props : IProductCardAuctionProps) {
+
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  return (
+    <StyledDiv>
       <div className="box__content">
         <Timer></Timer>
-        <div className="content">
-          <h3 className="content_title">{announcement.title}</h3>
-          <p className="content_description">{announcement.description}</p>
-          <Avatar colorClass="avatarName-white"></Avatar>
+        <div onClick={()=>{
+      navigate(`/vehicle/${props.id}`)
+    }} className="content">
+          <h3 className="content_title">{props.title}</h3>
+          <p className="content_description">{props.description}</p>
+          <Avatar size="small" colorClass="avatarName-white"></Avatar>
           <InfoVehicle
             colorClass="vehiclePrice-white"
-            km={announcement.km}
-            price={announcement.price}
-            year={announcement.year}
+            km={props.km}
+            price={props.price}
+            year={props.year}
           ></InfoVehicle>
         </div>
         <div className="navigation">
+          {location.pathname == "/profile" ? <ButtonGroup>
+            <ModalAnnouncementUpdate type="auction" vehicle_id={props.id}></ModalAnnouncementUpdate>
+            <Button onClick={()=>{
+      navigate(`/vehicle/${props.id}`)
+    }} size="small-auto" text="Ver como" variant="vehicle-auction"></Button>
+          </ButtonGroup> : <>
           <p className="navigation_title">Acessar página do leilão</p>
           <AiOutlineArrowRight className="navigation_icon"></AiOutlineArrowRight>
+          </>}
         </div>
       </div>
-      <CarImage image={announcement.coverImage} galleryImage={false}></CarImage>
+      <CarImage image={props.coverImage} galleryImage={false}></CarImage>
     </StyledDiv>
-  ));
+  );
 }
