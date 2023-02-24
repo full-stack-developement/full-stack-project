@@ -1,5 +1,5 @@
 import { chakra, Text } from "@chakra-ui/react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AnnouncementContext } from "../../contexts/announcement.context";
 import { ProductCardAuction } from "../../components/ProductCardAuction";
 import ProductCard from "../ProductCard";
@@ -15,6 +15,7 @@ export const AuctionList = (props : IAuctionListProps) => {
   const { announcements } = useContext(AnnouncementContext);
 
   return (
+    announcements.filter((el)=>el.type == "auction").length > 0 &&
     <chakra.section position={"relative"}
       mr={"2rem"}
       ml={"2rem"}
@@ -56,48 +57,84 @@ export const AuctionList = (props : IAuctionListProps) => {
 export const SaleList = (props : ISaleListProps) => {
   const { announcements } = useContext(AnnouncementContext);
 
+  useEffect(()=>{
+    console.log(announcements.filter((el)=> el.type == "sale" && el.vehicleType == "motorcycle"))
+  })
+
   return (
-    <chakra.section position={"relative"}
-      mr={"2rem"}
-      ml={"2rem"}
-      className="carousel"
-      overflowX="scroll"
-      overscroll="auto"
-    >
-      <Text
-        fontFamily="fonts.lexend"
-        fontWeight="600"
-        fontSize="24px"
-        lineHeight="30px"
-        marginTop="30px"
-        marginBottom="30px"
+    <>
+    {announcements.filter((el)=>el.type == "sale" && el.vehicleType == "car" && props.vehicleType == "Carros").length > 0 &&
+      <chakra.section position={"relative"}
+        mr={"2rem"}
+        ml={"2rem"}
+        className="carousel"
+        overflowX="scroll"
+        overscroll="auto"
       >
-        {props.vehicleType}
-      </Text>
-      <chakra.div
-        width="fit-content"
-        height="400px"
-        display="flex"
-        flexDirection="row"
-        flexWrap="nowrap"
-        gap="15px"
-      >
-         {props.vehicleType == "Carros" && announcements.map((announcement)=>{
-          if(announcement.vehicleType == "car" && announcement.type == "sale"){
-            return <ProductCard id={announcement.id} coverImage={announcement.coverImage}
-            km={announcement.km} price={announcement.price} title={announcement.title} year={announcement.year} description={announcement.description}
-            key={announcement.id}></ProductCard>
-          }
-        })}
-        {props.vehicleType == "Motos" && announcements.map((announcement)=>{
-          if(announcement.vehicleType == "motorcycle" && announcement.type == "sale"){
-            return <ProductCard id={announcement.id} coverImage={announcement.coverImage}
-            km={announcement.km} price={announcement.price} title={announcement.title} year={announcement.year} description={announcement.description}
-            key={announcement.id}></ProductCard>
-          }
-        })}
-        
-      </chakra.div>
-    </chakra.section>
+        <Text
+          fontFamily="fonts.lexend"
+          fontWeight="600"
+          fontSize="24px"
+          lineHeight="30px"
+          marginTop="30px"
+          marginBottom="30px"
+        >
+          {props.vehicleType}
+        </Text>
+        <chakra.div
+          width="fit-content"
+          height="400px"
+          display="flex"
+          flexDirection="row"
+          flexWrap="nowrap"
+          gap="15px"
+        >
+          {announcements.map((announcement)=>{
+            if(announcement.vehicleType == "car" && announcement.type == "sale"){
+              return <ProductCard id={announcement.id} coverImage={announcement.coverImage}
+              km={announcement.km} price={announcement.price} title={announcement.title} year={announcement.year} description={announcement.description}
+              key={announcement.id}></ProductCard>
+            }
+          })}
+        </chakra.div>
+      </chakra.section>
+      }
+        {announcements.filter((el)=>el.type == "sale" && el.vehicleType == "motorcycle" && props.vehicleType == "Motos").length > 0 &&
+          <chakra.section position={"relative"}
+          mr={"2rem"}
+          ml={"2rem"}
+          className="carousel"
+          overflowX="scroll"
+          overscroll="auto"
+        >
+          <Text
+            fontFamily="fonts.lexend"
+            fontWeight="600"
+            fontSize="24px"
+            lineHeight="30px"
+            marginTop="30px"
+            marginBottom="30px"
+          >
+            {props.vehicleType}
+          </Text>
+          <chakra.div
+            width="fit-content"
+            height="400px"
+            display="flex"
+            flexDirection="row"
+            flexWrap="nowrap"
+            gap="15px"
+          >
+            {announcements.map((announcement)=>{
+              if(announcement.vehicleType == "motorcycle" && announcement.type == "sale"){
+                return <ProductCard id={announcement.id} coverImage={announcement.coverImage}
+                km={announcement.km} price={announcement.price} title={announcement.title} year={announcement.year} description={announcement.description}
+                key={announcement.id}></ProductCard>
+              }
+            })}
+          </chakra.div>
+        </chakra.section>
+            }  
+    </>
   );
 };
