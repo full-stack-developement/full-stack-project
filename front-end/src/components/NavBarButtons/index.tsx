@@ -6,7 +6,7 @@ import {
 
 export const NavBarButtons = () => {
   return (
-    <Breadcrumb separator="" spacing="22px">
+    <Breadcrumb zIndex={2} separator="" spacing="22px">
       <BreadcrumbItem>
         <BreadcrumbLink href="#">Carros</BreadcrumbLink>
       </BreadcrumbItem>

@@ -1,15 +1,26 @@
-import Avatar from "../Avatar";
-import { useContext } from "react";
-import { AnnouncementContext } from "../../contexts/announcement.context";
+import Avatar from "../AvatarIcon";
 import InfoVehicle from "../InfoVehicle";
-import { Box, Text, Image } from "@chakra-ui/react";
+import { Box, Text, Image, ButtonGroup } from "@chakra-ui/react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Button } from "../Button";
 
-const ProductCard = ({ announcementsData }: any) => {
-  const { announcements } = useContext(AnnouncementContext);
+interface IProductCardProps{
+  id : string
+  title : string
+  description? : string
+  km: number
+  price : number
+  year : string
+  coverImage : string
+}
 
-  return announcementsData.map((announcement: any, index: any) => (
+const ProductCard = (props: IProductCardProps) => {
+
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  return(
     <Box
-      key={index}
       width="300px"
       height="340px"
       marginTop="10px"
@@ -32,7 +43,10 @@ const ProductCard = ({ announcementsData }: any) => {
         }}
       >
         <Image
-          src={announcement.coverImage}
+          onClick={()=>{
+            navigate(`/vehicle/${props.id}`)
+          }}
+          src={props.coverImage}
           alt="A car image"
           width="90%"
           height="90%"
@@ -48,9 +62,9 @@ const ProductCard = ({ announcementsData }: any) => {
         fontSize="15px"
         color="greyScale.grey0"
       >
-        {announcement.title}
+        {props.title}
       </Text>
-      <Text
+      {props.description && <Text
         width="100%"
         height="48px"
         textOverflow="ellipsis"
@@ -62,17 +76,28 @@ const ProductCard = ({ announcementsData }: any) => {
         fontSize="14px"
         color="greyScale.grey2"
       >
-        {announcement.description}
-      </Text>
-      <Avatar colorClass="avatarName-grey" />
+        {props.description}
+      </Text>}
+
+      <Avatar size="small" colorClass="avatarName-grey" />
       <InfoVehicle
         colorClass="vehiclePrice-grey"
-        km={announcement.km}
-        price={announcement.price}
-        year={announcement.year}
+        km={props.km}
+        price={props.price}
+        year={props.year}
       />
+      {location.pathname == "/profile" &&
+        <ButtonGroup>
+            <Button size="small-auto" text="Editar" variant="vehicle-sell"></Button>
+             <Button onClick={()=>{
+      navigate(`/vehicle/${props.id}`)
+    }}  size="small-auto" text="Ver como" variant="vehicle-sell"></Button>
+       </ButtonGroup>
+      }
+
+     
     </Box>
-  ));
+  )
 };
 
 export default ProductCard;

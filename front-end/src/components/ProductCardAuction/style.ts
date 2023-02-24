@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const StyledDiv = styled.div`
   position: relative;
   width: 100%;
-  height: 350px;
 
   .box__content {
     z-index: 1;
@@ -21,6 +20,10 @@ export const StyledDiv = styled.div`
       flex-direction: column;
       justify-content: space-between;
       gap: 1rem;
+
+      :hover{
+        cursor: pointer;
+      }
       .content_title {
         font-family: ${(props) => props.theme.fonts.lexend};
         font-size: ${(props) => props.theme.fonts["Heading-6-600"].size};

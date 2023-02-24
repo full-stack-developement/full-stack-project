@@ -7,6 +7,7 @@ export interface ICardImageProps{
     width? : string;
     height?:string;
     galleryImage : boolean
+    onClick?: React.MouseEventHandler<HTMLDivElement> | undefined
 }
 
 export function CarImage(props : ICardImageProps){

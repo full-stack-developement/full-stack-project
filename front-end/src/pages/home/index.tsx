@@ -78,12 +78,12 @@ const Home = () => {
         </Flex>
       </Flex>
       <chakra.main className="main" margin="0 auto 0 60px" overflow="hidden">
-        <AuctionList announcementType="Leilão" />
+        <AuctionList/>
         <Box id="carSale">
-          <SaleList announcementType="Carros" />
+          <SaleList vehicleType="Carros"/>
         </Box>
         <Box id="motorcycleSale">
-          <SaleList announcementType="Motos" />
+          <SaleList vehicleType="Motos"/>
         </Box>
       </chakra.main>
     </>

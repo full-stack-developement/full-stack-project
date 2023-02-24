@@ -111,6 +111,26 @@ const buttonTheme: ComponentStyleConfig = {
       _hover : {
           backgroundColor : "brand.brand2"
       }
+    },
+    "vehicle-sell":{
+      backgroundColor : "greyScale.whiteFixed",
+      color : "greyScale.grey1",
+      borderColor : "greyScale.grey1",
+      marginTop: "2rem",
+      _hover : {
+          backgroundColor : "greyScale.grey1",
+          color : "greyScale.grey10",
+      }
+    },
+    "vehicle-auction":{
+      backgroundColor : "brand.brand1",
+      color : "greyScale.grey10",
+      borderColor : "greyScale.grey10",
+      marginTop: "0.5rem",
+      _hover : {
+          backgroundColor : "greyScale.grey10",
+          color : "brand.brand1",
+      }
     }
   },
 };
