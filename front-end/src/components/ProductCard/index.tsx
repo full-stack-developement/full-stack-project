@@ -3,6 +3,7 @@ import InfoVehicle from "../InfoVehicle";
 import { Box, Text, Image, ButtonGroup } from "@chakra-ui/react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "../Button";
+import { ModalAnnouncementUpdate } from "../ModalAnnouncementUpdate";
 
 interface IProductCardProps{
   id : string
@@ -88,7 +89,7 @@ const ProductCard = (props: IProductCardProps) => {
       />
       {location.pathname == "/profile" &&
         <ButtonGroup>
-            <Button size="small-auto" text="Editar" variant="vehicle-sell"></Button>
+            <ModalAnnouncementUpdate type="sell" vehicle_id={props.id}></ModalAnnouncementUpdate>
              <Button onClick={()=>{
       navigate(`/vehicle/${props.id}`)
     }}  size="small-auto" text="Ver como" variant="vehicle-sell"></Button>
