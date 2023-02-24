@@ -131,6 +131,15 @@ const buttonTheme: ComponentStyleConfig = {
           backgroundColor : "greyScale.grey10",
           color : "brand.brand1",
       }
+    },
+    "exclude-announcement":{
+      backgroundColor : "feedback.alert3",
+      color : "feedback.alert1",
+      borderColor : "feedback.alert2",
+      _hover : {
+          backgroundColor : "feedback.alert2",
+          color : "feedback.alert1",
+      }
     }
   },
 };

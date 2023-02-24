@@ -9,6 +9,7 @@ import {announcementUpdateSchema } from "../../schemas/announcement.schema";
 import { useContext } from "react";
 import { updateAnnouncement } from "../../utils/announcement.util";
 import { AnnouncementContext } from "../../contexts/announcement.context";
+import { ModalAnnouncementDelete } from "../ModalAnnouncementDelete";
 
 interface IModalAnnouncementUpdateProps{
     vehicle_id : string
@@ -103,8 +104,8 @@ export function ModalAnnouncementUpdate(props : IModalAnnouncementUpdateProps){
                 </Box>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={onClose} variant="exclude/cancel-announcement" size="small-auto" text="Cancelar"></Button>
-            <Button type={"submit"} variant={isValid ? "create-announcement:enable":"create-announcement:disable"} size="small-auto" text="Salvar alterações"></Button>
+            <ModalAnnouncementDelete vehicle_id={props.vehicle_id}></ModalAnnouncementDelete>
+            <Button type={"submit"} variant={isValid ? "create-announcement:enable":"create-announcement:disable"} size="large-100%" text="Salvar alterações"></Button>
           </ModalFooter>
         </form>
         </ModalContent>

@@ -56,3 +56,17 @@ export async function updateAnnouncement(data : FieldValues,id : string){
         }
     }
 }
+export async function deleteAnnouncement(id : string){
+    let responseDelete = {message : "" as "success" | "error"}
+    try{
+        const response = await apiAnnouncement.delete(`/${id}`)
+        responseDelete.message = "success"
+        return responseDelete
+    }
+    catch(err){
+        if(err instanceof AxiosError){
+            responseDelete.message = "error"
+            return responseDelete
+        }
+    }
+}
