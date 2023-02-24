@@ -10,6 +10,8 @@ export const NavBar = () => {
 
   return (
     <chakra.div
+      position={"relative"}
+      zIndex={2}
       display="flex"
       justifyContent="space-between"
       alignItems="center"
