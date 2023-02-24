@@ -3,20 +3,19 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
-  Button,
-  forwardRef,
 } from "@chakra-ui/react";
-import Avatar from "../Avatar";
+import { useNavigate } from "react-router-dom";
+import { sellerMocked } from "../../mocks/user.mock";
+import Avatar from "../AvatarIcon";
 
 export const MenuProfile = () => {
+
+  const navigate = useNavigate()
+
   return (
     <Menu>
       <MenuButton>
-        <Avatar />
+        <Avatar size="small" colorClass="avatarName-grey"/>
       </MenuButton>
       <MenuList width="200px">
         <MenuItem pl="22px" py="8px" mt="13px">
@@ -25,8 +24,10 @@ export const MenuProfile = () => {
         <MenuItem pl="22px" py="8px">
           Editar endereço
         </MenuItem>
-        <MenuItem pl="22px" py="8px">
-          Minhas compras
+        <MenuItem onClick={()=>{
+          navigate("/profile")
+        }} pl="22px" py="8px">
+          {sellerMocked.accountType == "seller" ? "Meus anúncios" : "Minhas compras"}
         </MenuItem>
         <MenuItem pl="22px" py="8px">
           Sair

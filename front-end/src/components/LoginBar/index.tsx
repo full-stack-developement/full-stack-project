@@ -31,7 +31,6 @@ export const LoginBar = () => {
           </BreadcrumbItem>
         </Breadcrumb>
       ) : (
-        // <Avatar></Avatar>
         <MenuProfile></MenuProfile>
       )}
     </chakra.div>

@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { IAnnouncement } from "./announcement.inteface";
+import { IAnnouncement } from "./announcement.interface";
 
 export interface ISchemaRequest extends Request{
     data : Object

@@ -35,3 +35,24 @@ export async function getSpecificAnnouncement(id : string){
         }
     }
 }
+export async function updateAnnouncement(data : FieldValues,id : string){
+    let responseUpdate = {data : {} as IAnnouncement,message : "" as "success" | "error"}
+    try{
+        let validatedData = {} as FieldValues
+        for (const key in data){
+            if(data[key]){
+                validatedData[key] = data[key]
+            }
+        }
+        const response = await apiAnnouncement.patch(`/${id}`,validatedData)
+        responseUpdate.data = response.data
+        responseUpdate.message = "success"
+        return responseUpdate
+    }
+    catch(err){
+        if(err instanceof AxiosError){
+            responseUpdate.message = "error"
+            return responseUpdate
+        }
+    }
+}

@@ -5,38 +5,44 @@ import { InputText } from "../InputText";
 import { TextArea } from "../TextArea";
 import { useForm } from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup"
-import { announcementSchema } from "../../schemas/announcement.schema";
-import { useContext, useEffect } from "react";
-import { createAnnouncement } from "../../utils/announcement.util";
+import {announcementUpdateSchema } from "../../schemas/announcement.schema";
+import { useContext } from "react";
+import { updateAnnouncement } from "../../utils/announcement.util";
 import { AnnouncementContext } from "../../contexts/announcement.context";
 
-export function ModalAnnouncement(){
+interface IModalAnnouncementUpdateProps{
+    vehicle_id : string
+    type : "sell" | "auction"
+}
+
+export function ModalAnnouncementUpdate(props : IModalAnnouncementUpdateProps){
     const { isOpen, onOpen, onClose} = useDisclosure()
 
-    const {handleSubmit,register,setValue,formState : {errors,isValid},watch} = useForm({resolver : yupResolver(announcementSchema)})
+    const {handleSubmit,register,setValue,formState : {errors,isValid},watch} = useForm({resolver : yupResolver(announcementUpdateSchema)})
 
     const type = watch("type")
     const typeVehicle = watch("vehicleType")
 
     const {announcements,setAnnouncements} = useContext(AnnouncementContext)
 
-    useEffect(()=>{
-        console.log(announcements)
-    })
-
     return(        
     <>
-        <Button onClick={onOpen} variant="open-modal-announcement" size="large" text="Criar anúncio"></Button>
+        <Button onClick={onOpen} variant={props.type == "auction" ? "vehicle-auction" : "vehicle-sell"} size="small-auto" text="Editar"></Button>
         <Modal variant={"create-auction"} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Criar Anúncio</ModalHeader>
+          <ModalHeader>Editar Anúncio</ModalHeader>
           <ModalCloseButton />
 
         <form onSubmit={handleSubmit(async(data)=>{
-            const response = await createAnnouncement(data)
+            const response = await updateAnnouncement(data,props.vehicle_id)
             if(response?.message == "success"){
-                setAnnouncements((oldArray)=> [...oldArray,response.data])
+                setAnnouncements((old)=> {
+                    const copyOld = [...old]
+                    const indexValue = copyOld.findIndex((el)=> el.id == props.vehicle_id)
+                    copyOld.splice(indexValue,1,response.data)
+                    return copyOld
+                })
                 onClose()
             }
         })}>
@@ -98,7 +104,7 @@ export function ModalAnnouncement(){
           </ModalBody>
           <ModalFooter>
             <Button onClick={onClose} variant="exclude/cancel-announcement" size="small-auto" text="Cancelar"></Button>
-            <Button type={"submit"} variant={isValid ? "create-announcement:enable":"create-announcement:disable"} size="small-auto" text="Criar anúncio"></Button>
+            <Button type={"submit"} variant={isValid ? "create-announcement:enable":"create-announcement:disable"} size="small-auto" text="Salvar alterações"></Button>
           </ModalFooter>
         </form>
         </ModalContent>

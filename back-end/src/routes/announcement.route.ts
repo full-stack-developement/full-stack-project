@@ -4,9 +4,10 @@ import {
   announcementListSpecificController,
   announcementPostController,
   announcementsListControllers,
+  announcementsUpdateController,
 } from "../controllers/announcement.controller";
 import { schemaValidationMiddleware } from "../middlewares/schemaValidation.middleware";
-import { announcementSchema } from "../schemas/announcement.schema";
+import { announcementSchema, announcementUpdateSchema } from "../schemas/announcement.schema";
 
 const announcementRoute = Router();
 const routeName = "/announcement";
@@ -22,5 +23,7 @@ announcementRoute.post(
 announcementRoute.delete(routeName + "/:id", announcementDeleteController)
 
 announcementRoute.get(routeName + "/:id", announcementListSpecificController)
+
+announcementRoute.patch(routeName + "/:id",schemaValidationMiddleware(announcementUpdateSchema),announcementsUpdateController)
 
 export default announcementRoute;

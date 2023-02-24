@@ -1,5 +1,6 @@
 export const clientMocked = {
-    user_id : 1,
+    user_id : "1",
+    name : "John Doe",
     accountType : "client",
     email : "client@gmail.com",
     cpf : "123.456.789-09",
@@ -8,8 +9,9 @@ export const clientMocked = {
     description : "i am the client",
 }
 export const sellerMocked = {
-    user_id : 2,
+    user_id : "2",
     accountType : "seller",
+    name : "John Doe",
     email : "client@gmail.com",
     cpf : "123.456.789-09",
     phone : "(33)9945657865",

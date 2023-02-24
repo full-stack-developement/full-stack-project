@@ -4,15 +4,24 @@ import { AnnouncementContext } from "../../contexts/announcement.context";
 import { ProductCardAuction } from "../../components/ProductCardAuction";
 import ProductCard from "../ProductCard";
 
-export const AuctionList = () => {
+interface IAuctionListProps {}
+
+interface ISaleListProps {
+  vehicleType: "Carros" | "Motos";
+}
+
+export const AuctionList = (props: IAuctionListProps) => {
   const { announcements } = useContext(AnnouncementContext);
 
   return (
     <chakra.section
+      position={"relative"}
+      mr={"2rem"}
+      ml={"2rem"}
+      mb={"3rem"}
       className="carousel"
       overflowX="scroll"
       overscroll="auto"
-      marginBottom="100px"
     >
       <Text
         fontFamily="fonts.lexend"
@@ -20,7 +29,7 @@ export const AuctionList = () => {
         fontSize="24px"
         lineHeight="30px"
         marginTop="30px"
-        marginBottom="60px"
+        marginBottom="30px"
       >
         Leilão
       </Text>
@@ -32,19 +41,38 @@ export const AuctionList = () => {
         flexWrap="nowrap"
         gap="25px"
       >
-        <ProductCardAuction announcements={announcements} />
+        {announcements.map((announcement) => {
+          if (announcement.type == "auction") {
+            return (
+              <ProductCardAuction
+                id={announcement.id}
+                coverImage={announcement.coverImage}
+                km={announcement.km}
+                price={announcement.price}
+                title={announcement.title}
+                year={announcement.year}
+                description={announcement.description}
+                key={announcement.id}
+              ></ProductCardAuction>
+            );
+          }
+        })}
       </chakra.div>
     </chakra.section>
   );
 };
 
-export const CarSaleList = ({ announcementTypeCar }: any) => {
+export const SaleList = (props: ISaleListProps) => {
+  const { announcements } = useContext(AnnouncementContext);
+
   return (
     <chakra.section
-      className="carsList"
+      position={"relative"}
+      mr={"2rem"}
+      ml={"2rem"}
+      className="carousel"
       overflowX="scroll"
       overscroll="auto"
-      marginBottom="100px"
     >
       <Text
         fontFamily="fonts.lexend"
@@ -52,9 +80,9 @@ export const CarSaleList = ({ announcementTypeCar }: any) => {
         fontSize="24px"
         lineHeight="30px"
         marginTop="30px"
-        marginBottom="60px"
+        marginBottom="30px"
       >
-        Carros
+        {props.vehicleType}
       </Text>
       <chakra.div
         width="fit-content"
@@ -64,39 +92,46 @@ export const CarSaleList = ({ announcementTypeCar }: any) => {
         flexWrap="nowrap"
         gap="15px"
       >
-        <ProductCard announcementsData={announcementTypeCar} />
-      </chakra.div>
-    </chakra.section>
-  );
-};
-
-export const MotorcycleSaleList = ({ announcementTypeMotorcycle }: any) => {
-  return (
-    <chakra.section
-      className="motorcyclesList"
-      overflowX="scroll"
-      overscroll="auto"
-      marginBottom="100px"
-    >
-      <Text
-        fontFamily="fonts.lexend"
-        fontWeight="600"
-        fontSize="24px"
-        lineHeight="30px"
-        marginTop="30px"
-        marginBottom="60px"
-      >
-        Motos
-      </Text>
-      <chakra.div
-        width="fit-content"
-        height="400px"
-        display="flex"
-        flexDirection="row"
-        flexWrap="nowrap"
-        gap="15px"
-      >
-        <ProductCard announcementsData={announcementTypeMotorcycle} />
+        {props.vehicleType == "Carros" &&
+          announcements.map((announcement) => {
+            if (
+              announcement.vehicleType == "car" &&
+              announcement.type == "sale"
+            ) {
+              return (
+                <ProductCard
+                  id={announcement.id}
+                  coverImage={announcement.coverImage}
+                  km={announcement.km}
+                  price={announcement.price}
+                  title={announcement.title}
+                  year={announcement.year}
+                  description={announcement.description}
+                  key={announcement.id}
+                ></ProductCard>
+              );
+            }
+          })}
+        {props.vehicleType == "Motos" &&
+          announcements.map((announcement) => {
+            if (
+              announcement.vehicleType == "motorcycle" &&
+              announcement.type == "sale"
+            ) {
+              return (
+                <ProductCard
+                  id={announcement.id}
+                  coverImage={announcement.coverImage}
+                  km={announcement.km}
+                  price={announcement.price}
+                  title={announcement.title}
+                  year={announcement.year}
+                  description={announcement.description}
+                  key={announcement.id}
+                ></ProductCard>
+              );
+            }
+          })}
       </chakra.div>
     </chakra.section>
   );
