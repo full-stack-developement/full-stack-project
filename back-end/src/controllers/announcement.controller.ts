@@ -1,5 +1,8 @@
 import { Response, Request } from "express";
-import { IAnnouncementRequest, ISchemaRequest } from "../interfaces/requests.interface";
+import {
+  IAnnouncementRequest,
+  ISchemaRequest,
+} from "../interfaces/requests.interface";
 import {
   announcementDeleteService,
   announcementListSpecificService,
@@ -16,7 +19,7 @@ export async function announcementPostController(
 
   const response = await announcementPostService(data);
 
-  return res.status(200).json(response);
+  return res.status(201).json(response);
 }
 
 export const announcementsListControllers = async (
@@ -28,43 +31,45 @@ export const announcementsListControllers = async (
   return res.status(200).send(announcementList);
 };
 
-
-export async function announcementDeleteController(req: Request, res: Response){
+export async function announcementDeleteController(
+  req: Request,
+  res: Response
+) {
   const { id } = req.params;
 
   const announcementDeleted = await announcementDeleteService(id);
   return res.status(204).json({
     message: "Announcement deleted",
   });
-  
 }
 
-export const announcementListSpecificController = async (req: Request, res: Response) => {
+export const announcementListSpecificController = async (
+  req: Request,
+  res: Response
+) => {
   try {
-      const id = req.params.id
+    const id = req.params.id;
 
-      const announcement = await announcementListSpecificService(id)
+    const announcement = await announcementListSpecificService(id);
 
-      return res.json(announcement)
-      
+    return res.json(announcement);
   } catch (error) {
-      return res.status(400).json({message: error.message})
+    return res.status(400).json({ message: error.message });
   }
-}
+};
 export const announcementsUpdateController = async (
   req: IAnnouncementRequest,
   res: Response
 ) => {
-  try{
-    const {id} = req.params
-  
-    const data = req.data
-  
-    const announcementUpdated = await announcementUpdateService(id,data);
-  
+  try {
+    const { id } = req.params;
+
+    const data = req.data;
+
+    const announcementUpdated = await announcementUpdateService(id, data);
+
     return res.status(200).send(announcementUpdated);
-  }
-  catch(error){
-    return res.status(400).json({message: error.message})
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
   }
 };
