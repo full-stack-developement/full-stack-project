@@ -8,3 +8,7 @@ export interface ISchemaRequest extends Request{
 export interface IAnnouncementRequest extends Request{
     data : IAnnouncement
 }
+
+export interface IUserRequest extends Request{
+    user_id : string
+}
