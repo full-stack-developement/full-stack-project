@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
 import { User } from "./user";
 import { Vehicle } from "./vehicle";
 
@@ -15,4 +15,10 @@ export class VehicleComments{
 
     @ManyToOne(()=> User,(user)=> user.comments)
     user : User
+
+    @CreateDateColumn({type: "timestamp"})
+    created_at : Date
+
+    @UpdateDateColumn({type : "timestamp"})
+    updated_at : Date
 }
