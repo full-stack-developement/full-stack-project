@@ -1,6 +1,6 @@
 import { QueryFailedError } from "typeorm";
 import AppDataSource from "../data-source";
-import { Announcement } from "../entities/announcement";
+import { Announcement } from "../entities/vehicle";
 import { IAnnouncement } from "../interfaces/announcement.interface";
 
 const announcementRepository = AppDataSource.getRepository(Announcement);
