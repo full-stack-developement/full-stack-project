@@ -1,13 +1,15 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { AnnouncementGallery } from "./announcement_galery";
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { User } from "./user";
+import { VehicleComments } from "./vehicle_comments";
+import { VehicleGallery } from "./vehicle_gallery";
 
 @Entity()
-export class Announcement{
+export class Vehicle{
     @PrimaryGeneratedColumn("uuid")
     id : string
 
     @Column("varchar")
-    type : "sale" | "auction"
+    announcementType : "sale" | "auction"
 
     @Column("varchar")
     vehicleType : "car" | "motorcycle" 
@@ -39,9 +41,13 @@ export class Announcement{
     @Column("boolean",{default : true})
     isActive : boolean
 
-    @OneToMany(()=> AnnouncementGallery,(gallery)=> gallery.announcement)
-    announcementGallery: AnnouncementGallery[]
+    @OneToMany(()=> VehicleGallery,(gallery)=> gallery.vehicle)
+    gallery : VehicleGallery[]
 
-    @Column("int")
-    user_id : number
+    @ManyToOne(()=> User,(user)=> user.vehicles)
+    user : User
+
+    @OneToMany(()=> VehicleComments,(VehicleComments)=> VehicleComments.vehicle )
+    comments : VehicleComments[]
 }
+    
