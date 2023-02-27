@@ -15,42 +15,44 @@ export const AuctionList = (props : IAuctionListProps) => {
   const { announcements } = useContext(AnnouncementContext);
 
   return (
-    announcements.filter((el)=>el.type == "auction").length > 0 &&
-    <chakra.section position={"relative"}
-      mr={"2rem"}
-      ml={"2rem"}
-      mb={"3rem"}
-      className="carousel"
-      overflowX="scroll"
-      overscroll="auto"
-    >
-      <Text
-        fontFamily="fonts.lexend"
-        fontWeight="600"
-        fontSize="24px"
-        lineHeight="30px"
-        marginTop="30px"
-        marginBottom="30px"
+    <>
+      {announcements.filter((el)=>el.type == "auction").length > 0 &&
+      <chakra.section position={"relative"}
+        mr={"2rem"}
+        ml={"2rem"}
+        mb={"3rem"}
+        className="carousel"
+        overflowX="scroll"
+        overscroll="auto"
       >
-        Leilão
-      </Text>
-      <chakra.div
-        width="fit-content"
-        height="400px"
-        display="flex"
-        flexDirection="row"
-        flexWrap="nowrap"
-        gap="25px"
-      >
-        {announcements.map((announcement)=>{
-          if(announcement.type == "auction"){
-            return <ProductCardAuction id={announcement.id} coverImage={announcement.coverImage}
-            km={announcement.km} price={announcement.price} title={announcement.title} year={announcement.year} description={announcement.description}
-            key={announcement.id}></ProductCardAuction>
-          }
-        })}
-      </chakra.div>
-    </chakra.section>
+        <Text
+          fontFamily="fonts.lexend"
+          fontWeight="600"
+          fontSize="24px"
+          lineHeight="30px"
+          marginTop="30px"
+          marginBottom="30px"
+        >
+          Leilão
+        </Text>
+        <chakra.div
+          width="fit-content"
+          height="400px"
+          display="flex"
+          flexDirection="row"
+          flexWrap="nowrap"
+          gap="25px"
+        >
+          {announcements.map((announcement)=>{
+            if(announcement.type == "auction"){
+              return <ProductCardAuction id={announcement.id} coverImage={announcement.coverImage}
+              km={announcement.km} price={announcement.price} title={announcement.title} year={announcement.year} description={announcement.description}
+              key={announcement.id}></ProductCardAuction>
+            }
+          })}
+        </chakra.div>
+      </chakra.section>}
+    </>
   );
 };
 
