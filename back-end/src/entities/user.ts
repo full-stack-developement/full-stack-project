@@ -13,6 +13,9 @@ export class User{
     accountType : "seller" | "buyer"
 
     @Column("varchar")
+    full_name : string
+
+    @Column("varchar")
     email : string
 
     @Column("numeric",{precision : 11})
