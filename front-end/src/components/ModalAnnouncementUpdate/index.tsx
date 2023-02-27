@@ -21,7 +21,7 @@ export function ModalAnnouncementUpdate(props : IModalAnnouncementUpdateProps){
 
     const {handleSubmit,register,setValue,formState : {errors,isValid},watch} = useForm({resolver : yupResolver(announcementUpdateSchema)})
 
-    const type = watch("type")
+    const type = watch("announcementType")
     const typeVehicle = watch("vehicleType")
 
     const {announcements,setAnnouncements} = useContext(AnnouncementContext)
@@ -52,16 +52,16 @@ export function ModalAnnouncementUpdate(props : IModalAnnouncementUpdateProps){
                     <Text text="Tipo de anúncio" variant="title-content-form"></Text>
                     <ButtonGroup justifyContent={"center"} width={"100%"}>
                         <Button onClick={(e)=>{
-                            setValue("type","sale",{shouldValidate : true})
+                            setValue("announcementType","sale",{shouldValidate : true})
                         }} variant={type == "sale" ? "select-type-announcement:enable" : "select-type-announcement:disabled"} size="large-100%" text="Venda"></Button>
                         <Button onClick={(e)=>{
-                            setValue("type","auction",{shouldValidate : true})
+                            setValue("announcementType","auction",{shouldValidate : true})
                         }} variant={type == "auction" ? "select-type-announcement:enable" : "select-type-announcement:disabled"} size="large-100%" text="Leilão"></Button>
                     </ButtonGroup>
                     {errors.type && <Text variant="errors-form" text={errors.type.message as string}></Text> }
                 </Box>
                 <Text text="Informações do veículo" variant="title-content-form"></Text>
-                    <InputText register={{...register("title",{required : true})}} placeholder="Digitar título" text="Título"></InputText>
+                    <InputText register={{...register("title")}} placeholder="Digitar título" text="Título"></InputText>
                     {errors.title && <Text variant="errors-form" text={errors.title.message as string}></Text> }
                 <Flex gap={"1rem"}>
                     <Box>

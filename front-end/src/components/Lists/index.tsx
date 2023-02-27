@@ -16,7 +16,7 @@ export const AuctionList = (props : IAuctionListProps) => {
 
   return (
     <>
-      {announcements.filter((el)=>el.type == "auction").length > 0 &&
+      {announcements.filter((el)=>el.announcementType == "auction").length > 0 &&
       <chakra.section position={"relative"}
         mr={"2rem"}
         ml={"2rem"}
@@ -44,7 +44,7 @@ export const AuctionList = (props : IAuctionListProps) => {
           gap="25px"
         >
           {announcements.map((announcement)=>{
-            if(announcement.type == "auction"){
+            if(announcement.announcementType == "auction"){
               return <ProductCardAuction id={announcement.id} coverImage={announcement.coverImage}
               km={announcement.km} price={announcement.price} title={announcement.title} year={announcement.year} description={announcement.description}
               key={announcement.id}></ProductCardAuction>
@@ -60,12 +60,12 @@ export const SaleList = (props : ISaleListProps) => {
   const { announcements } = useContext(AnnouncementContext);
 
   useEffect(()=>{
-    console.log(announcements.filter((el)=> el.type == "sale" && el.vehicleType == "motorcycle"))
+    console.log(announcements.filter((el)=> el.announcementType == "sale" && el.vehicleType == "motorcycle"))
   })
 
   return (
     <>
-    {announcements.filter((el)=>el.type == "sale" && el.vehicleType == "car" && props.vehicleType == "Carros").length > 0 &&
+    {announcements.filter((el)=>el.announcementType == "sale" && el.vehicleType == "car" && props.vehicleType == "Carros").length > 0 &&
       <chakra.section position={"relative"}
         mr={"2rem"}
         ml={"2rem"}
@@ -92,7 +92,7 @@ export const SaleList = (props : ISaleListProps) => {
           gap="15px"
         >
           {announcements.map((announcement)=>{
-            if(announcement.vehicleType == "car" && announcement.type == "sale"){
+            if(announcement.vehicleType == "car" && announcement.announcementType == "sale"){
               return <ProductCard id={announcement.id} coverImage={announcement.coverImage}
               km={announcement.km} price={announcement.price} title={announcement.title} year={announcement.year} description={announcement.description}
               key={announcement.id}></ProductCard>
@@ -101,7 +101,7 @@ export const SaleList = (props : ISaleListProps) => {
         </chakra.div>
       </chakra.section>
       }
-        {announcements.filter((el)=>el.type == "sale" && el.vehicleType == "motorcycle" && props.vehicleType == "Motos").length > 0 &&
+        {announcements.filter((el)=>el.announcementType == "sale" && el.vehicleType == "motorcycle" && props.vehicleType == "Motos").length > 0 &&
           <chakra.section position={"relative"}
           mr={"2rem"}
           ml={"2rem"}
@@ -128,7 +128,7 @@ export const SaleList = (props : ISaleListProps) => {
             gap="15px"
           >
             {announcements.map((announcement)=>{
-              if(announcement.vehicleType == "motorcycle" && announcement.type == "sale"){
+              if(announcement.vehicleType == "motorcycle" && announcement.announcementType == "sale"){
                 return <ProductCard id={announcement.id} coverImage={announcement.coverImage}
                 km={announcement.km} price={announcement.price} title={announcement.title} year={announcement.year} description={announcement.description}
                 key={announcement.id}></ProductCard>
