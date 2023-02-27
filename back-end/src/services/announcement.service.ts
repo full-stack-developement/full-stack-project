@@ -1,26 +1,26 @@
 import { QueryFailedError } from "typeorm";
 import AppDataSource from "../data-source";
-import { Announcement } from "../entities/announcement";
+import { Vehicle } from "../entities/vehicle";
 import { IAnnouncement } from "../interfaces/announcement.interface";
 
-const announcementRepository = AppDataSource.getRepository(Announcement);
+const vehicleRepository = AppDataSource.getRepository(Vehicle);
 
 export async function announcementPostService(data: IAnnouncement) {
-  const announcementInstance = announcementRepository.create(data);
-  const announcement = await announcementRepository.save(announcementInstance);
+  const announcementInstance = vehicleRepository.create(data);
+  const announcement = await vehicleRepository.save(announcementInstance);
   return announcement;
 }
 
-export const announcementsListService = async (): Promise<Announcement[]> => {
+export const announcementsListService = async (): Promise<Vehicle[]> => {
 
-  const announcements = announcementRepository.find();
+  const announcements = vehicleRepository.find();
 
   return announcements;
 };
 
 export const announcementDeleteService = async (id: string): Promise<void> => {
   try {
-    const findAnnouncement = await announcementRepository.findOneBy({
+    const findAnnouncement = await vehicleRepository.findOneBy({
         id
     })
         
@@ -28,7 +28,7 @@ export const announcementDeleteService = async (id: string): Promise<void> => {
         throw new Error('Announcement not found') //404
     }
 
-    await announcementRepository.remove(findAnnouncement)
+    await vehicleRepository.remove(findAnnouncement)
     
   } catch (error) {
     throw new Error(error)
@@ -37,9 +37,8 @@ export const announcementDeleteService = async (id: string): Promise<void> => {
 
 export const announcementListSpecificService = async (id: string) => {
   try {
-    const announcementsRepository = AppDataSource.getRepository(Announcement);
 
-  const announcement= await announcementsRepository.findOneBy({ id });
+  const announcement= await vehicleRepository.findOneBy({ id });
 
   if (!announcement) {
     throw new Error("Announcement is not found"); //400
@@ -55,7 +54,7 @@ export const announcementListSpecificService = async (id: string) => {
 export const announcementUpdateService = async (id: string,data : IAnnouncement) => {
   try {
 
-  const announcement = await announcementRepository.findOneBy({id : id})
+  const announcement = await vehicleRepository.findOneBy({id : id})
 
   if (!announcement) {
     throw new Error("Announcement is not found"); //400
@@ -64,7 +63,7 @@ export const announcementUpdateService = async (id: string,data : IAnnouncement)
     announcement[props] = data[props]
   }
 
-  return await announcementRepository.save(announcement)
+  return await vehicleRepository.save(announcement)
 
   } catch (error) {
     if(error instanceof QueryFailedError){

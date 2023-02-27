@@ -1,6 +1,6 @@
 export interface IAnnouncement{
     id : string  
-    type : "sale" | "auction"
+    announcementType : "sale" | "auction"
     vehicleType : "car" | "motorcycle" 
     title : string
     year : string

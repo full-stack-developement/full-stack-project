@@ -1,7 +1,7 @@
 import * as yup from "yup"
 
 export const announcementSchema = yup.object().shape({
-    type : yup.string().oneOf(["sale","auction"],"Tipos de anúncio: sale(venda), auction(leilão)").required("O tipo de anúncio é obrigatório"),
+    announcementType : yup.string().oneOf(["sale","auction"],"Tipos de anúncio: sale(venda), auction(leilão)").required("O tipo de anúncio é obrigatório"),
     vehicleType : yup.string().oneOf(["car","motorcycle"],"Tipos de veículo: car(carro), motorcycle(moto)").required("O tipo de veículo é obrigatório"),
     title : yup.string().required("O título do anúncio é obrigatório"),
     year : yup.number().required("O ano do veículo é obrigatório").typeError("Digite um ano válido").test({message : "Digite um ano válido",test : (value : number,)=>{
@@ -21,7 +21,7 @@ export const announcementSchema = yup.object().shape({
     coverImage : yup.string().url("Digite uma url válida").required("A imagem de fundo do anúncio é obrigatória"),
 })
 export const announcementUpdateSchema = yup.object().shape({
-    type : yup.string().oneOf(["sale","auction"],"Tipos de anúncio: sale(venda), auction(leilão)").optional(),
+    announcementType : yup.string().oneOf(["sale","auction"],"Tipos de anúncio: sale(venda), auction(leilão)").optional(),
     vehicleType : yup.string().oneOf(["car","motorcycle"],"Tipos de veículo: car(carro), motorcycle(moto)").optional(),
     title : yup.string().optional(),
     year : yup.number().optional().test({message : "Digite um ano válido",test : (value)=>{
