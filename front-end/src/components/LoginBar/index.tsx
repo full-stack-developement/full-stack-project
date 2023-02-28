@@ -7,9 +7,11 @@ import { Button, chakra } from "@chakra-ui/react";
 import { customTheme } from "../../theme";
 import { useState } from "react";
 import { MenuProfile } from "../MenuProfile";
+import { useNavigate } from "react-router-dom";
 
 export const LoginBar = () => {
   const [clicked, setClicked] = useState(true);
+  const navigate = useNavigate();
 
   return (
     <chakra.div
@@ -24,7 +26,9 @@ export const LoginBar = () => {
       {clicked ? (
         <Breadcrumb separator="" spacing="22">
           <BreadcrumbItem>
-            <BreadcrumbLink href="#">Fazer Login</BreadcrumbLink>
+            <BreadcrumbLink onClick={() => navigate("/login")}>
+              Fazer Login
+            </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbItem>
             <Button variant="solid">Cadastrar</Button>

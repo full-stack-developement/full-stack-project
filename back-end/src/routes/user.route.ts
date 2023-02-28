@@ -7,4 +7,5 @@ const routeName = "/user";
 
 userRoute.delete(routeName,AuthTokenCheck,userDeleteController)
 
+
 export default userRoute;
