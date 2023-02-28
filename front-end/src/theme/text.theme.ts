@@ -56,11 +56,18 @@ const textTheme: ComponentStyleConfig = {
       fontWeight: "body-1-400.weight",
       fontSize: "body-1-400.size",
     },
-    "forms-title": {
-      color: "greyScale.grey0",
-      fontFamily: "lexend",
-      fontWeight: "Heading-5-500.weight",
-      fontSize: "Heading-5-500.size",
+    "forms-label": {
+      color: "greyScale.grey1",
+      fontFamily: "inter",
+      fontWeight: "body-2-500.weight",
+      fontSize: "body-2-500.size",
+      lineHeight: "17px",
+    },
+    "forms-input": {
+      width: "100%",
+      height: "45px",
+      border: "solid 1px",
+      borderColor: "greyScale.grey3",
     },
   },
 };
