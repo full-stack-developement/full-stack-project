@@ -1,3 +1,4 @@
+import { classToPlain, instanceToPlain } from "class-transformer"
 import AppDataSource from "../data-source"
 import { User } from "../entities/user"
 
@@ -15,4 +16,14 @@ export async function userDeleteService(id : string){
 
     userRepository.save(user)
 
+}
+export async function userListSpecificService(id : string){
+
+    const user = await userRepository.findOneBy({id : id})
+
+    if(!user){
+        throw new Error("User not found")
+    }
+
+    return instanceToPlain(user)
 }
