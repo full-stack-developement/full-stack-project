@@ -21,10 +21,7 @@ export const RegisterPage = () => {
         <Box
           className="registerFormContainer"
           width={"420px"}
-          position={"absolute"}
-          margin={"40px 0"}
-          left={"50%"}
-          transform=" translateX(-50%)"
+          margin={"40px auto"}
           bg={customTheme.colors.greyScale.grey8}
           padding={"15px"}
         >
@@ -265,6 +262,7 @@ export const RegisterPage = () => {
           </Flex>
         </Box>
       </form>
+      <Footer />
     </>
   );
 };
