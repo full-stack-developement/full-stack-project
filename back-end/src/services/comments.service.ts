@@ -3,7 +3,7 @@ import { User } from "../entities/user"
 import { Vehicle } from "../entities/vehicle"
 import { VehicleComments } from "../entities/vehicle_comments"
 import { ErrorResponse } from "../Error/ErrorResponse"
-import { IComments } from "../interfaces/comments.interface"
+import { IComments, ICommentsSpecificList } from "../interfaces/comments.interface"
 
 const commentsRepository = AppDataSource.getRepository(VehicleComments)
 const userRepository = AppDataSource.getRepository(User)
@@ -30,21 +30,53 @@ export async function commentsPostService(user_id : string,vehicle_id : string,d
 
 }   
 export async function commentsUserListService(user_id : string){
-    const userComments = await commentsRepository.find({where : {user : {id : user_id}}})
+    const user = await userRepository.findOneBy({id : user_id})
 
-    if(!userComments){
+    if(!user){
+        throw new ErrorResponse("User not exist",404)
+    }
+    if(user.comments.length == 0){
+        throw new ErrorResponse("User not have comments",400)
+    }
+}   
+export async function commentsUserListSpecificService(user_id : string,data : ICommentsSpecificList){
+    const user = await userRepository.findOneBy({id : user_id})
+
+    if(!user){
         throw new ErrorResponse("User not have comments",404)
     }
 
-    return userComments
-}   
-export async function commentsVehicleListService(vehicle_id : string){
-    const vehicleComments = await commentsRepository.find({where : {vehicle : {id : vehicle_id}}})
+    if(user.comments.length == 0){
+        throw new ErrorResponse("User not have comments",400)
+    }
+    const comment =  user.comments.find((el)=> el.id == data.comment_id)
 
-    if(!vehicleComments){
-        throw new ErrorResponse("Vehicle not have comments",404)
+    return comment
+} 
+export async function commentsVehicleListService(vehicle_id : string){
+    const vehicle = await vehicleRepository.findOneBy({id : vehicle_id})
+
+    if(!vehicle){
+        throw new ErrorResponse("Vehicle not found",404)
+    }
+    if(vehicle.comments.length == 0){
+        throw new ErrorResponse("Vehicle not have comments",400)
     }
 
-    return vehicleComments
+    return vehicle.comments
+}
+export async function commentsVehicleListSpecificService(vehicle_id : string,data : ICommentsSpecificList){
+    const vehicle = await vehicleRepository.findOneBy({id : vehicle_id})
+
+    if(!vehicle){
+        throw new ErrorResponse("Vehicle not found",404)
+    }
+    if(vehicle.comments.length == 0){
+        throw new ErrorResponse("Vehicle not have comments",400)
+    }
+
+    const comment = vehicle.comments.find((el)=> el.id == data.comment_id)
+
+    return comment
 }
 
