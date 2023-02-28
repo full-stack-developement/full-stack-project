@@ -1,3 +1,4 @@
+import { Exclude } from "class-transformer";
 import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Address } from "./address";
 import { Vehicle } from "./vehicle";
@@ -30,6 +31,7 @@ export class User{
     @Column("varchar",{nullable : true})
     description : string
 
+    @Exclude()
     @Column("varchar")
     password : string
 
