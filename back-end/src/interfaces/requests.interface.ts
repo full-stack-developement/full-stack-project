@@ -1,6 +1,6 @@
 import { Request } from "express";
 import { IAnnouncement } from "./announcement.interface";
-import { IComments } from "./comments.interface";
+import { IComments, ICommentsSpecificList } from "./comments.interface";
 
 export interface ISchemaRequest extends Request {
   data: Object;
@@ -39,4 +39,9 @@ export interface IUserRequest extends Request {
 export interface ICommentsRequest extends Request {
   user_id: string;
   data: IComments;
+}
+
+export interface ICommentsListRequest extends Request {
+  user_id: string;
+  data: ICommentsSpecificList;
 }
