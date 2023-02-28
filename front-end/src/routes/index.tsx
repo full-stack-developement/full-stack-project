@@ -3,11 +3,16 @@ import { Vehicle } from "../components/Vehicle";
 import { VehiclePage } from "../pages/VehiclePage";
 import Home from "../pages/home";
 import { Profile } from "../pages/Profile";
+import { LoginPage } from "../pages/loginPage";
 
 export const Route = createBrowserRouter([
   {
     path: "/home",
     element: <Home></Home>,
+  },
+  {
+    path: "/login",
+    element: <LoginPage></LoginPage>,
   },
   {
     path: "vehicle",
@@ -20,7 +25,7 @@ export const Route = createBrowserRouter([
     ],
   },
   {
-    path : "/profile",
-    element : <Profile></Profile>
-  }
+    path: "/profile",
+    element: <Profile></Profile>,
+  },
 ]);
