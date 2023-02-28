@@ -1,3 +1,4 @@
+import { AppError, handleError } from "./../Error/ErrorResponse";
 import { IUserCreate } from "./../interfaces/requests.interface";
 import { Response, Request } from "express";
 import { IUserRequest } from "../interfaces/requests.interface";
@@ -28,10 +29,10 @@ export async function userCreateController(req: Request, res: Response) {
       password,
     });
 
-    return res.json(instanceToPlain(createdUser)).status(201);
+    return res.status(201).json(instanceToPlain(createdUser));
   } catch (err) {
-    if (err instanceof Error) {
-      return res.json(err.message).status(400);
+    if (err instanceof AppError) {
+      handleError(err, res);
     }
     return res.json({ message: "Internal server error" }).status(500);
   }

@@ -2,7 +2,7 @@ import { IUserCreate } from "./../interfaces/requests.interface";
 import AppDataSource from "../data-source";
 import { User } from "../entities/user";
 import bcrypt from "bcryptjs";
-import { ErrorResponse } from "../Error/ErrorResponse";
+import { AppError, ErrorResponse } from "../Error/ErrorResponse";
 
 const userRepository = AppDataSource.getRepository(User);
 
@@ -18,7 +18,7 @@ export async function userCreateService({
 }: IUserCreate): Promise<User> {
   const userEmail = await userRepository.findOneBy({ email });
   if (userEmail) {
-    throw new ErrorResponse("User already exist");
+    throw new AppError(409, "User already exist");
   }
 
   const createdUser = userRepository.create({
