@@ -1,6 +1,42 @@
-import { Response } from "express";
+import { AppError, handleError } from "./../Error/ErrorResponse";
+import { IUserCreate } from "./../interfaces/requests.interface";
+import { Response, Request } from "express";
 import { IUserRequest } from "../interfaces/requests.interface";
-import { userDeleteService, userListSpecificService } from "../services/user.service";
+import { userCreateService, userDeleteService, userListSpecificService } from "../services/user.service";
+import { instanceToPlain } from "class-transformer";
+
+export async function userCreateController(req: Request, res: Response) {
+  try {
+    const {
+      accountType,
+      full_name,
+      email,
+      cpf,
+      phone,
+      birthDate,
+      description,
+      password,
+    }: IUserCreate = req.body;
+
+    const createdUser = await userCreateService({
+      accountType,
+      full_name,
+      email,
+      cpf,
+      phone,
+      birthDate,
+      description,
+      password,
+    });
+
+    return res.status(201).json(instanceToPlain(createdUser));
+  } catch (err) {
+    if (err instanceof AppError) {
+      handleError(err, res);
+    }
+    return res.json({ message: "Internal server error" }).status(500);
+  }
+}
 
 export async function userDeleteController(req : IUserRequest,res : Response){
 
