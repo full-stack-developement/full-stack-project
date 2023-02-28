@@ -7,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+
 import { Address } from "./address";
 import { Vehicle } from "./vehicle";
 import { VehicleComments } from "./vehicle_comments";
@@ -39,9 +40,9 @@ export class User {
   @Column("varchar", { nullable: true })
   description: string;
 
-  @Column("varchar")
   @Exclude()
-  password: string;
+  @Column("varchar")
+  password : string
 
   @CreateDateColumn({ type: "timestamp" })
   created_at: Date;
