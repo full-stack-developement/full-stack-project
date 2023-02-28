@@ -29,3 +29,22 @@ export async function commentsPostService(user_id : string,vehicle_id : string,d
     return commentsRepository.save(commentInstance)
 
 }   
+export async function commentsUserListService(user_id : string){
+    const userComments = await commentsRepository.find({where : {user : {id : user_id}}})
+
+    if(!userComments){
+        throw new ErrorResponse("User not have comments",404)
+    }
+
+    return userComments
+}   
+export async function commentsVehicleListService(vehicle_id : string){
+    const vehicleComments = await commentsRepository.find({where : {vehicle : {id : vehicle_id}}})
+
+    if(!vehicleComments){
+        throw new ErrorResponse("Vehicle not have comments",404)
+    }
+
+    return vehicleComments
+}
+
