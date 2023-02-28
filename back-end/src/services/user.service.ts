@@ -1,18 +1,50 @@
-import AppDataSource from "../data-source"
-import { User } from "../entities/user"
+import { IUserCreate } from "./../interfaces/requests.interface";
+import AppDataSource from "../data-source";
+import { User } from "../entities/user";
+import bcrypt from "bcryptjs";
+import { ErrorResponse } from "../Error/ErrorResponse";
 
-const userRepository = AppDataSource.getRepository(User)
+const userRepository = AppDataSource.getRepository(User);
 
-export async function userDeleteService(id : string){
+export async function userCreateService({
+  accountType,
+  full_name,
+  email,
+  cpf,
+  phone,
+  birthDate,
+  description,
+  password,
+}: IUserCreate): Promise<User> {
+  const userEmail = await userRepository.findOneBy({ email });
+  if (userEmail) {
+    throw new ErrorResponse("User already exist");
+  }
 
-    const user = await userRepository.findOneBy({id : id})
+  const createdUser = userRepository.create({
+    accountType,
+    full_name,
+    email,
+    cpf,
+    phone,
+    birthDate,
+    description,
+    password: bcrypt.hashSync(password, 10),
+  });
 
-    if(!user.isActive){
-        throw new Error("User already deactivated")
-    }
+  await userRepository.save(createdUser);
 
-    user.isActive = false
+  return createdUser;
+}
 
-    userRepository.save(user)
+export async function userDeleteService(id: string) {
+  const user = await userRepository.findOneBy({ id: id });
 
+  if (!user.isActive) {
+    throw new Error("User already deactivated");
+  }
+
+  user.isActive = false;
+
+  userRepository.save(user);
 }

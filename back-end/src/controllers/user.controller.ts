@@ -1,23 +1,52 @@
-import { Response } from "express";
+import { IUserCreate } from "./../interfaces/requests.interface";
+import { Response, Request } from "express";
 import { IUserRequest } from "../interfaces/requests.interface";
-import { userDeleteService } from "../services/user.service";
+import { userCreateService, userDeleteService } from "../services/user.service";
+import { instanceToPlain } from "class-transformer";
 
-export async function userDeleteController(req : IUserRequest,res : Response){
+export async function userCreateController(req: Request, res: Response) {
+  try {
+    const {
+      accountType,
+      full_name,
+      email,
+      cpf,
+      phone,
+      birthDate,
+      description,
+      password,
+    }: IUserCreate = req.body;
 
-    try{
-        const id = req.user_id
-        await userDeleteService(id)
-        const message = {"message" : "User has been deactivated"}
-        return res.json(message).status(200)
+    const createdUser = await userCreateService({
+      accountType,
+      full_name,
+      email,
+      cpf,
+      phone,
+      birthDate,
+      description,
+      password,
+    });
+
+    return res.json(instanceToPlain(createdUser)).status(201);
+  } catch (err) {
+    if (err instanceof Error) {
+      return res.json(err.message).status(400);
     }
-    catch(err){
-        if(err instanceof Error){
-            return res.json(err.message).status(400)
-        }
-        return res.json({"message" : "Internal server error"}).status(500)
+    return res.json({ message: "Internal server error" }).status(500);
+  }
+}
+
+export async function userDeleteController(req: IUserRequest, res: Response) {
+  try {
+    const id = req.user_id;
+    await userDeleteService(id);
+    const message = { message: "User has been deactivated" };
+    return res.json(message).status(200);
+  } catch (err) {
+    if (err instanceof Error) {
+      return res.json(err.message).status(400);
     }
-
-
-
-
+    return res.json({ message: "Internal server error" }).status(500);
+  }
 }
