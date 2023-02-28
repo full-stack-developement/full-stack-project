@@ -1,10 +1,9 @@
-
 import { IUserCreate } from "./../interfaces/requests.interface";
 import AppDataSource from "../data-source";
 import { User } from "../entities/user";
 import bcrypt from "bcryptjs";
-import { AppError, ErrorResponse } from "../Error/ErrorResponse";
-import { classToPlain, instanceToPlain } from "class-transformer"
+import { AppError } from "../Error/ErrorResponse";
+import { instanceToPlain } from "class-transformer";
 
 const userRepository = AppDataSource.getRepository(User);
 
@@ -50,14 +49,13 @@ export async function userDeleteService(id: string) {
 
   userRepository.save(user);
 }
-}
-export async function userListSpecificService(id : string){
 
-    const user = await userRepository.findOneBy({id : id})
+export async function userListSpecificService(id: string) {
+  const user = await userRepository.findOneBy({ id: id });
 
-    if(!user){
-        throw new Error("User not found")
-    }
+  if (!user) {
+    throw new Error("User not found");
+  }
 
-    return instanceToPlain(user)
+  return instanceToPlain(user);
 }
