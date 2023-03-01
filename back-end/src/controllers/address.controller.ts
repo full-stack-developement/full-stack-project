@@ -2,13 +2,13 @@ import { Request, Response } from "express";
 import { addressUpdatedService } from "../services/address.service";
 
 export const addressUpdateController = async (
-    req: IAddressRequest,
+    req: Request,
     res: Response
   ) => {
     try {
-      const { id } = req.params;
+      const id = req.params.id;
   
-      const data = req.data;
+      const data = req.body;
   
       const addressUpdated = await addressUpdatedService(id, data);
   
