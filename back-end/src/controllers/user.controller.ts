@@ -1,12 +1,13 @@
 import { QueryFailedError } from "typeorm";
-import { AppError, handleError } from "./../Error/ErrorResponse";
-import { IUserCreate } from "./../interfaces/requests.interface";
+import { AppError, ErrorResponse, handleError } from "./../Error/ErrorResponse";
+import { ILoginRequest, IUserCreate } from "./../interfaces/requests.interface";
 import { Response, Request } from "express";
 import { IUserRequest } from "../interfaces/requests.interface";
 import {
   userCreateService,
   userDeleteService,
   userListSpecificService,
+  userLoginService,
 } from "../services/user.service";
 import { instanceToPlain } from "class-transformer";
 
@@ -72,6 +73,18 @@ export async function userListSpecificController(
   } catch (err) {
     if (err instanceof Error) {
       return res.json(err.message).status(400);
+    }
+    return res.json({ message: "Internal server error" }).status(500);
+  }
+}
+export async function userLoginController(req : ILoginRequest,res : Response){
+  try {
+    const data = req.data;
+    const response = await userLoginService(data)
+    return res.json(response).status(200);
+  } catch (err) {
+    if (err instanceof ErrorResponse) {
+      return res.json(err.message).status(err.status_code);
     }
     return res.json({ message: "Internal server error" }).status(500);
   }
