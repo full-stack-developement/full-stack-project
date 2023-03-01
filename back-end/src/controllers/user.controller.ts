@@ -1,13 +1,9 @@
 import { QueryFailedError } from "typeorm";
 import { AppError, handleError } from "./../Error/ErrorResponse";
-import { IUserCreate } from "./../interfaces/requests.interface";
+import { IUserCreate, IUserUpdateRequest } from "./../interfaces/requests.interface";
 import { Response, Request } from "express";
 import { IUserRequest } from "../interfaces/requests.interface";
-import {
-  userCreateService,
-  userDeleteService,
-  userListSpecificService,
-} from "../services/user.service";
+import { userCreateService, userDeleteService, userListSpecificService, userUpdateserService } from "../services/user.service";
 import { instanceToPlain } from "class-transformer";
 
 export async function userCreateController(req: Request, res: Response) {
@@ -76,3 +72,21 @@ export async function userListSpecificController(
     return res.json({ message: "Internal server error" }).status(500);
   }
 }
+
+export const userUpdateController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const id : string = req.params.id;
+
+    const data: IUserUpdateRequest = req.body;
+
+    const announcementUpdated = await userUpdateserService(id, data);
+
+    return res.status(200).send(announcementUpdated);
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+

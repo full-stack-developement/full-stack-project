@@ -45,3 +45,13 @@ export interface ICommentsListRequest extends Request {
   user_id: string;
   data: ICommentsSpecificList;
 }
+
+export interface IUserUpdateRequest {
+  full_name?: string;
+  email?: string;
+  cpf?: number;
+  phone?: number;
+  birthDate?: Date;
+  description?: string;
+  password?: string;
+}

@@ -1,4 +1,4 @@
-import { IUserCreate } from "./../interfaces/requests.interface";
+import { IUserCreate, IUserUpdateRequest} from "./../interfaces/requests.interface";
 import AppDataSource from "../data-source";
 import { User } from "../entities/user";
 import bcrypt from "bcryptjs";
@@ -6,6 +6,7 @@ import { AppError } from "../Error/ErrorResponse";
 import { instanceToPlain } from "class-transformer";
 import { Address } from "../entities/address";
 import { IAddressCreate } from "../interfaces/address.interface";
+import { hash } from "bcrypt";
 
 const userRepository = AppDataSource.getRepository(User);
 
@@ -70,3 +71,41 @@ export async function userListSpecificService(id: string) {
 
   return instanceToPlain(user);
 }
+
+export const userUpdateserService = async (id: string, { full_name, email, cpf, phone, birthDate, description, password}: IUserUpdateRequest) => {
+  try {
+      const userRepository = AppDataSource.getRepository(User);
+
+  const userUpdated = await userRepository.findOneBy({
+    id: id
+  })
+
+  if (!userUpdated) {
+    throw new Error('User not found')
+  };
+
+  await userRepository.update(
+    id,
+    {
+      full_name: full_name ? full_name : userUpdated.full_name,
+      email: email ? email : userUpdated.email,
+      cpf: cpf ? cpf : userUpdated.cpf,
+      phone: phone ? phone : userUpdated.phone,
+      birthDate: birthDate ? birthDate : userUpdated.birthDate,
+      description: description ? description : userUpdated.description,
+      password: password  ? await hash(password, 10) : userUpdated.password
+    }
+  );
+
+  const updatedUser = await userRepository.findOneBy({
+    id: id
+  });
+
+  return updatedUser
+      
+  } catch (error) {
+      throw new Error(error)
+  }
+
+  
+};
