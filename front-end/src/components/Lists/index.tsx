@@ -59,10 +59,6 @@ export const AuctionList = (props : IAuctionListProps) => {
 export const SaleList = (props : ISaleListProps) => {
   const { announcements } = useContext(AnnouncementContext);
 
-  useEffect(()=>{
-    console.log(announcements.filter((el)=> el.announcementType == "sale" && el.vehicleType == "motorcycle"))
-  })
-
   return (
     <>
     {announcements.filter((el)=>el.announcementType == "sale" && el.vehicleType == "car" && props.vehicleType == "Carros").length > 0 &&
