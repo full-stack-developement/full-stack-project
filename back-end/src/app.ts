@@ -1,10 +1,11 @@
 import "reflect-metadata";
 import "express-async-errors";
 import express from "express";
-//import userRouter from "./routes/user.routes";
-//import handleErrorMiddleware from "./middlewares/handleError.middleware";
 import { mainRoutes } from "./routes";
 import cors from "cors";
+import dotenv from "dotenv"
+
+dotenv.config()
 
 import bodyParser from "body-parser";
 import swaggerUi from "swagger-ui-express";
