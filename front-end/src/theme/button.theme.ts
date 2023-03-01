@@ -140,6 +140,16 @@ const buttonTheme: ComponentStyleConfig = {
           backgroundColor : "feedback.alert2",
           color : "feedback.alert1",
       }
+    },
+    "show-profile" : {
+      marginTop : "1rem",
+      backgroundColor : "greyScale.grey0",
+      color : "greyScale.whiteFixed",
+      borderColor : "greyScale.grey0",
+      _hover : {
+          backgroundColor : "greyScale.grey1",
+          color : "greyScale.whiteFixed",
+      }
     }
   },
 };

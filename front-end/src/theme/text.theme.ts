@@ -56,6 +56,12 @@ const textTheme: ComponentStyleConfig = {
       fontWeight: "body-1-400.weight",
       fontSize: "body-1-400.size",
     },
+    "car-description": {
+      color: "greyScale.grey2",
+      fontFamily: "inter",
+      fontWeight: "body-1-400.weight",
+      fontSize: "body-1-400.size",
+    },
     "forms-label": {
       color: "greyScale.grey1",
       fontFamily: "inter",
@@ -69,6 +75,12 @@ const textTheme: ComponentStyleConfig = {
       border: "solid 1px",
       borderColor: "greyScale.grey3",
     },
+    "date-comment" :{
+      color: "greyScale.grey3",
+      fontFamily: "inter",
+      fontWeight: "400",
+      fontSize: "12px",
+    }
   },
 };
 

@@ -69,7 +69,7 @@ export function ModalAnnouncementCreate(){
                     </Box>
                 </Flex>
                 <Box>
-                    <TextArea text="Descrição" placeholder="Digitar Descrição"></TextArea>
+                    <TextArea register={{...register("description")}} text="Descrição" placeholder="Digitar Descrição"></TextArea>
                 </Box>
                 <Box mb={"2rem"}>
                     <Text text="Tipo de veículo" variant="title-content-form"></Text>
