@@ -260,6 +260,21 @@ export const RegisterPage = () => {
               ></Input>
             </FormControl>
           </Flex>
+
+          <Flex
+            className="btnSubmitForm"
+            width={"85%"}
+            display={"flex"}
+            margin={"2rem auto"}
+            flexDirection={"column"}
+            justifyContent={"space-around"}
+            alignItems={"center"}
+            gap={"15px"}
+          >
+            <Button width={"100%"} variant={"create-announcement:enable"}>
+              Finalizar cadastro
+            </Button>
+          </Flex>
         </Box>
       </form>
       <Footer />
