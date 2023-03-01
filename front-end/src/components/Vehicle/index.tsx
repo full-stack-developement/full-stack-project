@@ -1,5 +1,4 @@
 import { CarImage } from "../CarImage";
-import card from "../../assets/carImg.png"
 import { Box, Flex } from "@chakra-ui/react";
 import { VehiclePhotos } from "../VehiclePhotos";
 import InfoVehicle from "../InfoVehicle";
@@ -10,9 +9,6 @@ import { IAnnouncement } from "../../interfaces/announcement.interface";
 import { getSpecificAnnouncement } from "../../utils/announcement.util";
 import { useEffect, useState } from "react";
 import { Comments } from "../Comments";
-import { MenuProfile } from "../MenuProfile";
-import { AvatarContainer } from "../AvatarContainer";
-import AvatarIcon from "../AvatarIcon";
 import { AvatarCar } from "../AvatarCar";
 
 export function Vehicle(){
