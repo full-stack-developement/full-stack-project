@@ -61,6 +61,10 @@ export function ModalUserUpdate(props : IModalUserUpdateProps){
                     {errors.phone && <Text variant="errors-form" text={errors.phone.message as string}></Text> }
                 </Box>
                 <Box>
+                    <InputText placeholder="0" text="Celular"></InputText>
+                    {errors.phone && <Text variant="errors-form" text={errors.phone.message as string}></Text> }
+                </Box>
+                <Box>
                     <InputText placeholder="0" text="Data de nascimento"></InputText>
                     {errors.birthDate && <Text variant="errors-form" text={errors.birthDate.message as string}></Text> }
                 </Box>
