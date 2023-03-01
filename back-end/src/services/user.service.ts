@@ -97,10 +97,10 @@ export async function userLoginService(data: ILogin) {
 
 export const userUpdateserService = async (id: string, { full_name, email, cpf, phone, birthDate, description, password}: IUserUpdateRequest) => {
   try {
-      const userRepository = AppDataSource.getRepository(User);
+    const userRepository = AppDataSource.getRepository(User);
 
-  const userUpdated = await userRepository.findOneBy({
-    id: id
+    const userUpdated = await userRepository.findOneBy({
+      id: id
   })
 
   if (!userUpdated) {
@@ -135,30 +135,42 @@ export const userUpdateserService = async (id: string, { full_name, email, cpf, 
 
 export const userAddressUpdatedService = async (id: string, { cep, state, city, street, number, complement }: IAddressUpdate) => {
   try {
-  const addressRepository = AppDataSource.getRepository(Address);
-  const addressUpdated = await addressRepository.findOneBy({
-  id: id
-  })
-  if (!addressUpdated) {
-  throw new Error('Address not found')
+    const addressRepository = AppDataSource.getRepository(Address);
+    const userRepository = AppDataSource.getRepository(User)
+
+    const userAddressUpdate = userRepository.findOneBy({
+      id: id
+    })
+  
+    if (!userAddressUpdate) {
+      throw new Error('User not found')
+    };
+
+    const address = (await userAddressUpdate).address
+  
+  
+    if (!address) {
+      throw new Error('Address not found')
   };
+  
   await addressRepository.update(
-  id,
+    id,
   {
-  cep: cep ? cep : addressUpdated.cep,
-  state: state ? state : addressUpdated.state,
-  city: city ? city : addressUpdated.city,
-  street: street ? street : addressUpdated.street,
-  number: number ? number : addressUpdated.number,
-  complement: complement ? complement : addressUpdated.complement,
+    cep: cep ? cep : address.cep,
+    state: state ? state : address.state,
+    city: city ? city : address.city,
+    street: street ? street : address.street,
+    number: number ? number : address.number,
+    complement: complement ? complement : address.complement,
   }
   );
   const updatedAddress = await addressRepository.findOneBy({
-  id: id
+    id: id
   });
   return updatedAddress
+
   } catch (error) {
-  throw new Error(error)
+    throw new Error(error)
   }
-  };
+};
   
