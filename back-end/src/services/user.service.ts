@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 import { AppError } from "../Error/ErrorResponse";
 import { instanceToPlain } from "class-transformer";
 import { Address } from "../entities/address";
-import { IAddressCreate } from "../interfaces/address.interface";
+import { IAddressCreate, IAddressUpdate } from "../interfaces/address.interface";
 import { hash } from "bcrypt";
 
 const userRepository = AppDataSource.getRepository(User);
@@ -109,3 +109,33 @@ export const userUpdateserService = async (id: string, { full_name, email, cpf, 
 
   
 };
+
+export const userAddressUpdatedService = async (id: string, { cep, state, city, street, number, complement }: IAddressUpdate) => {
+  try {
+  const addressRepository = AppDataSource.getRepository(Address);
+  const addressUpdated = await addressRepository.findOneBy({
+  id: id
+  })
+  if (!addressUpdated) {
+  throw new Error('Address not found')
+  };
+  await addressRepository.update(
+  id,
+  {
+  cep: cep ? cep : addressUpdated.cep,
+  state: state ? state : addressUpdated.state,
+  city: city ? city : addressUpdated.city,
+  street: street ? street : addressUpdated.street,
+  number: number ? number : addressUpdated.number,
+  complement: complement ? complement : addressUpdated.complement,
+  }
+  );
+  const updatedAddress = await addressRepository.findOneBy({
+  id: id
+  });
+  return updatedAddress
+  } catch (error) {
+  throw new Error(error)
+  }
+  };
+  
