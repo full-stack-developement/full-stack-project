@@ -7,4 +7,13 @@ export interface IUserUpdate {
     birthDate: Date;
     description: string;
     password: string;
+    address : IAddress
   }
+interface IAddress{
+  cep: number;
+  state: string;
+  city: string;
+  street: string;
+  number: number;
+  complement: string;
+}
