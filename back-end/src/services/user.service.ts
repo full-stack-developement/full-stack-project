@@ -4,23 +4,33 @@ import { User } from "../entities/user";
 import bcrypt from "bcryptjs";
 import { AppError } from "../Error/ErrorResponse";
 import { instanceToPlain } from "class-transformer";
+import { Address } from "../entities/address";
+import { IAddressCreate } from "../interfaces/address.interface";
 
 const userRepository = AppDataSource.getRepository(User);
 
-export async function userCreateService({
-  accountType,
-  full_name,
-  email,
-  cpf,
-  phone,
-  birthDate,
-  description,
-  password,
-}: IUserCreate): Promise<User> {
+export async function userCreateService(
+  {
+    accountType,
+    full_name,
+    email,
+    cpf,
+    phone,
+    birthDate,
+    description,
+    password,
+  }: IUserCreate,
+  addressData: IAddressCreate
+): Promise<User> {
+  const addressRepository = AppDataSource.getRepository(Address);
+
   const userEmail = await userRepository.findOneBy({ email });
   if (userEmail) {
     throw new AppError(409, "User already exist");
   }
+
+  const address = addressRepository.create(addressData);
+  await addressRepository.save(address);
 
   const createdUser = userRepository.create({
     accountType,
@@ -31,6 +41,7 @@ export async function userCreateService({
     birthDate,
     description,
     password: bcrypt.hashSync(password, 10),
+    address,
   });
 
   await userRepository.save(createdUser);
