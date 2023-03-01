@@ -1,6 +1,5 @@
-import { QueryFailedError } from "typeorm";
 import { AppError, ErrorResponse, handleError } from "./../Error/ErrorResponse";
-import { ILoginRequest, IUserCreate } from "./../interfaces/requests.interface";
+import { ILoginRequest, IUserCreate, IUserUpdateRequest } from "./../interfaces/requests.interface";
 import { Response, Request } from "express";
 import { IUserRequest } from "../interfaces/requests.interface";
 import {
@@ -9,6 +8,7 @@ import {
   userListSpecificService,
   userLoginService,
 } from "../services/user.service";
+
 import { instanceToPlain } from "class-transformer";
 
 export async function userCreateController(req: Request, res: Response) {
@@ -89,3 +89,24 @@ export async function userLoginController(req : ILoginRequest,res : Response){
     return res.json({ message: "Internal server error" }).status(500);
   }
 }
+
+export const userUpdateController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const id : string = req.params.id;
+
+    const data: IUserUpdateRequest = req.body;
+
+    const announcementUpdated = await userUpdateserService(id, data);
+
+    return res.status(200).send(announcementUpdated);
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+function userUpdateserService(id: string, data: IUserUpdateRequest) {
+  throw new Error("Function not implemented.");
+}
+
