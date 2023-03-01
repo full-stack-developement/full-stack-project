@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -42,7 +43,7 @@ export class User {
 
   @Exclude()
   @Column("varchar")
-  password : string
+  password: string;
 
   @CreateDateColumn({ type: "timestamp" })
   created_at: Date;
@@ -53,7 +54,8 @@ export class User {
   @Column("boolean", { default: true })
   isActive: boolean;
 
-  @OneToOne(() => Address)
+  @OneToOne(() => Address, { eager: true })
+  @JoinColumn()
   address: Address;
 
   @OneToMany(() => Vehicle, (vehicle) => vehicle.user)
