@@ -85,16 +85,3 @@ export const userUpdateController = async (
   }
 };
 
-/*export const userUpdateController = async(req: Request, res: Response) => {
-  try {
-      const user: IUserUpdateRequest = req.body
-      const id: string = req.params.id
-      const updateUSer = await userUpdateserService(user, id)
-      return res.status(200).send(updateUSer)
-
-  } catch (error) {
-      return res.status(400).json({ message: error.message });
-  }
-  
-   
-}*/

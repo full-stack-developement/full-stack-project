@@ -9,6 +9,7 @@ import { InputText } from "../InputText"
 import { Text } from "../Text"
 
 
+//incluir yup
 interface IModalUserUpdateProps{
     user_id : string
 }
@@ -48,7 +49,7 @@ export function ModalUserUpdate(props : IModalUserUpdateProps){
                     {errors.full_name && <Text variant="errors-form" text={errors.full_name.message as string}></Text> }
                 </Box>
                 <Box>
-                    <InputText placeholder="@kenzie.com.br" text="Email"></InputText>
+                    <InputText  placeholder="@kenzie.com.br" text="Email"></InputText>
                     {errors.email && <Text variant="errors-form" text={errors.email.message as string}></Text> }
                     </Box>
                 <Box>
