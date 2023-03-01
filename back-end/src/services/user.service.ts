@@ -1,28 +1,37 @@
-
-import { IUserCreate, IUserUpdateRequest } from "./../interfaces/requests.interface";
+import { IUserCreate, IUserUpdateRequest} from "./../interfaces/requests.interface";
 import AppDataSource from "../data-source";
 import { User } from "../entities/user";
 import bcrypt from "bcryptjs";
-import { hash } from 'bcrypt';
-import { AppError, ErrorResponse } from "../Error/ErrorResponse";
-import { classToPlain, instanceToPlain } from "class-transformer"
+import { AppError } from "../Error/ErrorResponse";
+import { instanceToPlain } from "class-transformer";
+import { Address } from "../entities/address";
+import { IAddressCreate } from "../interfaces/address.interface";
+import { hash } from "bcrypt";
 
 const userRepository = AppDataSource.getRepository(User);
 
-export async function userCreateService({
-  accountType,
-  full_name,
-  email,
-  cpf,
-  phone,
-  birthDate,
-  description,
-  password,
-}: IUserCreate): Promise<User> {
+export async function userCreateService(
+  {
+    accountType,
+    full_name,
+    email,
+    cpf,
+    phone,
+    birthDate,
+    description,
+    password,
+  }: IUserCreate,
+  addressData: IAddressCreate
+): Promise<User> {
+  const addressRepository = AppDataSource.getRepository(Address);
+
   const userEmail = await userRepository.findOneBy({ email });
   if (userEmail) {
     throw new AppError(409, "User already exist");
   }
+
+  const address = addressRepository.create(addressData);
+  await addressRepository.save(address);
 
   const createdUser = userRepository.create({
     accountType,
@@ -33,6 +42,7 @@ export async function userCreateService({
     birthDate,
     description,
     password: bcrypt.hashSync(password, 10),
+    address,
   });
 
   await userRepository.save(createdUser);
@@ -52,15 +62,14 @@ export async function userDeleteService(id: string) {
   userRepository.save(user);
 }
 
-export async function userListSpecificService(id : string){
+export async function userListSpecificService(id: string) {
+  const user = await userRepository.findOneBy({ id: id });
 
-    const user = await userRepository.findOneBy({id : id})
+  if (!user) {
+    throw new Error("User not found");
+  }
 
-    if(!user){
-        throw new Error("User not found")
-    }
-
-    return instanceToPlain(user)
+  return instanceToPlain(user);
 }
 
 export const userUpdateserService = async (id: string, { full_name, email, cpf, phone, birthDate, description, password}: IUserUpdateRequest) => {
