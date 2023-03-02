@@ -3,26 +3,26 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { useContext } from "react"
 import { useForm } from "react-hook-form"
 import { UserContext } from "../../contexts/user.context"
+import { userUpdateSchema } from "../../schemas/user.schema"
 import { updateUser } from "../../utils/user.util"
 import { Button } from "../Button"
 import { InputText } from "../InputText"
 import { Text } from "../Text"
 
 
-//incluir yup
 interface IModalUserUpdateProps{
     user_id : string
 }
 export function ModalUserUpdate(props : IModalUserUpdateProps){
     const { isOpen, onOpen, onClose} = useDisclosure()
 
-    const {handleSubmit,register,setValue,formState : {errors,isValid},watch} = useForm()
+    const {handleSubmit,register,setValue,formState : {errors,isValid},watch} = useForm({resolver : yupResolver(userUpdateSchema)})
 
     const {users,setUsers} = useContext(UserContext)
 
     return(        
     <>
-        <Button onClick={onOpen} variant={"open-modal-announcement"} size="small-auto" text="Editar"></Button>
+        <Button onClick={onOpen} variant={"open-modal-announcement"} size="small-auto" text="Editar perfil"></Button>
         <Modal variant={"create-auction"} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -45,36 +45,33 @@ export function ModalUserUpdate(props : IModalUserUpdateProps){
           <ModalBody>
             <Text text="Informações pessoais" variant="title-content-form"></Text>
                 <Box>
-                    <InputText placeholder="Digitar nome" text="Nome"></InputText>
+                    <InputText register={{...register("full_name")}} placeholder="Digitar nome" text="Nome"></InputText>
                     {errors.full_name && <Text variant="errors-form" text={errors.full_name.message as string}></Text> }
                 </Box>
                 <Box>
-                    <InputText  placeholder="@kenzie.com.br" text="Email"></InputText>
+                    <InputText  register={{...register("email")}} placeholder="@kenzie.com.br" text="Email"></InputText>
                     {errors.email && <Text variant="errors-form" text={errors.email.message as string}></Text> }
                     </Box>
                 <Box>
-                    <InputText placeholder="000.000.000-00" text="CPF"></InputText>
+                    <InputText register={{...register("cpf")}} placeholder="000.000.000-00" text="CPF"></InputText>
                     {errors.cpf && <Text variant="errors-form" text={errors.cpf.message as string}></Text> }
                 </Box>
                 <Box>
-                    <InputText placeholder="0" text="Celular"></InputText>
+                    <InputText register={{...register("phone")}} placeholder="0" text="Celular"></InputText>
                     {errors.phone && <Text variant="errors-form" text={errors.phone.message as string}></Text> }
                 </Box>
                 <Box>
-                    <InputText placeholder="0" text="Celular"></InputText>
-                    {errors.phone && <Text variant="errors-form" text={errors.phone.message as string}></Text> }
-                </Box>
-                <Box>
-                    <InputText placeholder="0" text="Data de nascimento"></InputText>
+                    <InputText register={{...register("birthDate")}} placeholder="" text="Data de nascimento"></InputText>
                     {errors.birthDate && <Text variant="errors-form" text={errors.birthDate.message as string}></Text> }
                 </Box>
                 <Box>
-                    <Textarea placeholder="Digitar Descrição" text="Descrição"></Textarea>
+                    <InputText register={{...register("complement")}} placeholder="" text="Data de nascimento"></InputText>
+                    {errors.complement && <Text variant="errors-form" text={errors.complement.message as string}></Text> }
                 </Box>
           </ModalBody>
           <ModalFooter>
           <Button onClick={onClose} variant="exclude/cancel-announcement" size="large-100%" text="Cancelar"></Button>
-            <Button type={"submit"} variant={isValid ? "create-announcement:enable":"create-announcement:disable"} size="large-100%" text="Salvar alterações"></Button>
+            <Button type={"submit"} variant={"create-announcement:enable"} size="large-100%" text="Salvar alterações"></Button>
           </ModalFooter>
         </form>  
         </ModalContent>
