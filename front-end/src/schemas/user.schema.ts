@@ -1,10 +1,5 @@
 import * as yup from "yup"
 
-export const loginSchema = yup.object().shape({
-    username : yup.string().required("O username é obrigatório"),
-    password : yup.string().required("A senha é obrigatória")
-})
-
 export const userSchema = yup.object().shape({
     accountType : yup.string().oneOf(["seller","buyer"],"Tipos de conta: seller(anunciante), buyer(comprador)").required("O tipo de conta é obrigatório"),
     full_name : yup.string().required("O nome é obrigatório"),

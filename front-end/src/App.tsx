@@ -8,8 +8,6 @@ function App() {
   return (
     <AnnouncementProvider>
         <RouterProvider router={Route}></RouterProvider>
-        <ModalAddressUpdate></ModalAddressUpdate>
-        <ModalUserUpdate></ModalUserUpdate>
     </AnnouncementProvider>
   )
 }
