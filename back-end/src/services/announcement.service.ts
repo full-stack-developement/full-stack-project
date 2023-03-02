@@ -67,7 +67,7 @@ export const announcementUpdateService = async (id: string,data : IAnnouncement)
 
   } catch (error) {
     if(error instanceof QueryFailedError){
-      throw new Error("Formato de id inválido")
+      throw new Error("Format id is invalid")
     }
     throw new Error(error)
   }
