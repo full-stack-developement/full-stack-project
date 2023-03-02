@@ -17,9 +17,7 @@ export async function createUser(data: FieldValues) {
 
   await apiUser
     .post("", data)
-    .then((response) => {
-      console.log(response.data);
-    })
+    .then(() => {})
     .catch((error) => {
       if (error instanceof AxiosError) {
         console.log(error);
