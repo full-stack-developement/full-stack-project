@@ -14,8 +14,8 @@ export interface IUserCreate {
   accountType: "seller" | "buyer";
   full_name: string;
   email: string;
-  cpf: number;
-  phone: number;
+  cpf: string;
+  phone: string;
   birthDate: Date;
   description: string;
   password: string;
@@ -25,8 +25,8 @@ export interface IUserResponse {
   accountType: string;
   full_name: string;
   email: string;
-  cpf: number;
-  phone: number;
+  cpf: string;
+  phone: string;
   birthDate: Date;
   description: string;
   createdAt: Date;
