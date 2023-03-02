@@ -1,7 +1,7 @@
 import * as yup from "yup"
 
 export const userSchema = yup.object({
-    cep : yup.number().required("O cep obrigatória"),
+    cep : yup.number().required("O cep é obrigatório"),
     state : yup.string().required("O estado é obrigatório"),
     city : yup.string().required("A cidade é obrigatório"),
     street : yup.string().required("A rua é obrigatório"),
@@ -14,5 +14,5 @@ export const userUpdateSchema = yup.object({
     city : yup.string().optional(),
     street : yup.string().optional(),
     number : yup.number().optional(),
-    complement: yup.string().notRequired(),
+    complement: yup.string().optional(),
 })

@@ -5,7 +5,7 @@ import {customTheme} from "../../theme"
 interface IInputText{
   text : string
   placeholder : string;
-  register? : UseFormRegisterReturn<"username"|"password"|"title"|"year"|"km"|"price"|"coverImage">
+register? : UseFormRegisterReturn<"username"|"password"|"title"|"year"|"km"|"price"|"coverImage"|"full_name"|"email"|"cpf"| "phone"|"birthDate"|"cep"|"state"|"city"|"street"|"number"|"complement">
 }
 
 export const InputText = (props : IInputText) => {
