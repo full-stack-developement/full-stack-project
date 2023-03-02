@@ -19,7 +19,7 @@ export async function createUser(data : FieldValues){
     }
 }
 export async function loginUser(data : FieldValues){
-    let responseLogin = {data : {} as IUserUpdate,message : "" as "success" | "error"}
+    let responseLogin = {data : "",message : "" as "success" | "error"}
     try{
         const response = await apiUser.post("/login",data)
         responseLogin.data = response.data
