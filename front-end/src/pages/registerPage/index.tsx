@@ -112,7 +112,7 @@ export const RegisterPage = () => {
                 type={"date"}
                 placeholder="00/00/00"
                 variant={"forms-input"}
-                {...register("birthdate")}
+                {...register("birthDate")}
               />
               <Text>{errors.birthdate?.message as string}</Text>
             </FormControl>
@@ -152,7 +152,7 @@ export const RegisterPage = () => {
             <FormControl id="cep" isRequired>
               <FormLabel>CEP</FormLabel>
               <Input
-                type={"number"}
+                type={"text"}
                 placeholder={"00000-000"}
                 variant={"forms-input"}
                 {...register("cep")}
