@@ -5,7 +5,6 @@ import {
   userCreateController,
   userLoginController,
   userUpdateController,
-//  userAddressUpdateController,
 } from "../controllers/user.controller";
 import { AuthTokenCheck } from "../middlewares/auth.middleware";
 import { schemaValidationMiddleware } from "../middlewares/schemaValidation.middleware";
@@ -16,11 +15,13 @@ const routeName = "/user";
 //const routeNameAddress = "/address"
 
 userRoute.post(routeName, userCreateController);
-userRoute.post(routeName + "/login",schemaValidationMiddleware(loginSchema),userLoginController)
+userRoute.post(
+  routeName + "/login",
+  schemaValidationMiddleware(loginSchema),
+  userLoginController
+);
 userRoute.delete(routeName, AuthTokenCheck, userDeleteController);
-userRoute.get(routeName, userListSpecificController) //AuthTokenCheck
-userRoute.patch(routeName  + "/:id", userUpdateController)
-//userRoute.patch(routeName, userAddressUpdateController)
-
+userRoute.get(routeName, AuthTokenCheck, userListSpecificController); //
+userRoute.patch(routeName + "/:id", userUpdateController);
 
 export default userRoute;

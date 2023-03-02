@@ -31,7 +31,12 @@ export const LoginBar = () => {
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbItem>
-            <Button variant="solid">Cadastrar</Button>
+            <Button
+              variant={"select-type-announcement:disabled"}
+              onClick={() => navigate("/register")}
+            >
+              Cadastrar
+            </Button>
           </BreadcrumbItem>
         </Breadcrumb>
       ) : (

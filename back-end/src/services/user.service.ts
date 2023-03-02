@@ -33,8 +33,8 @@ export async function userCreateService(
     throw new AppError(409, "User already exist");
   }
 
-  const address = addressRepository.create(addressData);
-  await addressRepository.save(address);
+  const addressInstance = addressRepository.create(addressData);
+  const address = await addressRepository.save(addressInstance);
 
   const createdUser = userRepository.create({
     accountType,

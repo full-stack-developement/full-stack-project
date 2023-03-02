@@ -12,7 +12,6 @@ import {
 import { Address } from "./address";
 import { Vehicle } from "./vehicle";
 import { VehicleComments } from "./vehicle_comments";
-import { VehicleGallery } from "./vehicle_gallery";
 import { Exclude } from "class-transformer";
 
 @Entity()
@@ -29,11 +28,11 @@ export class User {
   @Column("varchar")
   email: string;
 
-  @Column("numeric", { precision: 11 })
-  cpf: number;
+  @Column("varchar", { length: 11 })
+  cpf: string;
 
-  @Column("numeric", { precision: 10 })
-  phone: number;
+  @Column("varchar", { length: 10 })
+  phone: string;
 
   @Column("date")
   birthDate: Date;

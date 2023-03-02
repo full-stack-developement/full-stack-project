@@ -1,5 +1,5 @@
 export interface IAddressCreate {
-  cep: number;
+  cep: string;
   state: string;
   city: string;
   street: string;

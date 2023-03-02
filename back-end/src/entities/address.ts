@@ -1,25 +1,25 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Address{
-    @PrimaryGeneratedColumn("uuid")
-    id : string
+export class Address {
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
-    @Column("numeric",{precision : 8})
-    cep: number
+  @Column("varchar", { length: 8 })
+  cep: string;
 
-    @Column("varchar")
-    state  : string
+  @Column("varchar")
+  state: string;
 
-    @Column("varchar")
-    city : string
+  @Column("varchar")
+  city: string;
 
-    @Column("varchar")
-    street : string
+  @Column("varchar")
+  street: string;
 
-    @Column("integer")
-    number : number
+  @Column("integer")
+  number: number;
 
-    @Column("varchar")
-    complement : string
+  @Column("varchar")
+  complement: string;
 }
