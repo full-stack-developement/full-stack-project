@@ -12,12 +12,26 @@ import {
 import { NavBar } from "../../components/NavBar";
 import Footer from "../../components/Footer";
 import { customTheme } from "../../theme";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { userRegisterSchema } from "../../schemas/user.schema";
+import { createUser } from "../../utils/user.util";
 
 export const RegisterPage = () => {
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    formState: { errors, isValid },
+    watch,
+  } = useForm({ resolver: yupResolver(userRegisterSchema) });
+
+  const type = watch("accountType");
+
   return (
     <>
       <NavBar />
-      <form className="registerForm" action="">
+      <form className="registerForm" onSubmit={handleSubmit(createUser)}>
         <Box
           className="registerFormContainer"
           width={"420px"}
@@ -48,13 +62,15 @@ export const RegisterPage = () => {
               Informações pessoais
             </Text>
 
-            <FormControl id="name" isRequired>
+            <FormControl id="full_name" isRequired>
               <FormLabel>Nome</FormLabel>
               <Input
                 type={"text"}
                 placeholder="Ex: Jhon Doe"
                 variant={"forms-input"}
+                {...register("full_name")}
               />
+              <Text>{errors.full_name?.message as string}</Text>
             </FormControl>
 
             <FormControl id="email" isRequired>
@@ -63,7 +79,9 @@ export const RegisterPage = () => {
                 type={"email"}
                 placeholder="Ex: jhondoe@kenzie.com.br"
                 variant={"forms-input"}
+                {...register("email")}
               />
+              <Text>{errors.email?.message as string}</Text>
             </FormControl>
 
             <FormControl id="socialSecurityNumber" isRequired>
@@ -72,16 +90,20 @@ export const RegisterPage = () => {
                 type={"number"}
                 placeholder="000.000.000-00"
                 variant={"forms-input"}
+                {...register("cpf")}
               />
+              <Text>{errors.cpf?.message as string}</Text>
             </FormControl>
 
-            <FormControl id="cellphone">
+            <FormControl id="phone">
               <FormLabel>Celular</FormLabel>
               <Input
                 type={"tel"}
                 placeholder="(DDD)90000-0000"
                 variant={"forms-input"}
+                {...register("phone")}
               />
+              <Text>{errors.phone?.message as string}</Text>
             </FormControl>
 
             <FormControl id="birthdate" isRequired>
@@ -90,7 +112,9 @@ export const RegisterPage = () => {
                 type={"date"}
                 placeholder="00/00/00"
                 variant={"forms-input"}
+                {...register("birthdate")}
               />
+              <Text>{errors.birthdate?.message as string}</Text>
             </FormControl>
 
             <FormControl id="description">
@@ -99,7 +123,9 @@ export const RegisterPage = () => {
                 type={"text"}
                 placeholder="Digitar descrição"
                 variant={"forms-input"}
+                {...register("description")}
               />
+              <Text>{errors.description?.message as string}</Text>
             </FormControl>
           </Flex>
 
@@ -129,19 +155,23 @@ export const RegisterPage = () => {
                 type={"number"}
                 placeholder={"00000-000"}
                 variant={"forms-input"}
+                {...register("cep")}
               ></Input>
+              <Text>{errors.cep?.message as string}</Text>
             </FormControl>
 
             <Stack spacing={4}>
               <HStack>
                 <Box>
-                  <FormControl id="location" isRequired>
+                  <FormControl id="state" isRequired>
                     <FormLabel>Estado</FormLabel>
                     <Input
                       type={"text"}
                       placeholder={"Digitar estado"}
                       variant={"forms-input"}
+                      {...register("state")}
                     />
+                    <Text>{errors.state?.message as string}</Text>
                   </FormControl>
                 </Box>
                 <Box>
@@ -151,7 +181,9 @@ export const RegisterPage = () => {
                       type={"text"}
                       placeholder={"Digitar cidade"}
                       variant={"forms-input"}
+                      {...register("city")}
                     />
+                    <Text>{errors.city?.message as string}</Text>
                   </FormControl>
                 </Box>
               </HStack>
@@ -163,29 +195,35 @@ export const RegisterPage = () => {
                 type={"text"}
                 placeholder="Digitar rua"
                 variant={"forms-input"}
+                {...register("street")}
               />
+              <Text>{errors.street?.message as string}</Text>
             </FormControl>
 
             <Stack spacing={4}>
               <HStack>
                 <Box>
-                  <FormControl id="complements" isRequired>
+                  <FormControl id="number" isRequired>
                     <FormLabel>Número</FormLabel>
                     <Input
                       type={"number"}
                       placeholder={"Digitar número"}
                       variant={"forms-input"}
+                      {...register("number")}
                     />
+                    <Text>{errors.number?.message as string}</Text>
                   </FormControl>
                 </Box>
                 <Box>
-                  <FormControl id="city" isRequired>
+                  <FormControl id="complement" isRequired>
                     <FormLabel>Complemento</FormLabel>
                     <Input
                       type={"text"}
                       placeholder={"Ex.: apart 307"}
                       variant={"forms-input"}
+                      {...register("complement")}
                     />
+                    <Text>{errors.complement?.message as string}</Text>
                   </FormControl>
                 </Box>
               </HStack>
@@ -216,14 +254,36 @@ export const RegisterPage = () => {
               <HStack>
                 <Box>
                   <FormControl id="accountType" isRequired>
-                    <Button variant={"select-type-announcement:enable"}>
+                    <Button
+                      onClick={() => {
+                        setValue("accountType", "buyer", {
+                          shouldValidate: true,
+                        });
+                      }}
+                      variant={
+                        type == "buyer"
+                          ? "select-type-announcement:enable"
+                          : "select-type-announcement:disabled"
+                      }
+                    >
                       Comprador
                     </Button>
                   </FormControl>
                 </Box>
                 <Box>
                   <FormControl id="city" isRequired>
-                    <Button variant={"select-type-announcement:disabled"}>
+                    <Button
+                      onClick={() => {
+                        setValue("accountType", "seller", {
+                          shouldValidate: true,
+                        });
+                      }}
+                      variant={
+                        type == "seller"
+                          ? "select-type-announcement:enable"
+                          : "select-type-announcement:disabled"
+                      }
+                    >
                       Anunciante
                     </Button>
                   </FormControl>
@@ -233,7 +293,7 @@ export const RegisterPage = () => {
           </Flex>
 
           <Flex
-            className="registerAccountType"
+            className="registerPassword"
             width={"85%"}
             display={"flex"}
             margin={"2rem auto"}
@@ -248,16 +308,20 @@ export const RegisterPage = () => {
                 type={"password"}
                 placeholder={"Digitar senha"}
                 variant={"forms-input"}
+                {...register("password")}
               ></Input>
+              <Text>{errors.password?.message as string}</Text>
             </FormControl>
 
-            <FormControl id="password" isRequired>
+            <FormControl id="confirmPassword" isRequired>
               <FormLabel>Confirmar senha</FormLabel>
               <Input
                 type={"password"}
                 placeholder={"Digitar senha"}
                 variant={"forms-input"}
+                {...register("confirmPassword")}
               ></Input>
+              <Text>{errors.confirmPassword?.message as string}</Text>
             </FormControl>
           </Flex>
 
@@ -271,7 +335,15 @@ export const RegisterPage = () => {
             alignItems={"center"}
             gap={"15px"}
           >
-            <Button width={"100%"} variant={"create-announcement:enable"}>
+            <Button
+              width={"100%"}
+              variant={
+                isValid
+                  ? "create-announcement:enable"
+                  : "create-announcement:disable"
+              }
+              type={"submit"}
+            >
               Finalizar cadastro
             </Button>
           </Flex>
