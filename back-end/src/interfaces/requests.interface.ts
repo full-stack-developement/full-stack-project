@@ -2,6 +2,7 @@ import { Request } from "express";
 import { IAnnouncement } from "./announcement.interface";
 import { IComments, ICommentsSpecificList } from "./comments.interface";
 import { ILogin } from "./login.interface";
+import { IAddressUpdate } from "./address.interface";
 
 export interface ISchemaRequest extends Request {
   data: Object;
@@ -9,6 +10,10 @@ export interface ISchemaRequest extends Request {
 
 export interface IAnnouncementRequest extends Request {
   data: IAnnouncement;
+}
+
+export interface IUserRequest extends Request {
+  data: IUserUpdateRequest
 }
 
 export interface IUserCreate {
@@ -51,7 +56,10 @@ export interface ICommentsListRequest extends Request {
   data: ICommentsSpecificList;
 }
 
-export interface IUserUpdateRequest {
+export interface IUserUpdateRequest extends Request {
+  data: IUserUpdate
+}
+export interface IUserUpdate {
   full_name?: string;
   email?: string;
   cpf?: number;
@@ -59,4 +67,5 @@ export interface IUserUpdateRequest {
   birthDate?: Date;
   description?: string;
   password?: string;
+  address: IAddressUpdate
 }

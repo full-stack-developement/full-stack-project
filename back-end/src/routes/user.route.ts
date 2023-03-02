@@ -12,6 +12,7 @@ import { loginSchema } from "../schemas/login.schema";
 
 const userRoute = Router();
 const routeName = "/user";
+//const routeNameAddress = "/address"
 
 userRoute.post(routeName, userCreateController);
 userRoute.post(
