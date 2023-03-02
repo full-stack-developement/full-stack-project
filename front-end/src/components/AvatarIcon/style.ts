@@ -2,26 +2,43 @@ import styled, { css } from "styled-components";
 import { IAvatarProps } from ".";
 import { customTheme } from "../../theme";
 
-export const AvatarStyled = styled.div<IAvatarProps>`
+interface IDivProps{
+  colorClass?: "avatarName-grey" | "avatarName-white";
+  size : "big" | "small" | "medium"
+}
+
+export const AvatarStyled = styled.div<IDivProps>`
 
 
   display: flex;
   width: max-content;
-  flex-direction: ${props=>props.size == "big" ? "column" : "row"};
+  flex-direction: ${props=>props.size != "small" ? "column" : "row"};
   align-items:  center;
+  justify-content: center;
   gap: 5px;
   font-family: "Inter", sans-serif;
   font-weight: 500;
   font-size: 14px;
 
   .avatarLetter {
-    width:${props=> props.size == "big" ? "104px" : "32px"};
-    height:${props=> props.size == "big" ? "104px" : "32px"};
-    display: flex;
     ${props=> props.size == "big" &&
     css`
+      width:104px;
+      height:104px;
       font-size: 3rem;
     `}
+    ${props=> props.size == "medium" &&
+    css`
+      width:104px;
+      height:104px;
+      font-size: 2.6rem;
+    `}
+    ${props=> props.size == "small" &&
+    css`
+      width:32px;
+      height:32px;
+    `}
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;

@@ -1,5 +1,6 @@
 import { extendTheme} from '@chakra-ui/react'
 import buttonTheme from './button.theme'
+import labelTheme from './label.theme'
 import modalTheme from './modal.theme'
 import textTheme from './text.theme'
 
@@ -7,7 +8,8 @@ const customTheme ={
     components : {
         Button : buttonTheme,
         Modal : modalTheme,
-        Text: textTheme
+        Text: textTheme,
+        FormLabel : labelTheme
     },
     colors : {
         brand: {
