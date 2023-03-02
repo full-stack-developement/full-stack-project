@@ -1,4 +1,5 @@
-import { IUserCreate, IUserUpdateRequest} from "./../interfaces/requests.interface";
+import { QueryFailedError } from "typeorm";
+import { IUserCreate, IUserUpdate, IUserUpdateRequest} from "./../interfaces/requests.interface";
 import AppDataSource from "../data-source";
 import { User } from "../entities/user";
 import bcrypt, { compare } from "bcryptjs";
@@ -95,36 +96,47 @@ export async function userLoginService(data: ILogin) {
 
 }
 
-export const userUpdateserService = async (id: string, { full_name, email, cpf, phone, birthDate, description, password}: IUserUpdateRequest) => {
+
+export const userUpdateService = async (id: string, { full_name, email, cpf, phone, birthDate, description, password, address}: IUserUpdate, addressData:IAddressUpdate):Promise<User> => {
   try {
     const userRepository = AppDataSource.getRepository(User);
 
     const userUpdated = await userRepository.findOneBy({
       id: id
-  })
+    })
 
-  if (!userUpdated) {
-    throw new Error('User not found')
-  };
+    if (!userUpdated) {
+      throw new Error('User not found')
+    };
 
-  await userRepository.update(
-    id,
-    {
-      full_name: full_name ? full_name : userUpdated.full_name,
-      email: email ? email : userUpdated.email,
-      cpf: cpf ? cpf : userUpdated.cpf,
-      phone: phone ? phone : userUpdated.phone,
-      birthDate: birthDate ? birthDate : userUpdated.birthDate,
-      description: description ? description : userUpdated.description,
-      password: password  ? await hash(password, 10) : userUpdated.password
-    }
-  );
+  
+    await userRepository.update(
+      id,
+      {
+        full_name: full_name ? full_name : userUpdated.full_name,
+        email: email ? email : userUpdated.email,
+        cpf: cpf ? cpf : userUpdated.cpf,
+        phone: phone ? phone : userUpdated.phone,
+        birthDate: birthDate ? birthDate : userUpdated.birthDate,
+        description: description ? description : userUpdated.description,
+        password: password  ? await hash(password, 10) : userUpdated.password,
+        address : {
+          cep: addressData.cep ? addressData.cep : userUpdated.address.cep,
+          state: addressData.state ? addressData.state : userUpdated.address.state,
+          city: addressData.city ? addressData.city : userUpdated.address.city,
+          street: addressData.street ? addressData.street : userUpdated.address.street,
+          number: addressData.number ? addressData.number : userUpdated.address.number,
+          complement: addressData.complement ? addressData.complement : userUpdated.address.complement,
+        }
 
-  const updatedUser = await userRepository.findOneBy({
-    id: id
-  });
+      }
+    );
 
-  return updatedUser
+    const updatedUser = await userRepository.findOneBy({
+      id: id
+    });
+
+    return updatedUser
       
   } catch (error) {
       throw new Error(error)
@@ -132,45 +144,3 @@ export const userUpdateserService = async (id: string, { full_name, email, cpf, 
 
   
 };
-
-export const userAddressUpdatedService = async (id: string, { cep, state, city, street, number, complement }: IAddressUpdate) => {
-  try {
-    const addressRepository = AppDataSource.getRepository(Address);
-    const userRepository = AppDataSource.getRepository(User)
-
-    const userAddressUpdate = userRepository.findOneBy({
-      id: id
-    })
-  
-    if (!userAddressUpdate) {
-      throw new Error('User not found')
-    };
-
-    const address = (await userAddressUpdate).address
-  
-  
-    if (!address) {
-      throw new Error('Address not found')
-  };
-  
-  await addressRepository.update(
-    id,
-  {
-    cep: cep ? cep : address.cep,
-    state: state ? state : address.state,
-    city: city ? city : address.city,
-    street: street ? street : address.street,
-    number: number ? number : address.number,
-    complement: complement ? complement : address.complement,
-  }
-  );
-  const updatedAddress = await addressRepository.findOneBy({
-    id: id
-  });
-  return updatedAddress
-
-  } catch (error) {
-    throw new Error(error)
-  }
-};
-  

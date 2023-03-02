@@ -3,15 +3,15 @@ import { ILoginRequest, IUserCreate, IUserUpdateRequest } from "./../interfaces/
 import { Response, Request } from "express";
 import { IUserRequest } from "../interfaces/requests.interface";
 import {
-  userAddressUpdatedService,
   userCreateService,
   userDeleteService,
   userListSpecificService,
   userLoginService,
-  userUpdateserService,
+  userUpdateService,
 } from "../services/user.service";
 
 import { instanceToPlain } from "class-transformer";
+import { IAddressUpdate } from "../interfaces/address.interface";
 
 export async function userCreateController(req: Request, res: Response) {
   try {
@@ -92,33 +92,38 @@ export async function userLoginController(req : ILoginRequest,res : Response){
   }
 }
 
+/*
+export async function userUpdateController(req: IUserUpdateRequest, res: Response){
+  try {
+    const id : string = req.params.id;
+  
+    const data: IUserUpdateRequest = req.body;
+
+    const dataAdrres: IAddressUpdate = req.body  
+
+    const userUpdated = await userUpdateService(id, data, dataAdrres);
+  
+    return res.status(200).send(userUpdated);
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+ };
+*/
+
 export const userUpdateController = async (
-  req: Request,
+  req: IUserUpdateRequest,
   res: Response
 ) => {
   try {
-    const id : string = req.params.id;
+    const { id } = req.params;
 
-    const data: IUserUpdateRequest = req.body;
+    const data = req.data;
+    const dataAdrress = req.data.address
 
-    const announcementUpdated = await userUpdateserService(id, data);
+    const userUpdated = await userUpdateService(id, data, dataAdrress);
 
-    return res.status(200).send(announcementUpdated);
+    return res.status(200).send(userUpdated);
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }
 };
-
-export const userAddressUpdateController = async (
-  req: Request,
-  res: Response
-  ) => {
-  try {
-  const id = req.params.id;
-  const data = req.body;
-  const addressUpdated = await userAddressUpdatedService(id, data);
-  return res.status(200).send(addressUpdated);
-  } catch (error) {
-  return res.status(400).json({ message: error.message });
-  }
-  };
