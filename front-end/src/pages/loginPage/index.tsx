@@ -6,7 +6,7 @@ import {Text} from "../../components/Text"
 import {InputText} from "../../components/InputText"
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { loginSchema } from "../../schemas/user.schema";
+import { loginSchema } from "../../schemas/login.schema";
 import { loginUser } from "../../utils/user.util";
 
 export const LoginPage = () => {
@@ -49,9 +49,9 @@ export const LoginPage = () => {
               justifyContent={"space-around"}
             >
               <InputText
-                register={{...register("username")}}
+                register={{...register("email")}}
                 text="Usuário"
-                placeholder="Digitar usuário"
+                placeholder="Digitar Email"
               ></InputText>
               {errors.username?.message && <Text text={errors.username.message as string} variant="errors-form"></Text>}
               <InputText
