@@ -8,7 +8,7 @@ export interface IAddressCreate {
 }
 
 export interface IAddressUpdate {
-  cep?: number;
+  cep?: string;
   state?: string;
   city?: string;
   street?: string;

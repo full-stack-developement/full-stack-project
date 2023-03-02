@@ -62,8 +62,8 @@ export interface IUserUpdateRequest extends Request {
 export interface IUserUpdate {
   full_name?: string;
   email?: string;
-  cpf?: number;
-  phone?: number;
+  cpf?: string;
+  phone?: string;
   birthDate?: Date;
   description?: string;
   password?: string;
