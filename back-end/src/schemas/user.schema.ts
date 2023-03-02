@@ -10,10 +10,11 @@ export const userSchema = yup.object({
     description: yup.string().notRequired(),
 })
 export const userUpdateSchema = yup.object({
-    announcementType : yup.string().oneOf(["seller","buyer"],"Tipos de conta: seller(anunciante), buyer(comprador)").optional(),
-    title : yup.string().optional(),
-    year : yup.number().optional(),
-    km : yup.number().optional(),
-    price : yup.number().optional(),
+    accountType : yup.string().oneOf(["seller","buyer"],"Tipos de conta: seller(anunciante), buyer(comprador)").optional(),
+    full_name : yup.string().optional(),
+    email : yup.string().email().optional(),
+    cpf : yup.number().optional(),
+    phone : yup.number().optional(),
+    birthDate : yup.date().optional(),
     description: yup.string().optional()
 })
