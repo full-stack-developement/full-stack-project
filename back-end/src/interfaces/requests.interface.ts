@@ -9,7 +9,8 @@ export interface ISchemaRequest extends Request {
 }
 
 export interface IAnnouncementRequest extends Request {
-  data: IAnnouncement;
+  data: IAnnouncement
+  user_id : string
 }
 
 export interface IUserRequest extends Request {
@@ -57,6 +58,7 @@ export interface ICommentsListRequest extends Request {
 }
 
 export interface IUserUpdateRequest extends Request {
+  user_id
   data: IUserUpdate
 }
 export interface IUserUpdate {

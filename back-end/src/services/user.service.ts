@@ -30,7 +30,7 @@ export async function userCreateService(
 
   const userEmail = await userRepository.findOneBy({ email });
   if (userEmail) {
-    throw new AppError(409, "User already exist");
+    throw new ErrorResponse("Email already been used")
   }
 
   const addressInstance = addressRepository.create(addressData);
@@ -97,9 +97,8 @@ export async function userLoginService(data: ILogin) {
 }
 
 
-export const userUpdateService = async (id: string, { full_name, email, cpf, phone, birthDate, description, password, address}: IUserUpdate, addressData:IAddressUpdate):Promise<User> => {
+export const userUpdateService = async (id: string,data : IUserUpdate) => {
   try {
-    const userRepository = AppDataSource.getRepository(User);
 
     const userUpdated = await userRepository.findOneBy({
       id: id
@@ -109,34 +108,20 @@ export const userUpdateService = async (id: string, { full_name, email, cpf, pho
       throw new Error('User not found')
     };
 
-  
-    await userRepository.update(
-      id,
-      {
-        full_name: full_name ? full_name : userUpdated.full_name,
-        email: email ? email : userUpdated.email,
-        cpf: cpf ? cpf : userUpdated.cpf,
-        phone: phone ? phone : userUpdated.phone,
-        birthDate: birthDate ? birthDate : userUpdated.birthDate,
-        description: description ? description : userUpdated.description,
-        password: password  ? await hash(password, 10) : userUpdated.password,
-        address : {
-          cep: addressData.cep ? addressData.cep : userUpdated.address.cep,
-          state: addressData.state ? addressData.state : userUpdated.address.state,
-          city: addressData.city ? addressData.city : userUpdated.address.city,
-          street: addressData.street ? addressData.street : userUpdated.address.street,
-          number: addressData.number ? addressData.number : userUpdated.address.number,
-          complement: addressData.complement ? addressData.complement : userUpdated.address.complement,
+    for(const prop in data){
+      if(data[prop]){
+          if(prop != "address"){
+            userUpdated[prop] = data[prop]
+          }
         }
-
+    }
+    for(const prop in data.address){
+      if(data.address[prop]){
+        userUpdated.address[prop] = data.address[prop]
       }
-    );
+    }
 
-    const updatedUser = await userRepository.findOneBy({
-      id: id
-    });
-
-    return updatedUser
+    return instanceToPlain(userRepository.save(userUpdated))
       
   } catch (error) {
       throw new Error(error)

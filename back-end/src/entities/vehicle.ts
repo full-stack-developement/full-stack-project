@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { User } from "./user";
 import { VehicleComments } from "./vehicle_comments";
 import { VehicleGallery } from "./vehicle_gallery";
@@ -47,6 +47,7 @@ export class Vehicle{
     @ManyToOne(()=> User,(user)=> user.vehicles)
     user : User
 
+    @JoinColumn()
     @OneToMany(()=> VehicleComments,(VehicleComments)=> VehicleComments.vehicle )
     comments : VehicleComments[]
 }

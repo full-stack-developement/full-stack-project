@@ -2,7 +2,7 @@ import { Router } from "express";
 import { commentsPostController,commentsUserListController,commentsUserListSpecificController,commentsVehicleListController, commentsVehicleListSpecificController } from "../controllers/comments.controller";
 import { AuthTokenCheck } from "../middlewares/auth.middleware";
 import { schemaValidationMiddleware } from "../middlewares/schemaValidation.middleware";
-import { commentsSchema } from "../schemas/comments.schema";
+import { commentsSchema } from "../schemas/comment.schema";
 
 const commentsRoute = Router();
 const routeName = "/comments"

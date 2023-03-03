@@ -5,11 +5,17 @@ import Home from "../pages/home";
 import { Profile } from "../pages/Profile";
 import { RegisterPage } from "../pages/registerPage";
 import { LoginPage } from "../pages/loginPage";
+import { CommentsProvider } from "../contexts/comments.context";
+import { ProtectedRoute } from "./ProtectedRoute";
 
 export const Route = createBrowserRouter([
   {
     path: "/home",
-    element: <Home></Home>,
+    element: 
+    <ProtectedRoute>
+      <Home></Home>
+    </ProtectedRoute>
+
   },
   {
     path: "/register",
@@ -21,16 +27,22 @@ export const Route = createBrowserRouter([
   },
   {
     path: "vehicle",
-    element: <VehiclePage></VehiclePage>,
+    element:
+    <ProtectedRoute>
+      <VehiclePage></VehiclePage>
+    </ProtectedRoute>,
     children: [
       {
         path: ":vehicle_id",
-        element: <Vehicle></Vehicle>,
+        element:
+        <CommentsProvider>
+          <Vehicle></Vehicle>
+        </CommentsProvider>
       },
     ],
   },
   {
     path: "/profile",
-    element: <Profile></Profile>,
+    element: <ProtectedRoute><Profile></Profile></ProtectedRoute>,
   },
 ]);

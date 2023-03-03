@@ -1,7 +1,6 @@
 import { Response, Request } from "express";
 import {
   IAnnouncementRequest,
-  ISchemaRequest,
 } from "../interfaces/requests.interface";
 import {
   announcementDeleteService,
@@ -16,8 +15,9 @@ export async function announcementPostController(
   res: Response
 ) {
   const data = req.data;
+  const user_id = req.user_id
 
-  const response = await announcementPostService(data);
+  const response = await announcementPostService(data,user_id);
 
   return res.status(201).json(response);
 }

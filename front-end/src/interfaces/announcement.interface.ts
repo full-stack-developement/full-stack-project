@@ -9,5 +9,4 @@ export interface IAnnouncement{
     description?: string
     coverImage : string
     isActive : boolean
-    user_id : number
 }

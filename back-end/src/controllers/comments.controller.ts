@@ -29,7 +29,7 @@ export async function commentsUserListController(req : ICommentsRequest,res : Re
     }
     catch(err){
         if(err instanceof ErrorResponse){
-            return res.json(err.message).status(err.status_code)
+            return res.status(err.status_code).json(err.message)
         }
         return res.json({"message" : "Internal server error"}).status(500)
     }
@@ -44,7 +44,7 @@ export async function commentsUserListSpecificController(req : ICommentsListRequ
     }
     catch(err){
         if(err instanceof ErrorResponse){
-            return res.json(err.message).status(err.status_code)
+            return res.status(err.status_code).json(err.message)
         }
         return res.json({"message" : "Internal server error"}).status(500)
     }
@@ -58,7 +58,7 @@ export async function commentsVehicleListController(req : ICommentsRequest,res :
     }
     catch(err){
         if(err instanceof ErrorResponse){
-            return res.json(err.message).status(err.status_code)
+            return res.status(err.status_code).json(err.message)
         }
         return res.json({"message" : "Internal server error"}).status(500)
     }
@@ -73,7 +73,7 @@ export async function commentsVehicleListSpecificController(req : ICommentsListR
     }
     catch(err){
         if(err instanceof ErrorResponse){
-            return res.json(err.message).status(err.status_code)
+            return res.status(err.status_code).json(err.message)
         }
         return res.json({"message" : "Internal server error"}).status(500)
     }

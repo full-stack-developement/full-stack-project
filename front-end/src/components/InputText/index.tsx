@@ -5,7 +5,30 @@ import {customTheme} from "../../theme"
 interface IInputText{
   text : string
   placeholder : string;
-  register? : UseFormRegisterReturn<"email"|"password"|"title"|"year"|"km"|"price"|"coverImage">
+  register? : UseFormRegisterReturn<"cep"|"state"|"city"|"complement"|"number"|"street"|"description"|"full_name"|"cpf"|"phone"|"birthDate"|"email"|"password"|"title"|"year"|"km"|"price"|"coverImage">
+  type? : | 'button'
+  | 'checkbox'
+  | 'color'
+  | 'date'
+  | 'datetime-local'
+  | 'email'
+  | 'file'
+  | 'hidden'
+  | 'image'
+  | 'month'
+  | 'number'
+  | 'password'
+  | 'radio'
+  | 'range'
+  | 'reset'
+  | 'search'
+  | 'submit'
+  | 'tel'
+  | 'text'
+  | 'time'
+  | 'url'
+  | 'week'
+  | (string & {});
 }
 
 export const InputText = (props : IInputText) => {
@@ -13,7 +36,7 @@ export const InputText = (props : IInputText) => {
     <Box>
       <FormLabel htmlFor={props.text}>{props.text}</FormLabel>
       <Input
-        type={"text"}
+        type={props.type}
         id={props.text}
         {...props.register}
         fontFamily={"inter"}
