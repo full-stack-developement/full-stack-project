@@ -95,22 +95,3 @@ export const loginSchema = yup.object().shape({
   username: yup.string().required("O username é obrigatório"),
   password: yup.string().required("A senha é obrigatória"),
 });
-
-export const userUpdateSchema = yup.object().shape({
-  cep: yup
-    .number()
-    .optional()
-    .transform((value) =>
-      isNaN(value) || value === null || value === undefined ? 0 : value
-    ),
-  state: yup.string().optional(),
-  city: yup.string().optional(),
-  street: yup.string().optional(),
-  number: yup
-    .number()
-    .optional()
-    .transform((value) =>
-      isNaN(value) || value === null || value === undefined ? 0 : value
-    ),
-  complement: yup.string().optional(),
-});

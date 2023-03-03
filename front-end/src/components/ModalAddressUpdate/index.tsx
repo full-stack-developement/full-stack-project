@@ -33,7 +33,6 @@ export function ModalAddressUpdate(props : IModalAddressUpdateProps){
             const address = {address : data}
             const response = await updateUser(address)
             if(response?.message == "success"){
-                console.log(response)
                 onClose()
             }
         })}>  

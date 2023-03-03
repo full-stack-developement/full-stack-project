@@ -29,6 +29,7 @@ interface IInputText{
   | 'url'
   | 'week'
   | (string & {});
+}
 
 
 export const InputText = (props: IInputText) => {
