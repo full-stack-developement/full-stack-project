@@ -1,9 +1,18 @@
 import { IEmailRequest } from "./../interfaces/email.interface";
 import { Request, Response } from "express";
-import { sendEmail } from "../configs/mailer.config";
+import emailRoute from "../routes/mail.route";
+import { sendEmail } from "../utils/mailer.util";
 
 export const mailerController = async (req: Request, res: Response) => {
-  try {
+  const { to, subject, text }: IEmailRequest = req.body;
+
+  await sendEmail({ to, subject, text });
+
+  return res.json({
+    message: "Email successfully sent",
+  });
+
+  /* try {
     const { host, subject, text, to, user, pass }: IEmailRequest = req.body;
 
     await sendEmail({ host, subject, text, to, user, pass });
@@ -16,5 +25,5 @@ export const mailerController = async (req: Request, res: Response) => {
         message: error.message,
       });
     }
-  }
+  } */
 };

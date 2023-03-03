@@ -5,6 +5,6 @@ import { AuthTokenCheck } from "../middlewares/auth.middleware";
 const emailRoute = Router();
 const routeName = "/mail";
 
-emailRoute.post(routeName, mailerController);
+emailRoute.post(routeName, AuthTokenCheck, mailerController);
 
 export default emailRoute;

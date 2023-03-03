@@ -1,8 +1,8 @@
 export interface IEmailRequest {
-  host: string;
+  //host: string;
   to: string;
   subject: string;
   text: string;
-  user: string;
-  pass: string;
+  //user: string;
+  //pass: string;
 }
