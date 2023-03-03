@@ -1,6 +1,6 @@
-import { Box, FormLabel, Input} from "@chakra-ui/react";
+import { Box, FormLabel, Input } from "@chakra-ui/react";
 import { UseFormRegisterReturn } from "react-hook-form";
-import {customTheme} from "../../theme"
+import { customTheme } from "../../theme";
 
 interface IInputText{
   text : string
@@ -29,9 +29,9 @@ interface IInputText{
   | 'url'
   | 'week'
   | (string & {});
-}
 
-export const InputText = (props : IInputText) => {
+
+export const InputText = (props: IInputText) => {
   return (
     <Box>
       <FormLabel htmlFor={props.text}>{props.text}</FormLabel>

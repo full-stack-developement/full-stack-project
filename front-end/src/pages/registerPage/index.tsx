@@ -16,8 +16,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { userRegisterSchema } from "../../schemas/user.schema";
 import { createUser } from "../../utils/user.util";
+import { useToast } from "@chakra-ui/react";
 
 export const RegisterPage = () => {
+  const toast = useToast();
+
   const {
     handleSubmit,
     register,
@@ -70,7 +73,9 @@ export const RegisterPage = () => {
                 variant={"forms-input"}
                 {...register("full_name")}
               />
-              <Text>{errors.full_name?.message as string}</Text>
+              <Text variant="errors-form">
+                {errors.full_name?.message as string}
+              </Text>
             </FormControl>
 
             <FormControl id="email" isRequired>
@@ -81,7 +86,9 @@ export const RegisterPage = () => {
                 variant={"forms-input"}
                 {...register("email")}
               />
-              <Text>{errors.email?.message as string}</Text>
+              <Text variant="errors-form">
+                {errors.email?.message as string}
+              </Text>
             </FormControl>
 
             <FormControl id="socialSecurityNumber" isRequired>
@@ -92,7 +99,7 @@ export const RegisterPage = () => {
                 variant={"forms-input"}
                 {...register("cpf")}
               />
-              <Text>{errors.cpf?.message as string}</Text>
+              <Text variant="errors-form">{errors.cpf?.message as string}</Text>
             </FormControl>
 
             <FormControl id="phone">
@@ -103,7 +110,9 @@ export const RegisterPage = () => {
                 variant={"forms-input"}
                 {...register("phone")}
               />
-              <Text>{errors.phone?.message as string}</Text>
+              <Text variant="errors-form">
+                {errors.phone?.message as string}
+              </Text>
             </FormControl>
 
             <FormControl id="birthdate" isRequired>
@@ -114,7 +123,9 @@ export const RegisterPage = () => {
                 variant={"forms-input"}
                 {...register("birthDate")}
               />
-              <Text>{errors.birthdate?.message as string}</Text>
+              <Text variant="errors-form">
+                {errors.birthdate?.message as string}
+              </Text>
             </FormControl>
 
             <FormControl id="description">
@@ -125,7 +136,9 @@ export const RegisterPage = () => {
                 variant={"forms-input"}
                 {...register("description")}
               />
-              <Text>{errors.description?.message as string}</Text>
+              <Text variant="errors-form">
+                {errors.description?.message as string}
+              </Text>
             </FormControl>
           </Flex>
 
@@ -157,7 +170,7 @@ export const RegisterPage = () => {
                 variant={"forms-input"}
                 {...register("cep")}
               ></Input>
-              <Text>{errors.cep?.message as string}</Text>
+              <Text variant="errors-form">{errors.cep?.message as string}</Text>
             </FormControl>
 
             <Stack spacing={4}>
@@ -171,7 +184,9 @@ export const RegisterPage = () => {
                       variant={"forms-input"}
                       {...register("state")}
                     />
-                    <Text>{errors.state?.message as string}</Text>
+                    <Text variant="errors-form">
+                      {errors.state?.message as string}
+                    </Text>
                   </FormControl>
                 </Box>
                 <Box>
@@ -183,7 +198,9 @@ export const RegisterPage = () => {
                       variant={"forms-input"}
                       {...register("city")}
                     />
-                    <Text>{errors.city?.message as string}</Text>
+                    <Text variant="errors-form">
+                      {errors.city?.message as string}
+                    </Text>
                   </FormControl>
                 </Box>
               </HStack>
@@ -197,7 +214,9 @@ export const RegisterPage = () => {
                 variant={"forms-input"}
                 {...register("street")}
               />
-              <Text>{errors.street?.message as string}</Text>
+              <Text variant="errors-form">
+                {errors.street?.message as string}
+              </Text>
             </FormControl>
 
             <Stack spacing={4}>
@@ -211,7 +230,9 @@ export const RegisterPage = () => {
                       variant={"forms-input"}
                       {...register("number")}
                     />
-                    <Text>{errors.number?.message as string}</Text>
+                    <Text variant="errors-form">
+                      {errors.number?.message as string}
+                    </Text>
                   </FormControl>
                 </Box>
                 <Box>
@@ -223,7 +244,9 @@ export const RegisterPage = () => {
                       variant={"forms-input"}
                       {...register("complement")}
                     />
-                    <Text>{errors.complement?.message as string}</Text>
+                    <Text variant="errors-form">
+                      {errors.complement?.message as string}
+                    </Text>
                   </FormControl>
                 </Box>
               </HStack>
@@ -310,7 +333,9 @@ export const RegisterPage = () => {
                 variant={"forms-input"}
                 {...register("password")}
               ></Input>
-              <Text>{errors.password?.message as string}</Text>
+              <Text variant="errors-form">
+                {errors.password?.message as string}
+              </Text>
             </FormControl>
 
             <FormControl id="confirmPassword" isRequired>
@@ -321,7 +346,9 @@ export const RegisterPage = () => {
                 variant={"forms-input"}
                 {...register("confirmPassword")}
               ></Input>
-              <Text>{errors.confirmPassword?.message as string}</Text>
+              <Text variant="errors-form">
+                {errors.confirmPassword?.message as string}
+              </Text>
             </FormControl>
           </Flex>
 
@@ -343,6 +370,25 @@ export const RegisterPage = () => {
                   : "create-announcement:disable"
               }
               type={"submit"}
+              onClick={() => {
+                isValid
+                  ? toast({
+                      position: "top-right",
+                      title: "Conta criada.",
+                      description: "Por favor, faça login.",
+                      status: "success",
+                      duration: 4000,
+                      isClosable: true,
+                    })
+                  : toast({
+                      position: "top-right",
+                      title: "Conta não criada.",
+                      description: "Por favor, revise os dados.",
+                      status: "error",
+                      duration: 4000,
+                      isClosable: true,
+                    });
+              }}
             >
               Finalizar cadastro
             </Button>
