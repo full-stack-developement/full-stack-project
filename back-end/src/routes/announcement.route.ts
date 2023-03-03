@@ -6,6 +6,7 @@ import {
   announcementsListControllers,
   announcementsUpdateController,
 } from "../controllers/announcement.controller";
+import { AuthTokenCheck } from "../middlewares/auth.middleware";
 import { schemaValidationMiddleware } from "../middlewares/schemaValidation.middleware";
 import { announcementSchema, announcementUpdateSchema } from "../schemas/announcement.schema";
 
@@ -16,14 +17,15 @@ announcementRoute.get(routeName, announcementsListControllers);
 
 announcementRoute.post(
   routeName,
+  AuthTokenCheck,
   schemaValidationMiddleware(announcementSchema),
   announcementPostController
 );
 
-announcementRoute.delete(routeName + "/:id", announcementDeleteController)
+announcementRoute.delete(routeName + "/:id",AuthTokenCheck ,announcementDeleteController)
 
-announcementRoute.get(routeName + "/:id", announcementListSpecificController)
+announcementRoute.get(routeName + "/:id",AuthTokenCheck,announcementListSpecificController)
 
-announcementRoute.patch(routeName + "/:id",schemaValidationMiddleware(announcementUpdateSchema),announcementsUpdateController)
+announcementRoute.patch(routeName + "/:id",AuthTokenCheck,schemaValidationMiddleware(announcementUpdateSchema),announcementsUpdateController)
 
 export default announcementRoute;

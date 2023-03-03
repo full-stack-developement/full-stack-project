@@ -40,7 +40,8 @@ export async function commentsUserListService(user_id : string){
     }
 }   
 export async function commentsUserListSpecificService(user_id : string,data : ICommentsSpecificList){
-    const user = await userRepository.findOneBy({id : user_id})
+
+    const user = await userRepository.findOne({where : {id : user_id},relations : {comments : true}})
 
     if(!user){
         throw new ErrorResponse("User not have comments",404)
@@ -54,7 +55,7 @@ export async function commentsUserListSpecificService(user_id : string,data : IC
     return comment
 } 
 export async function commentsVehicleListService(vehicle_id : string){
-    const vehicle = await vehicleRepository.findOneBy({id : vehicle_id})
+    const vehicle = await vehicleRepository.findOne({where : {id : vehicle_id},relations : {comments : true}})
 
     if(!vehicle){
         throw new ErrorResponse("Vehicle not found",404)
@@ -66,7 +67,7 @@ export async function commentsVehicleListService(vehicle_id : string){
     return vehicle.comments
 }
 export async function commentsVehicleListSpecificService(vehicle_id : string,data : ICommentsSpecificList){
-    const vehicle = await vehicleRepository.findOneBy({id : vehicle_id})
+    const vehicle = await vehicleRepository.findOne({where : {id : vehicle_id},relations : {comments : true}})
 
     if(!vehicle){
         throw new ErrorResponse("Vehicle not found",404)

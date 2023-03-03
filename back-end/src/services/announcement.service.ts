@@ -1,12 +1,18 @@
 import { QueryFailedError } from "typeorm";
 import AppDataSource from "../data-source";
+import { User } from "../entities/user";
 import { Vehicle } from "../entities/vehicle";
 import { IAnnouncement } from "../interfaces/announcement.interface";
 
 const vehicleRepository = AppDataSource.getRepository(Vehicle);
+const userRepository = AppDataSource.getRepository(User)
 
-export async function announcementPostService(data: IAnnouncement) {
+export async function announcementPostService(data: IAnnouncement,user_id : string) {
+  const user = await userRepository.findOneBy({id : user_id})
+  
   const announcementInstance = vehicleRepository.create(data);
+  announcementInstance.user = user
+
   const announcement = await vehicleRepository.save(announcementInstance);
   return announcement;
 }

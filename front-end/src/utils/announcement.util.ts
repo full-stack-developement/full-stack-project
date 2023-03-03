@@ -2,13 +2,12 @@ import { AxiosError } from "axios";
 import { FieldValues } from "react-hook-form";
 import { apiAnnouncement } from "../api";
 import { IAnnouncement } from "../interfaces/announcement.interface";
-import { sellerMocked } from "../mocks/user.mock";
 
 export async function createAnnouncement(data : FieldValues ){
     let responseCreate = {data : {} as IAnnouncement,message : "" as "success" | "error"}
     try{
-        data.user_id = sellerMocked.user_id
-        const response = await apiAnnouncement.post("",data)
+        const token = localStorage.getItem("$TOKEN")
+        const response = await apiAnnouncement.post("",data,{headers : {Authorization : `Bearer ${token}`}})
         responseCreate.data = response.data
         responseCreate.message = "success"
         return responseCreate
@@ -23,7 +22,8 @@ export async function createAnnouncement(data : FieldValues ){
 export async function getSpecificAnnouncement(id : string){
     let responseSpecificGet = {data : {} as IAnnouncement,message : "" as "success" | "error"}
     try{
-        const response = await apiAnnouncement.get(`/${id}`)
+        const token = localStorage.getItem("$TOKEN")
+        const response = await apiAnnouncement.get(`/${id}`,{headers : {Authorization : `Bearer ${token}`}})
         responseSpecificGet.data = response.data
         responseSpecificGet.message = "success"
         return responseSpecificGet
@@ -44,7 +44,8 @@ export async function updateAnnouncement(data : FieldValues,id : string){
                 validatedData[key] = data[key]
             }
         }
-        const response = await apiAnnouncement.patch(`/${id}`,validatedData)
+        const token = localStorage.getItem("$TOKEN")
+        const response = await apiAnnouncement.patch(`/${id}`,validatedData,{headers : {Authorization : `Bearer ${token}`}})
         responseUpdate.data = response.data
         responseUpdate.message = "success"
         return responseUpdate
@@ -59,7 +60,8 @@ export async function updateAnnouncement(data : FieldValues,id : string){
 export async function deleteAnnouncement(id : string){
     let responseDelete = {message : "" as "success" | "error"}
     try{
-        const response = await apiAnnouncement.delete(`/${id}`)
+        const token = localStorage.getItem("$TOKEN")
+        const response = await apiAnnouncement.delete(`/${id}`,{headers : {Authorization : `Bearer ${token}`}})
         responseDelete.message = "success"
         return responseDelete
     }

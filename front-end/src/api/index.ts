@@ -9,3 +9,7 @@ export const apiAnnouncement = axios.create({
 export const apiUser = axios.create({
   baseURL: baseURL + "/user",
 });
+
+export const apiComment = axios.create({
+  baseURL: baseURL + "/comments",
+});

@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import { FieldValues } from "react-hook-form";
 import { apiUser } from "../api";
-import { IUserUpdate } from "../interfaces/user.interface";
+import { IProfile, IUserUpdate } from "../interfaces/user.interface";
 
 export async function createUser(data: FieldValues) {
   const addressData = {
@@ -27,10 +27,10 @@ export async function createUser(data: FieldValues) {
 }
 
 export async function loginUser(data: FieldValues) {
-  let responseLogin = { data: "", message: "" as "success" | "error" };
+  let responseLogin = { token: "", message: "" as "success" | "error" };
   try {
     const response = await apiUser.post("/login", data);
-    responseLogin.data = response.data;
+    responseLogin.token = response.data;
     responseLogin.message = "success";
     return responseLogin;
   } catch (err) {
@@ -41,7 +41,7 @@ export async function loginUser(data: FieldValues) {
   }
 }
 
-export async function updateUser(data: FieldValues, id: string) {
+export async function updateUser(data: FieldValues) {
   let responseUpdate = {
     data: {} as IUserUpdate,
     message: "" as "success" | "error",
@@ -53,7 +53,8 @@ export async function updateUser(data: FieldValues, id: string) {
         validatedData[key] = data[key];
       }
     }
-    const response = await apiUser.patch(`/${id}`, validatedData);
+    const token = localStorage.getItem("$TOKEN")
+    const response = await apiUser.patch(``, validatedData,{headers : {Authorization : `Bearer ${token}`}});
     responseUpdate.data = response.data;
     responseUpdate.message = "success";
     return responseUpdate;
@@ -62,5 +63,22 @@ export async function updateUser(data: FieldValues, id: string) {
       responseUpdate.message = "error";
       return responseUpdate;
     }
+  }
+}
+export async function getSpecificUser(){
+  let responseSpecificGet = {data : {} as IProfile,message : "" as "success" | "error"}
+  try{
+      const token = localStorage.getItem("$TOKEN")
+      const response = await apiUser.get(``,{headers : {Authorization : `Bearer ${token}`}})
+      responseSpecificGet.data = response.data
+      responseSpecificGet.message = "success"
+      return responseSpecificGet
+  }
+  catch(err){
+      if(err instanceof AxiosError){
+          responseSpecificGet.message = "error"
+          responseSpecificGet.data = err.response?.data
+          return responseSpecificGet
+      }
   }
 }

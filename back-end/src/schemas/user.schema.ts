@@ -1,13 +1,5 @@
 import * as yup from "yup";
-
-export const addressSchema = yup.object().shape({
-  cep: yup.string().required("Campo obrigatório"),
-  state: yup.string().required("Campo obrigatório"),
-  city: yup.string().required("Campo obrigatório"),
-  street: yup.string().required("Campo obrigatório"),
-  number: yup.number().required("Campo obrigatório"),
-  complement: yup.string().required("Campo obrigatório"),
-});
+import { addressSchema } from "./address.schema";
 
 export const userRegisterSchema = yup.object().shape({
   full_name: yup.string().required("Campo obrigatório"),
@@ -77,4 +69,12 @@ export const userUpdateSchema = yup.object({
   phone: yup.number().optional(),
   birthDate: yup.date().optional(),
   description: yup.string().optional(),
+  address : yup.object().shape({
+    cep : yup.string().optional(),
+    state : yup.string().optional(),
+    city : yup.string().optional(),
+    street : yup.string().optional(),
+    number : yup.number().optional(),
+    complement: yup.string().optional(),
+})
 });

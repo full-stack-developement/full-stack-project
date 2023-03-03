@@ -60,6 +60,7 @@ export class User {
   @OneToMany(() => Vehicle, (vehicle) => vehicle.user)
   vehicles: Vehicle[];
 
+  @JoinColumn()
   @OneToMany(() => VehicleComments, (vehicle_comments) => vehicle_comments.user)
   comments: VehicleComments[];
 }

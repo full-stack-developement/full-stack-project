@@ -1,4 +1,5 @@
 import * as yup from "yup"
+import { userSchema } from "./user.schema"
 
 export const announcementSchema = yup.object({
     announcementType : yup.string().oneOf(["sale","auction"],"Tipos de anúncio: sale(venda), auction(leilão)").required("O tipo de anúncio é obrigatório"),
@@ -19,5 +20,4 @@ export const announcementUpdateSchema = yup.object({
     price : yup.number().optional(),
     description: yup.string().optional(),
     coverImage : yup.string().url().optional(),
-    user_id : yup.number().optional()
 })

@@ -10,7 +10,7 @@ import { MenuProfile } from "../MenuProfile";
 import { useNavigate } from "react-router-dom";
 
 export const LoginBar = () => {
-  const [clicked, setClicked] = useState(true);
+  const token = localStorage.getItem("$TOKEN")
   const navigate = useNavigate();
 
   return (
@@ -21,9 +21,8 @@ export const LoginBar = () => {
       height="80px"
       display="flex"
       alignItems="center"
-      onClick={() => setClicked(false)}
     >
-      {clicked ? (
+      {!token ? (
         <Breadcrumb separator="" spacing="22">
           <BreadcrumbItem>
             <BreadcrumbLink onClick={() => navigate("/login")}>

@@ -9,6 +9,7 @@ import {
 import { AuthTokenCheck } from "../middlewares/auth.middleware";
 import { schemaValidationMiddleware } from "../middlewares/schemaValidation.middleware";
 import { loginSchema } from "../schemas/login.schema";
+import { userUpdateSchema } from "../schemas/user.schema";
 
 const userRoute = Router();
 const routeName = "/user";
@@ -22,6 +23,7 @@ userRoute.post(
 );
 userRoute.delete(routeName, AuthTokenCheck, userDeleteController);
 userRoute.get(routeName, AuthTokenCheck, userListSpecificController); //
-userRoute.patch(routeName + "/:id", userUpdateController);
+userRoute.patch(routeName,AuthTokenCheck,schemaValidationMiddleware(userUpdateSchema),userUpdateController);
+
 
 export default userRoute;

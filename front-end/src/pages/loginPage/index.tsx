@@ -1,4 +1,4 @@
-import { Flex, chakra, Button, Box } from "@chakra-ui/react";
+import { Flex, Button, Box } from "@chakra-ui/react";
 import { NavBar } from "../../components/NavBar";
 import { customTheme } from "../../theme";
 import { useNavigate } from "react-router-dom";
@@ -10,10 +10,10 @@ import { loginSchema } from "../../schemas/login.schema";
 import { loginUser } from "../../utils/user.util";
 
 export const LoginPage = () => {
-  const navigate = useNavigate();
 
   const {formState : {errors},register,handleSubmit} = useForm({resolver : yupResolver(loginSchema)})
 
+  const navigate = useNavigate()
   return (
     <>
       <NavBar />
@@ -21,7 +21,8 @@ export const LoginPage = () => {
         <form className="loginForm" onSubmit={handleSubmit(async(data)=>{
           const response = await loginUser(data)
           if(response?.message == "success"){
-            localStorage.setItem("$TOKEN",response.data)
+            localStorage.setItem("$TOKEN",response.token)
+            navigate("/home")
           }
         })}>
           <Flex
@@ -50,10 +51,10 @@ export const LoginPage = () => {
             >
               <InputText
                 register={{...register("email")}}
-                text="Usuário"
+                text="Email"
                 placeholder="Digitar Email"
               ></InputText>
-              {errors.username?.message && <Text text={errors.username.message as string} variant="errors-form"></Text>}
+              {errors.email?.message && <Text text={errors.email.message as string} variant="errors-form"></Text>}
               <InputText
                 register={{...register("password")}}
                 text="Senha"

@@ -1,32 +1,46 @@
-import { Box, Flex, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Textarea, useDisclosure } from "@chakra-ui/react"
-import { useContext } from "react"
+import { Box, Flex, MenuItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Textarea, useDisclosure } from "@chakra-ui/react"
+import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm } from "react-hook-form"
-import { UserContext } from "../../contexts/user.context"
+import { addressUpdateSchema } from "../../schemas/address.schemas"
+import { updateUser } from "../../utils/user.util"
 import { Button } from "../Button"
 import { InputText } from "../InputText"
 import { Text } from "../Text"
 
+interface IModalAddressUpdateProps{
+    user_id : string
+}
 
-export function ModalAddressUpdate(id: string){
+export function ModalAddressUpdate(props : IModalAddressUpdateProps){
     const { isOpen, onOpen, onClose} = useDisclosure()
 
-    const {handleSubmit,register,setValue,formState : {errors,isValid},watch} = useForm()
-
-    const {users,setUsers} = useContext(UserContext)
+    const {handleSubmit,register,setValue,formState : {errors,isValid},watch} = useForm({resolver : yupResolver(addressUpdateSchema)})
 
     return(        
     <>
-        <Button onClick={onOpen} variant={"open-modal-announcement"} size="small-auto" text="Editar endereço"></Button>
+           <MenuItem onClick={()=>{
+        onOpen()
+       }} pl="22px" py="8px" mt="13px">
+          Editar endereço
+        </MenuItem>
         <Modal variant={"create-auction"} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Editar Endereço</ModalHeader>
           <ModalCloseButton />
 
-          <ModalBody>
+          <form onSubmit={handleSubmit(async(data)=>{
+            const address = {address : data}
+            const response = await updateUser(address)
+            if(response?.message == "success"){
+                console.log(response)
+                onClose()
+            }
+        })}>  
+          <ModalBody display={"flex"} flexDirection={"column"} gap={"1rem"}>
             <Text text="Informações de endereço" variant="title-content-form"></Text>
                 <Box>
-                    <InputText register={{...register("cep")}} placeholder="Digitar CEP" text="CEP"></InputText>
+                    <InputText type={"text"} register={{...register("cep")}} placeholder="Digitar CEP" text="CEP"></InputText>
                     {errors.cep && <Text variant="errors-form" text={errors.cep.message as string}></Text> }
                 </Box>
                 <Flex gap={"1rem"}>
@@ -45,7 +59,7 @@ export function ModalAddressUpdate(id: string){
                 </Box>
                 <Flex gap={"1rem"}>
                     <Box>
-                        <InputText register={{...register("number")}} placeholder="Número" text="Número"></InputText>
+                        <InputText type={"number"} register={{...register("number")}} placeholder="Número" text="Número"></InputText>
                         {errors.number && <Text variant="errors-form" text={errors.number.message as string}></Text> }
                     </Box>
                     <Box>
@@ -58,6 +72,7 @@ export function ModalAddressUpdate(id: string){
           <Button onClick={onClose} variant={"exclude/cancel-announcement"} size="large-100%" text="Cancelar"></Button>
             <Button type={"submit"} variant={"create-announcement:enable"} size="large-100%" text="Salvar alterações"></Button>
           </ModalFooter>
+        </form>
         </ModalContent>
       </Modal>
     </>
