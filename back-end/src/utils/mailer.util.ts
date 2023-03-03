@@ -5,7 +5,6 @@ import { IEmailRequest } from "../interfaces/email.interface";
 import hbs from "nodemailer-express-handlebars";
 import ejs from "ejs";
 
-const template = ejs.renderFile(__dirname + "/resetPassword.html");
 export const sendEmail = async ({ to, subject, text }: IEmailRequest) => {
   const transporter = createTransport({
     host: "smtp-mail.outlook.com",
@@ -22,7 +21,7 @@ export const sendEmail = async ({ to, subject, text }: IEmailRequest) => {
       from: "maiapemaia@hotmail.com",
       to: to,
       subject: subject,
-      html: `<h1>🔐 Confirmação do cadastro 🔐</h1> 
+      html: `<h1>Confirmação do cadastro</h1> 
       <p>Prezado(a) bom dia, boa tarde, boa noite ! 
       Esse e-mail é automatico então por favor, não responda.</p> 
       <P>confirmamos seu cadastro em nosso sistema</P> 
