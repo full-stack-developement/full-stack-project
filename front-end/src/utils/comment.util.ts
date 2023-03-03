@@ -26,7 +26,6 @@ export async function getCommentsVehicle(id_vehicle : string){
         const response = await apiComment.get(`/vehicle/${id_vehicle}`,{headers : {Authorization : `Bearer ${token}`}})
         responseGet.data = response.data
         responseGet.message = "success"
-        console.log(response)
         return responseGet
     }
     catch(err){

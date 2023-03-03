@@ -20,10 +20,6 @@ export function ModalUserUpdate(props : IModalUserUpdateProps){
 
     const {profile,setProfile} = useContext(ProfileContext)
 
-    useEffect(()=>{
-        console.log(props.user_id)
-    })
-
     return(        
     <>
        <MenuItem onClick={()=>{

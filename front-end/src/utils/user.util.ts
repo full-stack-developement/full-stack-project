@@ -20,7 +20,6 @@ export async function createUser(data: FieldValues) {
     .then(() => {})
     .catch((error) => {
       if (error instanceof AxiosError) {
-        console.log(error);
         return error.message;
       }
     });
