@@ -1,15 +1,28 @@
+import {
+  IResetPassword,
+  IResetPasswordData,
+} from "./../interfaces/resetPassword.interface";
 import { QueryFailedError } from "typeorm";
-import { IUserCreate, IUserUpdate, IUserUpdateRequest} from "./../interfaces/requests.interface";
+import {
+  IUserCreate,
+  IUserUpdate,
+  IUserUpdateRequest,
+} from "./../interfaces/requests.interface";
 import AppDataSource from "../data-source";
 import { User } from "../entities/user";
 import bcrypt, { compare } from "bcryptjs";
 import { AppError, ErrorResponse } from "../Error/ErrorResponse";
 import { instanceToPlain } from "class-transformer";
 import { Address } from "../entities/address";
-import { IAddressCreate, IAddressUpdate } from "../interfaces/address.interface";
+import {
+  IAddressCreate,
+  IAddressUpdate,
+} from "../interfaces/address.interface";
 import { ILogin } from "../interfaces/login.interface";
-import {sign} from "jsonwebtoken"
+import { sign } from "jsonwebtoken";
+import { createHmac } from "crypto";
 import { hash } from "bcrypt";
+import { resetPasswordSchema } from "../schemas/password.schema";
 
 const userRepository = AppDataSource.getRepository(User);
 
@@ -30,7 +43,7 @@ export async function userCreateService(
 
   const userEmail = await userRepository.findOneBy({ email });
   if (userEmail) {
-    throw new ErrorResponse("Email already been used")
+    throw new ErrorResponse("Email already been used");
   }
 
   const addressInstance = addressRepository.create(addressData);
@@ -75,57 +88,86 @@ export async function userListSpecificService(id: string) {
   return instanceToPlain(user);
 }
 export async function userLoginService(data: ILogin) {
-  const email = data.email
-  const password = data.password
+  const email = data.email;
+  const password = data.password;
 
-  const user = await userRepository.findOneBy({email : email})
+  const user = await userRepository.findOneBy({ email: email });
 
-  if(!user){
-    throw new ErrorResponse("Email or password not valid",400)
+  if (!user) {
+    throw new ErrorResponse("Email or password not valid", 400);
   }
 
-  const isValidPassword = await compare(password,user.password)
+  const isValidPassword = await compare(password, user.password);
 
-  if(!isValidPassword){
-    throw new ErrorResponse("Email or password not valid",400)
+  if (!isValidPassword) {
+    throw new ErrorResponse("Email or password not valid", 400);
   }
 
-  const token = sign({id : user.id},process.env.SECRET_KEY,{expiresIn : "24h",subject : user.id})
+  const token = sign({ id: user.id }, process.env.SECRET_KEY, {
+    expiresIn: "24h",
+    subject: user.id,
+  });
 
-  return token
-
+  return token;
 }
 
-
-export const userUpdateService = async (id: string,data : IUserUpdate) => {
+export const userUpdateService = async (id: string, data: IUserUpdate) => {
   try {
-
     const userUpdated = await userRepository.findOneBy({
-      id: id
-    })
+      id: id,
+    });
 
     if (!userUpdated) {
-      throw new Error('User not found')
-    };
-
-    for(const prop in data){
-      if(data[prop]){
-          if(prop != "address"){
-            userUpdated[prop] = data[prop]
-          }
-        }
+      throw new Error("User not found");
     }
-    for(const prop in data.address){
-      if(data.address[prop]){
-        userUpdated.address[prop] = data.address[prop]
+
+    for (const prop in data) {
+      if (data[prop]) {
+        if (prop != "address") {
+          userUpdated[prop] = data[prop];
+        }
+      }
+    }
+    for (const prop in data.address) {
+      if (data.address[prop]) {
+        userUpdated.address[prop] = data.address[prop];
       }
     }
 
-    return instanceToPlain(userRepository.save(userUpdated))
-      
+    return instanceToPlain(userRepository.save(userUpdated));
   } catch (error) {
-      throw new Error(error)
+    throw new Error(error);
   }
+};
 
-  
+export const forgotPassword = async (
+  data: IResetPassword,
+  resetData: IResetPasswordData
+) => {
+  try {
+    const email = data.email;
+
+    const user = await userRepository.findOneBy({ email: email });
+
+    if (!user) {
+      throw new ErrorResponse("EUsuário não encontrado");
+    }
+
+    const token = createHmac("sha256", "a secret");
+
+    const now = new Date();
+    now.setHours(now.getHours() + 1);
+
+    for (const prop in resetData) {
+      if (resetData[prop]) {
+        if (prop == "password") {
+          user[prop] = resetData[prop];
+        }
+      }
+    }
+
+    return instanceToPlain(userRepository.save(user));
+  } catch (error) {
+    throw new Error(error);
+  }
 };
