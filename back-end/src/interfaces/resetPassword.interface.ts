@@ -3,6 +3,5 @@ export interface IResetPassword {
 }
 
 export interface IResetPasswordData {
-  password: string;
-  confirmPassword: string;
+  password: string | number;
 }

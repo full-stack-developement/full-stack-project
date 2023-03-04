@@ -24,9 +24,9 @@ export const resetUserPasswordController = async (
   res: Response
 ) => {
   const { token } = req.params;
-  const { newPassword } = req.body;
+  const { password } = req.body;
 
-  await resetUserPasswordService(token, newPassword);
+  await resetUserPasswordService(token, password);
 
   return res.status(200).json({
     message: "Senha alterada com sucesso!",

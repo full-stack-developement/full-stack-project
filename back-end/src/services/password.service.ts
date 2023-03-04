@@ -1,3 +1,4 @@
+import { IResetPasswordData } from "./../interfaces/resetPassword.interface";
 import bcrypt from "bcryptjs";
 import AppDataSource from "../data-source";
 import { User } from "../entities/user";
@@ -5,7 +6,6 @@ import { AppError } from "../Error/ErrorResponse";
 import { IEmailRequest } from "../interfaces/email.interface";
 import { sendEmail } from "../utils/mailer.util";
 import { generateRandomPassword } from "../utils/password.util";
-import { hash } from "bcryptjs";
 
 export const sendResetUserPasswordService = async (
   email: string,
@@ -50,8 +50,8 @@ export const sendResetUserPasswordService = async (
 
 export const resetUserPasswordService = async (
   token: string,
-  newPassword: string
-) => {
+  password
+): Promise<void> => {
   const userRepository = AppDataSource.getRepository(User);
 
   const user = await userRepository.findOne({
@@ -64,15 +64,13 @@ export const resetUserPasswordService = async (
     throw new AppError(404, "Usuário não encontrado");
   }
 
-  const hashedPassword = await hash(newPassword, 10);
-
   await userRepository.update(
     {
       id: user.id,
     },
     {
       token_reset_password: "",
-      password: hashedPassword,
+      password: bcrypt.hashSync(password, 10),
     }
   );
 };
