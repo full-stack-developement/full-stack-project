@@ -50,8 +50,14 @@ export class User {
   @UpdateDateColumn({ type: "timestamp" })
   updated_at: Date;
 
-  @Column("boolean", { default: true })
+  @Column("boolean")
   isActive: boolean;
+
+  @Column("varchar", { nullable: true })
+  token_activation: string;
+
+  @Column("varchar", { nullable: true })
+  token_reset_password: string;
 
   @OneToOne(() => Address, { eager: true })
   @JoinColumn()

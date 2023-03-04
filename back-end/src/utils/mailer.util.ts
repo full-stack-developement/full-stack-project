@@ -21,11 +21,7 @@ export const sendEmail = async ({ to, subject, text }: IEmailRequest) => {
       from: "maiapemaia@hotmail.com",
       to: to,
       subject: subject,
-      html: `<h1>Confirmação do cadastro</h1> 
-      <p>Prezado(a) bom dia, boa tarde, boa noite ! 
-      Esse e-mail é automatico então por favor, não responda.</p> 
-      <P>confirmamos seu cadastro em nosso sistema</P> 
-      <b><h4>Atenciosamente</h4> <h4>Equipe de suporte 💻</h4></b>`,
+      html: text,
     })
     .then(() => {
       console.log("Email send with success");

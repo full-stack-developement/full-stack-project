@@ -23,6 +23,8 @@ import { sign } from "jsonwebtoken";
 import { createHmac } from "crypto";
 import { hash } from "bcrypt";
 import { resetPasswordSchema } from "../schemas/password.schema";
+import { sendEmail } from "../utils/mailer.util";
+import { IEmailRequest } from "../interfaces/email.interface";
 
 const userRepository = AppDataSource.getRepository(User);
 
@@ -37,7 +39,9 @@ export async function userCreateService(
     description,
     password,
   }: IUserCreate,
-  addressData: IAddressCreate
+  addressData: IAddressCreate,
+  protocol: string,
+  host: string | undefined
 ): Promise<User> {
   const addressRepository = AppDataSource.getRepository(Address);
 
@@ -49,6 +53,8 @@ export async function userCreateService(
   const addressInstance = addressRepository.create(addressData);
   const address = await addressRepository.save(addressInstance);
 
+  const tokenActivationData = (Math.random() + 1).toString(36).substring(2);
+
   const createdUser = userRepository.create({
     accountType,
     full_name,
@@ -59,7 +65,21 @@ export async function userCreateService(
     description,
     password: bcrypt.hashSync(password, 10),
     address,
+    isActive: false,
+    token_activation: tokenActivationData,
   });
+
+  const emailData: IEmailRequest = {
+    subject: "Ativação de usuário",
+    text: `<h1>Confirmação do cadastro</h1> 
+    <p>Prezado(a) ${full_name}. 
+    Esse e-mail é automatico então por favor, não responda.</p> 
+    <P>confirme seu cadastro através do link: ${protocol}://${host}/user/activate/${tokenActivationData}</P> 
+    <b><h4>Atenciosamente</h4> <h4>Equipe de suporte 💻</h4></b>`,
+    to: email,
+  };
+
+  await sendEmail(emailData);
 
   await userRepository.save(createdUser);
 
@@ -138,6 +158,30 @@ export const userUpdateService = async (id: string, data: IUserUpdate) => {
   } catch (error) {
     throw new Error(error);
   }
+};
+
+export const activateUserService = async (
+  tokenActivation: string
+): Promise<void> => {
+  const user = await userRepository.findOne({
+    where: {
+      token_activation: tokenActivation,
+    },
+  });
+
+  if (!user) {
+    throw new AppError(404, "Usuário não encontrado");
+  }
+
+  await userRepository.update(
+    {
+      id: user.id,
+    },
+    {
+      isActive: true,
+      token_activation: "",
+    }
+  );
 };
 
 export const forgotPassword = async (

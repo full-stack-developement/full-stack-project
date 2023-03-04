@@ -1,3 +1,4 @@
+import { activateUserController } from "./../controllers/user.controller";
 import { Router } from "express";
 import {
   userDeleteController,
@@ -23,7 +24,15 @@ userRoute.post(
 );
 userRoute.delete(routeName, AuthTokenCheck, userDeleteController);
 userRoute.get(routeName, AuthTokenCheck, userListSpecificController); //
-userRoute.patch(routeName,AuthTokenCheck,schemaValidationMiddleware(userUpdateSchema),userUpdateController);
-
+userRoute.patch(
+  routeName,
+  AuthTokenCheck,
+  schemaValidationMiddleware(userUpdateSchema),
+  userUpdateController
+);
+userRoute.get(
+  routeName + "/activate/:token_activation",
+  activateUserController
+);
 
 export default userRoute;
