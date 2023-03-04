@@ -1,3 +1,4 @@
+import { sendResetUserPasswordService } from "../services/password.service";
 import { AppError, ErrorResponse, handleError } from "./../Error/ErrorResponse";
 import {
   ILoginRequest,
@@ -32,7 +33,7 @@ export async function userCreateController(req: Request, res: Response) {
 
     const { address } = req.body;
     const protocol = req.protocol;
-    const host = req.get("host");
+    const host = req.get("host"); //o host pode ser localhost do front para reset de senha
 
     const createdUser = await userCreateService(
       {

@@ -25,6 +25,7 @@ import { hash } from "bcrypt";
 import { resetPasswordSchema } from "../schemas/password.schema";
 import { sendEmail } from "../utils/mailer.util";
 import { IEmailRequest } from "../interfaces/email.interface";
+import { generateRandomPassword } from "../utils/password.util";
 
 const userRepository = AppDataSource.getRepository(User);
 
@@ -53,7 +54,7 @@ export async function userCreateService(
   const addressInstance = addressRepository.create(addressData);
   const address = await addressRepository.save(addressInstance);
 
-  const tokenActivationData = (Math.random() + 1).toString(36).substring(2);
+  const tokenActivationData = generateRandomPassword();
 
   const createdUser = userRepository.create({
     accountType,
@@ -182,36 +183,4 @@ export const activateUserService = async (
       token_activation: "",
     }
   );
-};
-
-export const forgotPassword = async (
-  data: IResetPassword,
-  resetData: IResetPasswordData
-) => {
-  try {
-    const email = data.email;
-
-    const user = await userRepository.findOneBy({ email: email });
-
-    if (!user) {
-      throw new ErrorResponse("EUsuário não encontrado");
-    }
-
-    const token = createHmac("sha256", "a secret");
-
-    const now = new Date();
-    now.setHours(now.getHours() + 1);
-
-    for (const prop in resetData) {
-      if (resetData[prop]) {
-        if (prop == "password") {
-          user[prop] = resetData[prop];
-        }
-      }
-    }
-
-    return instanceToPlain(userRepository.save(user));
-  } catch (error) {
-    throw new Error(error);
-  }
 };
