@@ -106,7 +106,7 @@ export const RegisterPage = () => {
               <FormLabel>Celular</FormLabel>
               <Input
                 type={"tel"}
-                placeholder="(DDD)90000-0000"
+                placeholder="(DD)90000-0000"
                 variant={"forms-input"}
                 {...register("phone")}
               />
@@ -236,7 +236,7 @@ export const RegisterPage = () => {
                   </FormControl>
                 </Box>
                 <Box>
-                  <FormControl id="complement" isRequired>
+                  <FormControl id="complement">
                     <FormLabel>Complemento</FormLabel>
                     <Input
                       type={"text"}
@@ -375,7 +375,7 @@ export const RegisterPage = () => {
                   ? toast({
                       position: "top-right",
                       title: "Conta criada.",
-                      description: "Por favor, faça login.",
+                      description: "Por favor, confirme sua conta no email",
                       status: "success",
                       duration: 4000,
                       isClosable: true,

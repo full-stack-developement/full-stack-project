@@ -31,7 +31,7 @@ export class User {
   @Column("varchar", { length: 11 })
   cpf: string;
 
-  @Column("varchar", { length: 10 })
+  @Column("varchar", { length: 11 })
   phone: string;
 
   @Column("date")
