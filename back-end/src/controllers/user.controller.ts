@@ -1,8 +1,13 @@
 import { AppError, ErrorResponse, handleError } from "./../Error/ErrorResponse";
-import { ILoginRequest, IUserCreate, IUserUpdateRequest } from "./../interfaces/requests.interface";
+import {
+  ILoginRequest,
+  IUserCreate,
+  IUserUpdateRequest,
+} from "./../interfaces/requests.interface";
 import { Response, Request } from "express";
 import { IUserRequest } from "../interfaces/requests.interface";
 import {
+  activateUserService,
   userCreateService,
   userDeleteService,
   userListSpecificService,
@@ -26,6 +31,8 @@ export async function userCreateController(req: Request, res: Response) {
     }: IUserCreate = req.body;
 
     const { address } = req.body;
+    const protocol = req.protocol;
+    const host = req.get("host"); //o host pode ser localhost do front para reset de senha
 
     const createdUser = await userCreateService(
       {
@@ -38,13 +45,15 @@ export async function userCreateController(req: Request, res: Response) {
         description,
         password,
       },
-      address
+      address,
+      protocol,
+      host
     );
 
     return res.status(201).json(instanceToPlain(createdUser));
   } catch (err) {
     if (err instanceof ErrorResponse) {
-     return res.status(err.status_code).json({message : err.message})
+      return res.status(err.status_code).json({ message: err.message });
     }
     return res.json({ message: err.message }).status(500);
   }
@@ -58,7 +67,7 @@ export async function userDeleteController(req: IUserRequest, res: Response) {
     return res.json(message).status(200);
   } catch (err) {
     if (err instanceof Error) {
-      return res.status(400).json({message : err.message});
+      return res.status(400).json({ message: err.message });
     }
     return res.json({ message: "Internal server error" }).status(500);
   }
@@ -73,19 +82,19 @@ export async function userListSpecificController(
     return res.json(response).status(200);
   } catch (err) {
     if (err instanceof Error) {
-      return res.json({message : err.message}).status(400);
+      return res.json({ message: err.message }).status(400);
     }
     return res.json({ message: "Internal server error" }).status(500);
   }
 }
-export async function userLoginController(req : ILoginRequest,res : Response){
+export async function userLoginController(req: ILoginRequest, res: Response) {
   try {
     const data = req.data;
-    const response = await userLoginService(data)
+    const response = await userLoginService(data);
     return res.json(response).status(200);
   } catch (err) {
     if (err instanceof ErrorResponse) {
-      return res.status(err.status_code).json({message : err.message});
+      return res.status(err.status_code).json({ message: err.message });
     }
     return res.json({ message: "Internal server error" }).status(500);
   }
@@ -124,4 +133,12 @@ export const userUpdateController = async (
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }
+};
+
+export const activateUserController = async (req: Request, res: Response) => {
+  const tokenActivated = req.params.token_activation;
+
+  await activateUserService(tokenActivated);
+
+  return res.status(200).redirect("http://localhost:5173/login");
 };

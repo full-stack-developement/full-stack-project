@@ -12,7 +12,17 @@ export const userRegisterSchema = yup.object().shape({
     .required("Campo obrigatório"),
   phone: yup
     .string()
-    .length(10, "Telefone deve ter 10 números")
+    .test({
+      test: (value) => {
+        if (value) {
+          if (value.length < 11) {
+            return false;
+          }
+        }
+        return true;
+      },
+      message: "Telefone deve ter 11 números",
+    })
     .required("Campo obrigatório"),
   birthDate: yup.date().required("Data de nascimento obrigatória"),
   description: yup.string(),
@@ -48,29 +58,32 @@ export const userRegisterSchema = yup.object().shape({
 });
 export const userUpdateSchema = yup.object().shape({
   full_name: yup.string().optional(),
-  email: yup
-    .string()
-    .email("Insira um email válido").optional(),
+  email: yup.string().email("Insira um email válido").optional(),
   cpf: yup
     .string()
-    .optional().test({test : (value =>{
-      if(value){
-        if(value.length < 11){
-          return false
+    .optional()
+    .test({
+      test: (value) => {
+        if (value) {
+          if (value.length < 11) {
+            return false;
+          }
+        }
+        return true;
+      },
+      message: "CPF deve ter 11 números",
+    }),
+  phone: yup.string().test({
+    test: (value) => {
+      if (value) {
+        if (value.length < 11) {
+          return false;
         }
       }
-      return true
-    }),message : "CPF deve ter 11 números"}),
-  phone: yup
-    .string()
-    .test({test : (value =>{
-      if(value){
-        if(value.length < 10){
-          return false
-        }
-      }
-      return true
-    }),message : "O telefone deve ter 10 números"}),
+      return true;
+    },
+    message: "O telefone deve ter 11 números",
+  }),
   birthDate: yup.string().optional(),
   description: yup.string().optional(),
   accountType: yup
