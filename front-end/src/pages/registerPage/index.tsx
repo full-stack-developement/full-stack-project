@@ -17,9 +17,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { userRegisterSchema } from "../../schemas/user.schema";
 import { createUser } from "../../utils/user.util";
 import { useToast } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 export const RegisterPage = () => {
   const toast = useToast();
+
+  const navigate = useNavigate();
 
   const {
     handleSubmit,
@@ -372,14 +375,17 @@ export const RegisterPage = () => {
               type={"submit"}
               onClick={() => {
                 isValid
-                  ? toast({
-                      position: "top-right",
-                      title: "Conta criada.",
-                      description: "Por favor, confirme sua conta no email",
-                      status: "success",
-                      duration: 4000,
-                      isClosable: true,
-                    })
+                  ? setTimeout(() => {
+                      navigate("/login");
+                      toast({
+                        position: "top-right",
+                        title: "Conta criada.",
+                        description: "Por favor, confirme sua conta no email",
+                        status: "success",
+                        duration: 4000,
+                        isClosable: true,
+                      });
+                    }, 10000)
                   : toast({
                       position: "top-right",
                       title: "Conta não criada.",

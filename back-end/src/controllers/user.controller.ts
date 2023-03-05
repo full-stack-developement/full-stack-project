@@ -1,4 +1,3 @@
-import { sendResetUserPasswordService } from "../services/password.service";
 import { AppError, ErrorResponse, handleError } from "./../Error/ErrorResponse";
 import {
   ILoginRequest,
@@ -141,5 +140,5 @@ export const activateUserController = async (req: Request, res: Response) => {
 
   await activateUserService(tokenActivated);
 
-  return res.status(200).json({ message: "Usuário ativado com sucesso" });
+  return res.status(200).redirect("http://localhost:5173/login");
 };

@@ -7,10 +7,11 @@ export interface IUserCreate {
   birthDate: Date;
   description: string;
   password: string;
+  address: IAddress;
 }
 export interface IUserUpdate {
   id: string;
-  accountType : "seller" | "buyer"
+  accountType: "seller" | "buyer";
   full_name: string;
   email: string;
   cpf: number;
@@ -29,9 +30,9 @@ interface IAddress {
   complement: string;
 }
 
-export interface IProfile{
+export interface IProfile {
   id: string;
-  accountType : "seller" | "buyer"
+  accountType: "seller" | "buyer";
   full_name: string;
   email: string;
   cpf: number;

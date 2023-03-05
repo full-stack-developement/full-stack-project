@@ -1,7 +1,3 @@
-import {
-  IResetPassword,
-  IResetPasswordData,
-} from "./../interfaces/resetPassword.interface";
 import { QueryFailedError } from "typeorm";
 import {
   IUserCreate,
@@ -20,9 +16,6 @@ import {
 } from "../interfaces/address.interface";
 import { ILogin } from "../interfaces/login.interface";
 import { sign } from "jsonwebtoken";
-import { createHmac } from "crypto";
-import { hash } from "bcrypt";
-import { resetPasswordSchema } from "../schemas/password.schema";
 import { sendEmail } from "../utils/mailer.util";
 import { IEmailRequest } from "../interfaces/email.interface";
 import { generateRandomPassword } from "../utils/password.util";
