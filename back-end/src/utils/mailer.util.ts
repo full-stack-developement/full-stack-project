@@ -15,7 +15,7 @@ export const sendEmail = async ({ to, subject, text }: IEmailRequest) => {
 
   await transporter
     .sendMail({
-      from: "maiapemaia@hotmail.com",
+      from: "motors_shop@hotmail.com",
       to: to,
       subject: subject,
       html: text,
