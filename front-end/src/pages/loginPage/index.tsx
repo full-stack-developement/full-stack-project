@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../schemas/login.schema";
 import { loginUser } from "../../utils/user.util";
+import { useToast } from "@chakra-ui/react";
 
 export const LoginPage = () => {
   const {
@@ -17,6 +18,8 @@ export const LoginPage = () => {
   } = useForm({ resolver: yupResolver(loginSchema) });
 
   const navigate = useNavigate();
+  const toast = useToast();
+
   return (
     <>
       <NavBar />
@@ -27,7 +30,23 @@ export const LoginPage = () => {
             const response = await loginUser(data);
             if (response?.message == "success") {
               localStorage.setItem("$TOKEN", response.token);
+              toast({
+                position: "top",
+                title: "Login feito com sucesso.",
+                status: "success",
+                duration: 4000,
+                isClosable: true,
+              });
               navigate("/home");
+            } else {
+              toast({
+                position: "top",
+                title: "Não foi possível fazer o login.",
+                description: "Email ou senha inválidos",
+                status: "error",
+                duration: 4000,
+                isClosable: true,
+              });
             }
           })}
         >
@@ -88,6 +107,9 @@ export const LoginPage = () => {
                 mb={"0.5rem"}
                 border={"none"}
                 alignSelf={"flex-end"}
+                onClick={() => {
+                  navigate("/user/password");
+                }}
               >
                 Esqueci minha senha
               </Button>
