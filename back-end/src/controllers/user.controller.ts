@@ -104,23 +104,17 @@ export async function userListSpecificProfileController(
   }
 }
 export async function userLoginController(req : ILoginRequest,res : Response){
-
-export async function userUpdateController(req: IUserUpdateRequest, res: Response){
   try {
-    const id : string = req.params.id;
-  
-    const data: IUserUpdateRequest = req.body;
-
-    const dataAdrres: IAddressUpdate = req.body  
-
-    const userUpdated = await userUpdateService(id, data, dataAdrres);
-  
-    return res.status(200).send(userUpdated);
-  } catch (error) {
-    return res.status(400).json({ message: error.message });
+    const data = req.data;
+    const response = await userLoginService(data);
+    return res.json(response).status(200);
+  } catch (err) {
+    if (err instanceof ErrorResponse) {
+      return res.status(err.status_code).json({ message: err.message });
+    }
+    return res.json({ message: "Internal server error" }).status(500);
   }
- };
-*/
+}
 
 export const userUpdateController = async (
   req: IUserUpdateRequest,
