@@ -11,12 +11,11 @@ export const sendResetUserPasswordController = async (
   const { email } = req.body;
   const protocol = req.protocol;
   const host = req.get("host");
-  const { token } = req.params;
 
   await sendResetUserPasswordService(email, protocol, host);
 
   return res.status(200).json({
-    message: "Email enviado com sucesso",
+    message: "Token da alteração de senha enviado",
   });
 };
 
@@ -30,6 +29,6 @@ export const resetUserPasswordController = async (
   await resetUserPasswordService(token, password);
 
   return res.status(200).json({
-    message: "Senha alterada com sucesso!",
+    message: "Senha alterada com sucesso",
   });
 };

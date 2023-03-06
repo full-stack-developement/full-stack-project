@@ -24,13 +24,19 @@ export async function sendResetPasswordToken(data: FieldValues) {
   }
 }
 
-export async function resetPassword(data: FieldValues, token: string) {
+export async function resetPassword(
+  data: FieldValues,
+  token_reset_password: string
+) {
   let resetPasswordResponse = {
     data: {} as IResetPassword,
     message: "" as "success" | "error",
   };
   try {
-    const response = await apiUser.patch(`/resetpassword/${token}`, data);
+    const response = await apiUser.patch(
+      `/resetpassword/${token_reset_password}`,
+      data
+    );
     resetPasswordResponse.data = response.data;
     resetPasswordResponse.message = "success";
     return resetPasswordResponse;

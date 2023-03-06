@@ -51,22 +51,24 @@ export const ResetPasswordPage = (): JSX.Element => {
                 duration: 4000,
                 isClosable: true,
               });
-            }, 7000);
+            }, 5000);
           } else {
-            navigate("/user/password");
-            toast({
-              position: "top-right",
-              title: "Senha não redefinida.",
-              description: "Por favor, tente novamente.",
-              status: "error",
-              duration: 4000,
-              isClosable: true,
-            });
+            setTimeout(() => {
+              navigate("/user/password");
+              toast({
+                position: "top-right",
+                title: "Senha não redefinida.",
+                description: "Por favor, tente novamente.",
+                status: "error",
+                duration: 4000,
+                isClosable: true,
+              });
+            }, 5000);
           }
         })}
       >
         <Flex
-          minH={"100vh"}
+          minH={"lg"}
           align={"center"}
           justify={"center"}
           bg={useColorModeValue("gray.50", "gray.800")}
@@ -113,14 +115,14 @@ export const ResetPasswordPage = (): JSX.Element => {
 
             <Stack spacing={6}>
               <Button
-                bg={"blue.400"}
-                color={"white"}
-                _hover={{
-                  bg: "blue.500",
-                }}
                 type={"submit"}
+                variant={
+                  isValid
+                    ? "create-announcement:enable"
+                    : "create-announcement:disable"
+                }
               >
-                Submit
+                Enviar
               </Button>
             </Stack>
           </Stack>

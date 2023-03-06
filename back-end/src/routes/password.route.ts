@@ -11,6 +11,7 @@ import {
 
 const passwordRoute = Router();
 const routeName = "/user/password";
+const resetPasswordRouteName = "/user/resetpassword";
 
 passwordRoute.post(
   routeName,
@@ -18,7 +19,7 @@ passwordRoute.post(
   sendResetUserPasswordController
 );
 passwordRoute.patch(
-  routeName + "/:token",
+  resetPasswordRouteName + "/:token_reset_password",
   schemaValidationMiddleware(resetPasswordSchema),
   resetUserPasswordController
 );

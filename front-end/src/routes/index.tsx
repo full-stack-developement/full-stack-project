@@ -32,7 +32,7 @@ export const Route = createBrowserRouter([
     element: <SendResetPasswordPage></SendResetPasswordPage>,
   },
   {
-    path: "/user/resetpassword",
+    path: "/user/resetpassword/:token_reset_password",
     element: <ResetPasswordPage></ResetPasswordPage>,
   },
   {

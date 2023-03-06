@@ -38,7 +38,6 @@ export const SendResetPasswordPage = (): JSX.Element => {
           const response = await sendResetPasswordToken(data);
           if (response?.message == "success") {
             setTimeout(() => {
-              navigate("/user/resetpassword");
               toast({
                 position: "top-right",
                 title: "Email enviado.",
