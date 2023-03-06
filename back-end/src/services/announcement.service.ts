@@ -2,6 +2,7 @@ import { QueryFailedError } from "typeorm";
 import AppDataSource from "../data-source";
 import { User } from "../entities/user";
 import { Vehicle } from "../entities/vehicle";
+import { ErrorResponse } from "../Error/ErrorResponse";
 import { IAnnouncement } from "../interfaces/announcement.interface";
 
 const vehicleRepository = AppDataSource.getRepository(Vehicle);
@@ -17,9 +18,20 @@ export async function announcementPostService(data: IAnnouncement,user_id : stri
   return announcement;
 }
 
+
 export const announcementsListService = async (): Promise<Vehicle[]> => {
 
-  const announcements = vehicleRepository.find();
+  const announcements = await vehicleRepository.find({relations : {user : true}});
+  return announcements;
+};
+
+export const announcementsUserListService = async (user_id : string): Promise<Vehicle[]> => {
+
+  const announcements = await vehicleRepository.find({where : {user : {id : user_id}},relations : {user : true}});
+
+  if(announcements.length == 0){
+    throw new ErrorResponse("User not have announcements")
+  }
 
   return announcements;
 };
@@ -44,7 +56,7 @@ export const announcementDeleteService = async (id: string): Promise<void> => {
 export const announcementListSpecificService = async (id: string) => {
   try {
 
-  const announcement= await vehicleRepository.findOneBy({ id });
+  const announcement= await vehicleRepository.findOne({where : {id : id},relations : {user : true}});
 
   if (!announcement) {
     throw new Error("Announcement is not found"); //400

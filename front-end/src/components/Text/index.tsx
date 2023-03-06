@@ -1,6 +1,6 @@
 import {Text as TextChakra} from "@chakra-ui/react"
 
-type typeVariants = "title-content-form" | "label-content-form" | "errors-form" | "text-delete" | "title-card" | "info-card" | "profile-description" | "car-description" | "date-comment"// tipe suas variantes aqui
+type typeVariants = "title"|"title-content-form" | "label-content-form" | "errors-form" | "text-delete" | "title-card" | "info-card" | "profile-description" | "car-description" | "date-comment"// tipe suas variantes aqui
 
 interface ITextProps{
     text: string

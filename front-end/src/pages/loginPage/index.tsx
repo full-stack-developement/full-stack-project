@@ -1,4 +1,4 @@
-import { Flex, Button, Box } from "@chakra-ui/react";
+import { Flex, Button, Box, useToast } from "@chakra-ui/react";
 import { NavBar } from "../../components/NavBar";
 import { customTheme } from "../../theme";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,8 @@ import { loginUser } from "../../utils/user.util";
 
 export const LoginPage = () => {
 
-  const {formState : {errors},register,handleSubmit} = useForm({resolver : yupResolver(loginSchema)})
+  const {formState : {errors,isValid},register,handleSubmit} = useForm({resolver : yupResolver(loginSchema)})
+  const toast = useToast();
 
   const navigate = useNavigate()
   return (
@@ -22,7 +23,23 @@ export const LoginPage = () => {
           const response = await loginUser(data)
           if(response?.message == "success"){
             localStorage.setItem("$TOKEN",response.token)
+            isValid && toast({
+                      position: "top-right",
+                      title: "Logado com sucesso!",
+                      status: "success",
+                      duration: 4000,
+                      isClosable: true,
+                    })
             navigate("/home")
+          }
+          if(response?.message == "error"){
+            toast({
+                position: "top-right",
+                title: "Email ou senha incorretos.",
+                description: "Por favor, revise os dados.",
+                status: "error",
+                duration: 4000,
+                isClosable: true,});
           }
         })}>
           <Flex

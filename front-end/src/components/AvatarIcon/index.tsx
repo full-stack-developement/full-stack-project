@@ -1,7 +1,8 @@
 import { Box, Flex } from "@chakra-ui/react";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProfileContext } from "../../contexts/profile.context";
-import { getSpecificUser } from "../../utils/user.util";
+import { IProfile } from "../../interfaces/user.interface";
+import { getSpecificUser, getSpecificUserToken } from "../../utils/user.util";
 
 import { Text } from "../Text";
 import { AvatarStyled } from "./style";
@@ -11,30 +12,30 @@ export interface IAvatarProps {
   size : "big" | "small" | "medium"
   comment? : "create" | "list"
   dateComment? : string
+  user_id : string
 }
 
 const AvatarIcon = (props: IAvatarProps) => {
 
-  const {profile,setProfile} = useContext(ProfileContext)
+  const [profileAuth,setProfileAuth] = useState({} as IProfile)
 
   useEffect(()=>{
     async function getProfile(){
-      const response = await getSpecificUser()
+      const response = await getSpecificUser(props.user_id)
       if(response?.message == "success"){
-        setProfile(response.data)
+        setProfileAuth(response.data)
       }
     }
     getProfile()
   },[])
 
   return (
-    <>
-      {Object.keys(profile).length > 0 &&
+    <>{profileAuth.full_name != undefined ? 
       <Flex alignItems={"flex-end"} gap={"9px"}>
         <AvatarStyled colorClass={props.colorClass} size={props.size}>
-          <div className='avatarLetter'>{profile.full_name[0]}</div>
-          {props.size == "medium" ? <Text mt="1.5rem" text={profile.full_name} variant="title-card" ></Text> : 
-          <span className={props.colorClass}>{profile.full_name}</span>
+          <div className='avatarLetter'>{profileAuth.full_name[0]}</div>
+          {props.size == "medium" ? <Text mt="1.5rem" text={profileAuth.full_name} variant="title-card" ></Text> : 
+          <span className={props.colorClass}>{profileAuth.full_name}</span>
           }
           {props.comment == "list" &&  
           <>
@@ -43,9 +44,9 @@ const AvatarIcon = (props: IAvatarProps) => {
           </>
           }
         </AvatarStyled>
-        {props.size == "big" && <Text text={profile.accountType == "seller" ? "Anunciante" : "Comprador"} variant="info-card"></Text>}
-      </Flex>}
-    </>
+        {props.size == "big" && <Text text={profileAuth.accountType == "seller" ? "Anunciante" : "Comprador"} variant="info-card"></Text>}
+      </Flex>
+ : <></>}</>
   );
 };
 

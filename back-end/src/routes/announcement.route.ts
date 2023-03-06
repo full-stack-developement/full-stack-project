@@ -5,6 +5,7 @@ import {
   announcementPostController,
   announcementsListControllers,
   announcementsUpdateController,
+  announcementsUserListController,
 } from "../controllers/announcement.controller";
 import { AuthTokenCheck } from "../middlewares/auth.middleware";
 import { schemaValidationMiddleware } from "../middlewares/schemaValidation.middleware";
@@ -14,6 +15,8 @@ const announcementRoute = Router();
 const routeName = "/announcement";
 
 announcementRoute.get(routeName, announcementsListControllers);
+
+announcementRoute.get(routeName + "/user/:id",AuthTokenCheck,announcementsUserListController)
 
 announcementRoute.post(
   routeName,

@@ -93,5 +93,12 @@ export const userUpdateSchema = yup.object().shape({
 
 export const loginSchema = yup.object().shape({
   username: yup.string().required("O username é obrigatório"),
-  password: yup.string().required("A senha é obrigatória"),
+  password: yup
+  .string()
+  .min(8, "Senha deve ter no mínimo 8 caracteres")
+  .max(15, "Senha deve ter no máximo 15 caracteres")
+  .matches(
+    /^([a-zA-Z0-9@*#]{8,15})$/,
+    "Senha, no mínimo 8 letras, uma letra maiúscula, uma letra minúscula, um número e um caractere especial"
+  )
 });

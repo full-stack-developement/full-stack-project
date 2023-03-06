@@ -1,3 +1,5 @@
+import { IProfile } from "./user.interface"
+
 export interface IAnnouncement{
     id : string  
     announcementType : "sale" | "auction"
@@ -9,4 +11,5 @@ export interface IAnnouncement{
     description?: string
     coverImage : string
     isActive : boolean
+    user : IProfile
 }

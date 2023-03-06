@@ -5,6 +5,7 @@ import { IUserRequest } from "../interfaces/requests.interface";
 import {
   userCreateService,
   userDeleteService,
+  userListSpecificProfileService,
   userListSpecificService,
   userLoginService,
   userUpdateService,
@@ -68,8 +69,23 @@ export async function userListSpecificController(
   res: Response
 ) {
   try {
-    const id = req.user_id;
+    const id = req.params.id;
     const response = await userListSpecificService(id);
+    return res.json(response).status(200);
+  } catch (err) {
+    if (err instanceof Error) {
+      return res.json({message : err.message}).status(400);
+    }
+    return res.json({ message: "Internal server error" }).status(500);
+  }
+}
+export async function userListSpecificProfileController(
+  req: IUserRequest,
+  res: Response
+) {
+  try {
+    const user_id = req.user_id
+    const response = await userListSpecificProfileService(user_id);
     return res.json(response).status(200);
   } catch (err) {
     if (err instanceof Error) {

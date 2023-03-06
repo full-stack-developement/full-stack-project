@@ -1,4 +1,5 @@
 import { Response, Request } from "express";
+import { ErrorResponse } from "../Error/ErrorResponse";
 import {
   IAnnouncementRequest,
 } from "../interfaces/requests.interface";
@@ -7,6 +8,7 @@ import {
   announcementListSpecificService,
   announcementPostService,
   announcementsListService,
+  announcementsUserListService,
   announcementUpdateService,
 } from "../services/announcement.service";
 
@@ -29,6 +31,23 @@ export const announcementsListControllers = async (
   const announcementList = await announcementsListService();
 
   return res.status(200).send(announcementList);
+};
+
+export const announcementsUserListController = async (
+  req: IAnnouncementRequest,
+  res: Response
+) => {
+  try{
+    const user_id = req.params.id
+    const announcementList = await announcementsUserListService(user_id);
+    return res.status(200).json(announcementList);
+  }
+  catch(err){ 
+    if(err instanceof ErrorResponse){
+      return res.status(err.status_code).json({message : err.message})
+    }
+  }
+
 };
 
 export async function announcementDeleteController(
