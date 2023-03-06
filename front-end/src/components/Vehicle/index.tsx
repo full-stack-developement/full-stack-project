@@ -7,7 +7,8 @@ import { Button } from "../Button";
 import {useParams} from "react-router-dom"
 import { IAnnouncement } from "../../interfaces/announcement.interface";
 import { getSpecificAnnouncement } from "../../utils/announcement.util";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ProfileContext } from "../../contexts/profile.context"
 import { Comments } from "../Comments";
 import { AvatarCar } from "../AvatarCar";
 
@@ -15,6 +16,7 @@ export function Vehicle(){
 
     const {vehicle_id} = useParams()
     const [vehicle,setVehicle] = useState({} as IAnnouncement)
+    const { profile } = useContext(ProfileContext)
 
     useEffect(()=>{
         async function specificAnnouncement(){
@@ -27,6 +29,15 @@ export function Vehicle(){
         }
         specificAnnouncement()
     },[])
+
+    function handleRedirectWhatsapp() {
+        window.open(
+          `http://api.whatsapp.com/send?1=pt_BR&phone=${profile.phone}`,
+          "_system",
+          "location=yes"
+        );
+        return false;
+      }
 
     return (
         <Flex width={"100%"} justifyContent={"center"} alignItems={{phone : "center", desktopSmall : "flex-start"}} flexDirection={{phone : "column",desktopSmall : "row"}} gap={"40px"}>
