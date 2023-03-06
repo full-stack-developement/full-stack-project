@@ -42,7 +42,7 @@ export const Route = createBrowserRouter([
     ],
   },
   {
-    path: "/profile",
-    element: <ProtectedRoute><Profile></Profile></ProtectedRoute>,
+    path: "/profile/:profile_id",
+    element: <ProtectedRoute><Profile></Profile></ProtectedRoute>
   },
 ]);

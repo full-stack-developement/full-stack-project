@@ -1,5 +1,5 @@
 import { CarImage } from "../CarImage";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, propNames } from "@chakra-ui/react";
 import { VehiclePhotos } from "../VehiclePhotos";
 import InfoVehicle from "../InfoVehicle";
 import {Text} from "../Text"
@@ -56,7 +56,7 @@ export function Vehicle(){
             </Flex>
             <Flex mb={"1rem"} gap={"1rem"} flexDirection={"column"}>
                 <VehiclePhotos></VehiclePhotos>
-                <AvatarCar size="medium"></AvatarCar>
+                {vehicle?.user &&  <AvatarCar user_id={vehicle.user.id} size="medium"></AvatarCar> }
             </Flex>
         </Flex>
     )

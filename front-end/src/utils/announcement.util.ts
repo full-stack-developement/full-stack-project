@@ -19,6 +19,22 @@ export async function createAnnouncement(data : FieldValues ){
         }
     }
 }
+export async function getAnnouncementUser(id : string){
+    let responseGet = {data : [{}] as IAnnouncement[],message : "" as "success" | "error"}
+    try{
+        const token = localStorage.getItem("$TOKEN")
+        const response = await apiAnnouncement.get(`/user/${id}`,{headers : {Authorization : `Bearer ${token}`}})
+        responseGet.data = response.data
+        responseGet.message = "success"
+        return responseGet
+    }
+    catch(err){
+        if(err instanceof AxiosError){
+            responseGet.message = "error"
+            return responseGet
+        }
+    }
+}
 export async function getSpecificAnnouncement(id : string){
     let responseSpecificGet = {data : {} as IAnnouncement,message : "" as "success" | "error"}
     try{

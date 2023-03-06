@@ -10,6 +10,10 @@ export const apiUser = axios.create({
   baseURL: baseURL + "/user",
 });
 
+export const apiProfile = axios.create({
+  baseURL: baseURL + "/profile",
+});
+
 export const apiComment = axios.create({
   baseURL: baseURL + "/comments",
 });

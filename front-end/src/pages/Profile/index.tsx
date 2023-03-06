@@ -6,18 +6,26 @@ import Footer from "../../components/Footer";
 import { AnnouncementContext } from "../../contexts/announcement.context";
 import { useContext, useEffect } from "react";
 import { apiAnnouncement } from "../../api";
+import { useParams } from "react-router-dom";
+import { getAnnouncementUser } from "../../utils/announcement.util";
+import { IAnnouncement } from "../../interfaces/announcement.interface";
 
 export function Profile() {
 
-  const { announcements, setAnnouncements } = useContext(AnnouncementContext);
+  const {setAnnouncements } = useContext(AnnouncementContext);
+  const {profile_id} = useParams()
 
   useEffect(() => {
-    apiAnnouncement
-      .get("")
-      .then((res) => {
-        setAnnouncements(res.data);
-      })
-      .catch((err) => console.log(err));
+    async function getAnnouncementsUser(){
+        const response = await getAnnouncementUser(profile_id as string)
+        if(response?.message == "success"){
+          setAnnouncements(response?.data)
+        }
+        if(response?.message == "error"){
+          setAnnouncements([{}] as IAnnouncement[])
+        }
+    }
+    getAnnouncementsUser()
   }, []);
 
   return (
@@ -25,7 +33,7 @@ export function Profile() {
       <NavBar></NavBar>
       <Background purpleHeight="300px">
         <>
-          <AvatarContainer size="big"></AvatarContainer>
+          <AvatarContainer user_id={profile_id as string} size="big"></AvatarContainer>
           <AuctionList></AuctionList>
           <SaleList vehicleType="Carros"></SaleList>
           <SaleList vehicleType="Motos"></SaleList>

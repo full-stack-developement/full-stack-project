@@ -95,8 +95,18 @@ export async function userDeleteService(id: string) {
 export async function userListSpecificService(id: string) {
   const user = await userRepository.findOneBy({ id: id });
 
+
   if (!user) {
-    throw new Error("User not found");
+      throw new Error("User not found");
+  }
+
+  return instanceToPlain(user);
+}
+export async function userListSpecificProfileService(user_id : string) {
+  const user = await userRepository.findOneBy({ id: user_id });
+
+  if (!user) {
+      throw new Error("User not found");
   }
 
   return instanceToPlain(user);

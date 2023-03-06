@@ -1,9 +1,11 @@
 import Avatar from "../AvatarIcon";
 import InfoVehicle from "../InfoVehicle";
 import { Box, Text, Image, ButtonGroup } from "@chakra-ui/react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Button } from "../Button";
 import { ModalAnnouncementUpdate } from "../ModalAnnouncementUpdate";
+import { IProfile } from "../../interfaces/user.interface";
+import { useEffect } from "react";
 
 interface IProductCardProps{
   id : string
@@ -13,11 +15,12 @@ interface IProductCardProps{
   price : number
   year : string
   coverImage : string
+  user: IProfile
 }
 
 const ProductCard = (props: IProductCardProps) => {
 
-  const location = useLocation()
+  const {profile_id} = useParams()
   const navigate = useNavigate()
 
   return(
@@ -80,14 +83,14 @@ const ProductCard = (props: IProductCardProps) => {
         {props.description}
       </Text>}
 
-      <Avatar size="small" colorClass="avatarName-grey" />
+      <Avatar user_id={props.user.id} size="small" colorClass="avatarName-grey" />
       <InfoVehicle
         colorClass="vehiclePrice-grey"
         km={props.km}
         price={props.price}
         year={props.year}
       />
-      {location.pathname == "/profile" &&
+      {props.user.id == profile_id &&
         <ButtonGroup>
             <ModalAnnouncementUpdate type="sell" vehicle_id={props.id}></ModalAnnouncementUpdate>
              <Button onClick={()=>{

@@ -21,8 +21,7 @@ import { useNavigate } from "react-router-dom";
 
 export const RegisterPage = () => {
   const toast = useToast();
-
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const {
     handleSubmit,
@@ -37,7 +36,28 @@ export const RegisterPage = () => {
   return (
     <>
       <NavBar />
-      <form className="registerForm" onSubmit={handleSubmit(createUser)}>
+      <form className="registerForm" onSubmit={handleSubmit(async(data)=>{
+        const response = await createUser(data)
+        if(response?.message == "success"){
+          isValid
+                  ? toast({
+                      position: "top-right",
+                      title: "Conta criada.",
+                      description: "Por favor, faça login.",
+                      status: "success",
+                      duration: 4000,
+                      isClosable: true,
+                    })
+                  : toast({
+                      position: "top-right",
+                      title: "Conta não criada.",
+                      description: "Por favor, revise os dados.",
+                      status: "error",
+                      duration: 4000,
+                      isClosable: true,});
+          navigate("/login")
+        }
+      })}>
         <Box
           className="registerFormContainer"
           width={"420px"}
