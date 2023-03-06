@@ -10,11 +10,6 @@ import { loginSchema } from "../../schemas/login.schema";
 import { loginUser } from "../../utils/user.util";
 
 export const LoginPage = () => {
-  const {
-    formState: { errors },
-    register,
-    handleSubmit,
-  } = useForm({ resolver: yupResolver(loginSchema) });
 
   const {formState : {errors,isValid},register,handleSubmit} = useForm({resolver : yupResolver(loginSchema)})
   const toast = useToast();
@@ -47,16 +42,6 @@ export const LoginPage = () => {
                 isClosable: true,});
           }
         })}>
-        <form
-          className="loginForm"
-          onSubmit={handleSubmit(async (data) => {
-            const response = await loginUser(data);
-            if (response?.message == "success") {
-              localStorage.setItem("$TOKEN", response.token);
-              navigate("/home");
-            }
-          })}
-        >
           <Flex
             mt={"1rem"}
             mb={"1rem"}
@@ -153,5 +138,5 @@ export const LoginPage = () => {
         </form>
       </Flex>
     </>
-  );
-};
+  )
+}

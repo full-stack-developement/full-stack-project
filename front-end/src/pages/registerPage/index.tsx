@@ -23,8 +23,6 @@ export const RegisterPage = () => {
   const toast = useToast();
   const navigate = useNavigate()
 
-  const navigate = useNavigate();
-
   const {
     handleSubmit,
     register,
