@@ -1,10 +1,9 @@
-import { activateUserController } from "./../controllers/user.controller";
+import { activateUserController, userLoginController } from "./../controllers/user.controller";
 import { Router } from "express";
 import {
   userDeleteController,
   userListSpecificController,
   userCreateController,
-  userLoginController,
   userUpdateController,
 userListSpecificProfileController
 } from "../controllers/user.controller";

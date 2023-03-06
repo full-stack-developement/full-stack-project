@@ -1,4 +1,4 @@
-import { AppError, ErrorResponse, handleError } from "./../Error/ErrorResponse";
+import { ErrorResponse } from "./../Error/ErrorResponse";
 import {
   ILoginRequest,
   IUserCreate,
@@ -17,6 +17,19 @@ import {
 } from "../services/user.service";
 
 import { instanceToPlain } from "class-transformer";
+
+export async function userLoginController(req : ILoginRequest,res : Response){
+  try {
+    const data = req.data;
+    const response = await userLoginService(data)
+    return res.json(response).status(200);
+  } catch (err) {
+    if (err instanceof ErrorResponse) {
+      return res.status(err.status_code).json({message : err.message})
+    }
+    return res.json({ message: "Internal server error" }).status(500);
+  }
+}
 
 export async function userCreateController(req: Request, res: Response) {
   try {
@@ -99,18 +112,6 @@ export async function userListSpecificProfileController(
   } catch (err) {
     if (err instanceof Error) {
       return res.json({message : err.message}).status(400);
-    }
-    return res.json({ message: "Internal server error" }).status(500);
-  }
-}
-export async function userLoginController(req : ILoginRequest,res : Response){
-  try {
-    const data = req.data;
-    const response = await userLoginService(data);
-    return res.json(response).status(200);
-  } catch (err) {
-    if (err instanceof ErrorResponse) {
-      return res.status(err.status_code).json({ message: err.message });
     }
     return res.json({ message: "Internal server error" }).status(500);
   }
