@@ -6,6 +6,7 @@ import {
   userCreateController,
   userLoginController,
   userUpdateController,
+userListSpecificProfileController
 } from "../controllers/user.controller";
 import { AuthTokenCheck } from "../middlewares/auth.middleware";
 import { schemaValidationMiddleware } from "../middlewares/schemaValidation.middleware";
@@ -23,13 +24,12 @@ userRoute.post(
   userLoginController
 );
 userRoute.delete(routeName, AuthTokenCheck, userDeleteController);
+userRoute.get(routeName + "/:id", AuthTokenCheck, userListSpecificController); //
+userRoute.get("/profile",AuthTokenCheck, userListSpecificProfileController);
+userRoute.patch(routeName,AuthTokenCheck,schemaValidationMiddleware(userUpdateSchema),userUpdateController);
+
 userRoute.get(routeName, AuthTokenCheck, userListSpecificController); //
-userRoute.patch(
-  routeName,
-  AuthTokenCheck,
-  schemaValidationMiddleware(userUpdateSchema),
-  userUpdateController
-);
+
 userRoute.get(
   routeName + "/activate/:token_activation",
   activateUserController

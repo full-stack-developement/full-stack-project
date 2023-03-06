@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import { FieldValues } from "react-hook-form";
-import { apiUser } from "../api";
+import { apiProfile, apiUser } from "../api";
 import { IProfile, IUserUpdate } from "../interfaces/user.interface";
 
 export async function createUser(data: FieldValues) {
@@ -15,14 +15,18 @@ export async function createUser(data: FieldValues) {
 
   data.address = addressData;
 
-  await apiUser
-    .post("", data)
-    .then(() => {})
-    .catch((error) => {
-      if (error instanceof AxiosError) {
-        return error.message;
-      }
-    });
+  let responseCreate = { data: {} as FieldValues, message: "" as "success" | "error" };
+  try {
+    const response = await apiUser.post("", data);
+    responseCreate.data = response.data;
+    responseCreate.message = "success";
+    return responseCreate;
+  } catch (err) {
+    if (err instanceof AxiosError) {
+      responseCreate.message = "error";
+      return responseCreate;
+    }
+  }
 }
 
 export async function loginUser(data: FieldValues) {
@@ -64,11 +68,28 @@ export async function updateUser(data: FieldValues) {
     }
   }
 }
-export async function getSpecificUser(){
+export async function getSpecificUser(user_id : string){
   let responseSpecificGet = {data : {} as IProfile,message : "" as "success" | "error"}
   try{
       const token = localStorage.getItem("$TOKEN")
-      const response = await apiUser.get(``,{headers : {Authorization : `Bearer ${token}`}})
+      const response = await apiUser.get(`/${user_id}`,{headers : {Authorization : `Bearer ${token}`}})
+      responseSpecificGet.data = response.data
+      responseSpecificGet.message = "success"
+      return responseSpecificGet
+  }
+  catch(err){
+      if(err instanceof AxiosError){
+          responseSpecificGet.message = "error"
+          responseSpecificGet.data = err.response?.data
+          return responseSpecificGet
+      }
+  }
+}
+export async function getSpecificUserToken(){
+  let responseSpecificGet = {data : {} as IProfile,message : "" as "success" | "error"}
+  try{
+      const token = localStorage.getItem("$TOKEN")
+      const response = await apiProfile.get(``,{headers : {Authorization : `Bearer ${token}`}})
       responseSpecificGet.data = response.data
       responseSpecificGet.message = "success"
       return responseSpecificGet
