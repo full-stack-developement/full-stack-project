@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { customTheme } from "../../theme";
 
 export const Footer1 = styled.div`
+  position: relative;
   background-color: ${() => customTheme.colors.greyScale.grey0};
   color: #ffffff;
   font-family: "Inter", sans-serif;

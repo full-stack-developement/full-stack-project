@@ -55,16 +55,13 @@ export async function commentsUserListSpecificService(user_id : string,data : IC
     return comment
 } 
 export async function commentsVehicleListService(vehicle_id : string){
-    const vehicle = await vehicleRepository.findOne({where : {id : vehicle_id},relations : {comments : true}})
+    const comments = await commentsRepository.find({where : {vehicle : {id : vehicle_id}},relations : {user : true,vehicle : true}})
 
-    if(!vehicle){
-        throw new ErrorResponse("Vehicle not found",404)
-    }
-    if(vehicle.comments.length == 0){
+    if(comments.length == 0){
         throw new ErrorResponse("Vehicle not have comments",400)
     }
 
-    return vehicle.comments
+    return comments
 }
 export async function commentsVehicleListSpecificService(vehicle_id : string,data : ICommentsSpecificList){
     const vehicle = await vehicleRepository.findOne({where : {id : vehicle_id},relations : {comments : true}})

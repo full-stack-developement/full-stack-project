@@ -11,6 +11,7 @@ export function Comments(){
 
     const {vehicle_id} = useParams()
     const {comments,setComments} = useContext(CommentsContext)
+    
 
     useEffect(()=>{
         async function listComments(){
@@ -27,7 +28,7 @@ export function Comments(){
             <Box zIndex={1} backgroundColor={"greyScale.grey10"} borderRadius={"5px"} width={{phone : "351px",desktopLarge : "752px"}} padding={"1rem"}>
                 <Text text="Comentários" variant="title-card"></Text>
                 {comments.length > 0 && comments.map((el)=>{
-                    return <Comment content={el.content} date={el.created_at} key={el.id}></Comment>
+                    return <Comment user_id={el.user.id} content={el.content} date={el.created_at} key={el.id}></Comment>
                 })}
             </Box>
             <CreateComment></CreateComment>

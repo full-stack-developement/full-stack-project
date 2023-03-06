@@ -44,6 +44,7 @@ export class Vehicle{
     @OneToMany(()=> VehicleGallery,(gallery)=> gallery.vehicle)
     gallery : VehicleGallery[]
 
+    @JoinColumn()
     @ManyToOne(()=> User,(user)=> user.vehicles)
     user : User
 

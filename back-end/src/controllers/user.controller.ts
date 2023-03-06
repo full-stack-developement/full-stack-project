@@ -10,6 +10,7 @@ import {
   activateUserService,
   userCreateService,
   userDeleteService,
+  userListSpecificProfileService,
   userListSpecificService,
   userLoginService,
   userUpdateService,
@@ -77,7 +78,7 @@ export async function userListSpecificController(
   res: Response
 ) {
   try {
-    const id = req.user_id;
+    const id = req.params.id;
     const response = await userListSpecificService(id);
     return res.json(response).status(200);
   } catch (err) {
@@ -87,20 +88,23 @@ export async function userListSpecificController(
     return res.json({ message: "Internal server error" }).status(500);
   }
 }
-export async function userLoginController(req: ILoginRequest, res: Response) {
+export async function userListSpecificProfileController(
+  req: IUserRequest,
+  res: Response
+) {
   try {
-    const data = req.data;
-    const response = await userLoginService(data);
+    const user_id = req.user_id
+    const response = await userListSpecificProfileService(user_id);
     return res.json(response).status(200);
   } catch (err) {
-    if (err instanceof ErrorResponse) {
-      return res.status(err.status_code).json({ message: err.message });
+    if (err instanceof Error) {
+      return res.json({message : err.message}).status(400);
     }
     return res.json({ message: "Internal server error" }).status(500);
   }
 }
+export async function userLoginController(req : ILoginRequest,res : Response){
 
-/*
 export async function userUpdateController(req: IUserUpdateRequest, res: Response){
   try {
     const id : string = req.params.id;
