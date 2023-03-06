@@ -8,65 +8,41 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../schemas/login.schema";
 import { loginUser } from "../../utils/user.util";
-import { useToast } from "@chakra-ui/react";
 
 export const LoginPage = () => {
   const {
-    formState: { errors },
+    formState: { errors, isValid },
     register,
     handleSubmit,
   } = useForm({ resolver: yupResolver(loginSchema) });
-
-  const {formState : {errors,isValid},register,handleSubmit} = useForm({resolver : yupResolver(loginSchema)})
   const toast = useToast();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <>
       <NavBar />
       <Flex alignItems={"center"} justifyContent={"center"}>
-        <form className="loginForm" onSubmit={handleSubmit(async(data)=>{
-          const response = await loginUser(data)
-          if(response?.message == "success"){
-            localStorage.setItem("$TOKEN",response.token)
-            isValid && toast({
-                      position: "top-right",
-                      title: "Logado com sucesso!",
-                      status: "success",
-                      duration: 4000,
-                      isClosable: true,
-                    })
-            navigate("/home")
-          }
-          if(response?.message == "error"){
-            toast({
-                position: "top-right",
-                title: "Email ou senha incorretos.",
-                description: "Por favor, revise os dados.",
-                status: "error",
-                duration: 4000,
-                isClosable: true,});
-          }
-        })}>
         <form
           className="loginForm"
           onSubmit={handleSubmit(async (data) => {
             const response = await loginUser(data);
             if (response?.message == "success") {
               localStorage.setItem("$TOKEN", response.token);
-              toast({
-                position: "top",
-                title: "Login feito com sucesso.",
-                status: "success",
-                duration: 4000,
-                isClosable: true,
-              });
+              isValid &&
+                toast({
+                  position: "top-right",
+                  title: "Logado com sucesso!",
+                  status: "success",
+                  duration: 4000,
+                  isClosable: true,
+                });
               navigate("/home");
-            } else {
+            }
+            if (response?.message == "error") {
               toast({
-                position: "top",
-                title: "Não foi possível fazer o login.",
-                description: "Email ou senha inválidos",
+                position: "top-right",
+                title: "Email ou senha incorretos.",
+                description: "Por favor, revise os dados.",
                 status: "error",
                 duration: 4000,
                 isClosable: true,
