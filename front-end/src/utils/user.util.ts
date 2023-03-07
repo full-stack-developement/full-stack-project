@@ -18,6 +18,7 @@ export async function createUser(data: FieldValues) {
   let responseCreate = { data: {} as FieldValues, message: "" as "success" | "error" };
   try {
     const response = await apiUser.post("", data);
+    console.log(response)
     responseCreate.data = response.data;
     responseCreate.message = "success";
     return responseCreate;

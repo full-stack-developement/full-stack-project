@@ -35,7 +35,7 @@ interface IInputText{
 export const InputText = (props: IInputText) => {
   return (
     <Box>
-      <FormLabel htmlFor={props.text}>{props.text}</FormLabel>
+      <FormLabel variant={"forms-label"} htmlFor={props.text}>{props.text}</FormLabel>
       <Input
         type={props.type}
         id={props.text}
