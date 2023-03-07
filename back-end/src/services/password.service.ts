@@ -40,7 +40,7 @@ export const sendResetUserPasswordService = async (
     <p>Esse e-mail é automatico então por favor, não responda.</p> 
     <P>Recebemos um pedido de alteração de senha. Caso não tenha sido você,</p> 
     <p>favor entrar em contato com a adminstração do sistema, através do email maiapemaia@hotmail.com.</P>
-    <p>acesse o link para alterar a senha: ${protocol}://${host}/user/password/${resetPasswordToken}</P> 
+    <p>acesse o link para alterar a senha: ${protocol}://localhost:5173/user/resetpassword/${resetPasswordToken}</P> 
     <b><h4>Atenciosamente</h4> <h4>Equipe de suporte 💻</h4></b>`,
     to: email,
   };

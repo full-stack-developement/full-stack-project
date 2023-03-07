@@ -10,38 +10,46 @@ import { loginSchema } from "../../schemas/login.schema";
 import { loginUser } from "../../utils/user.util";
 
 export const LoginPage = () => {
-
-  const {formState : {errors,isValid},register,handleSubmit} = useForm({resolver : yupResolver(loginSchema)})
+  const {
+    formState: { errors, isValid },
+    register,
+    handleSubmit,
+  } = useForm({ resolver: yupResolver(loginSchema) });
   const toast = useToast();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <>
       <NavBar />
       <Flex alignItems={"center"} justifyContent={"center"}>
-        <form className="loginForm" onSubmit={handleSubmit(async(data)=>{
-          const response = await loginUser(data)
-          if(response?.message == "success"){
-            localStorage.setItem("$TOKEN",response.token)
-            isValid && toast({
-                      position: "top-right",
-                      title: "Logado com sucesso!",
-                      status: "success",
-                      duration: 4000,
-                      isClosable: true,
-                    })
-            navigate("/home")
-          }
-          if(response?.message == "error"){
-            toast({
+        <form
+          className="loginForm"
+          onSubmit={handleSubmit(async (data) => {
+            const response = await loginUser(data);
+            if (response?.message == "success") {
+              localStorage.setItem("$TOKEN", response.token);
+              isValid &&
+                toast({
+                  position: "top-right",
+                  title: "Logado com sucesso!",
+                  status: "success",
+                  duration: 4000,
+                  isClosable: true,
+                });
+              navigate("/home");
+            }
+            if (response?.message == "error") {
+              toast({
                 position: "top-right",
                 title: "Email ou senha incorretos.",
                 description: "Por favor, revise os dados.",
                 status: "error",
                 duration: 4000,
-                isClosable: true,});
-          }
-        })}>
+                isClosable: true,
+              });
+            }
+          })}
+        >
           <Flex
             mt={"1rem"}
             mb={"1rem"}
@@ -99,6 +107,9 @@ export const LoginPage = () => {
                 mb={"0.5rem"}
                 border={"none"}
                 alignSelf={"flex-end"}
+                onClick={() => {
+                  navigate("/user/password");
+                }}
               >
                 Esqueci minha senha
               </Button>
@@ -138,5 +149,5 @@ export const LoginPage = () => {
         </form>
       </Flex>
     </>
-  )
-}
+  );
+};

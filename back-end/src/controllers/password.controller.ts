@@ -29,6 +29,6 @@ export const resetUserPasswordController = async (
   await resetUserPasswordService(token, password);
 
   return res.status(200).json({
-    message: "Senha alterada com sucesso!",
+    message: "Senha alterada com sucesso",
   });
 };
