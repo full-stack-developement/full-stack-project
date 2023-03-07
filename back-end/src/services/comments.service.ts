@@ -77,4 +77,24 @@ export async function commentsVehicleListSpecificService(vehicle_id : string,dat
 
     return comment
 }
+export async function commentsUpdateService(comment_id : string,data : IComments){
+    const comment = await commentsRepository.findOneBy({id : comment_id})
+
+    if(!comment){
+        throw new ErrorResponse("Comment not found",404)
+    }
+
+    comment.content = data.content ? data.content : comment.content
+
+    commentsRepository.save(comment)
+}
+export async function commentsDeleteService(comment_id : string){
+    const comment = await commentsRepository.findOneBy({id : comment_id})
+
+    if(!comment){
+        throw new ErrorResponse("Comment not found",404)
+    }
+
+    await commentsRepository.delete(comment)
+}
 
