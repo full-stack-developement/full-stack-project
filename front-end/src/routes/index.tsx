@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import { Vehicle } from "../components/Vehicle";
 import { VehiclePage } from "../pages/VehiclePage";
 import Home from "../pages/home";
@@ -12,11 +12,15 @@ import { ResetPasswordPage } from "../pages/resetPassword";
 
 export const Route = createBrowserRouter([
   {
-    path: "/home",
+    path: "/*",
     element: (
-      <ProtectedRoute>
+      <Navigate to={"/home"}></Navigate>
+    ),
+  },
+  {
+    path : "/home",
+    element: (
         <Home></Home>
-      </ProtectedRoute>
     ),
   },
   {

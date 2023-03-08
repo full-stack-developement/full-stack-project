@@ -54,7 +54,7 @@ export function ModalAnnouncementCreate(){
                 <Text text="Informações do veículo" variant="title-content-form"></Text>
                     <InputText register={{...register("title")}} placeholder="Digitar título" text="Título"></InputText>
                     {errors.title && <Text variant="errors-form" text={errors.title.message as string}></Text> }
-                <Flex gap={"1rem"}>
+                <Flex gap={"1rem"} mt={"1rem"}>
                     <Box>
                         <InputText register={{...register("year")}} placeholder="Digitar ano" text="Ano"></InputText>
                         {errors.year && <Text variant="errors-form" text={errors.year.message as string}></Text> }
@@ -87,7 +87,7 @@ export function ModalAnnouncementCreate(){
                     <InputText register={{...register("coverImage")}} placeholder="Inserir URL da imagem" text="Imagem da capa"></InputText>
                     {errors.coverImage && <Text variant="errors-form" text={errors.coverImage.message as string}></Text> }
                 </Box>
-                <Box>
+                <Box mt={"1rem"}>
                     <InputText placeholder="Inserir URL da imagem" text="1° Imagem da galeria"></InputText>
                 </Box>
                 <Box mt={"1rem"} mb={"1rem"}>
