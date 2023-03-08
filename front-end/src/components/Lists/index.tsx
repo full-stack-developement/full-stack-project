@@ -4,6 +4,13 @@ import { AnnouncementContext } from "../../contexts/announcement.context";
 import { ProductCardAuction } from "../../components/ProductCardAuction";
 import ProductCard from "../ProductCard";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
+import { scrollLeftAuction, scrollRightAuction } from "../../utils/lists.util";
+import {
+  scrollLeftCar,
+  scrollRightCar,
+  scrollLeftMotorcycle,
+  scrollRightMotorcycle,
+} from "../../utils/lists.util";
 
 interface IAuctionListProps {}
 
@@ -13,16 +20,6 @@ interface ISaleListProps {
 
 export const AuctionList = (props: IAuctionListProps) => {
   const { announcements } = useContext(AnnouncementContext);
-
-  function scrollLeft() {
-    const left = document.querySelector(".carouselAuctionCardsContainer");
-    left?.scrollBy(-700, 0);
-  }
-
-  function scrollRight() {
-    const right = document.querySelector(".carouselAuctionCardsContainer");
-    right?.scrollBy(700, 0);
-  }
 
   return (
     <>
@@ -61,7 +58,7 @@ export const AuctionList = (props: IAuctionListProps) => {
               borderRadius="full"
               transform={"translate(0%, -50%)"}
               zIndex={2}
-              onClick={() => scrollLeft()}
+              onClick={() => scrollLeftAuction()}
             >
               <BiLeftArrowAlt />
             </IconButton>
@@ -104,7 +101,7 @@ export const AuctionList = (props: IAuctionListProps) => {
               borderRadius="full"
               transform={"translate(0%, -50%)"}
               zIndex={2}
-              onClick={() => scrollRight()}
+              onClick={() => scrollRightAuction()}
             >
               <BiRightArrowAlt />
             </IconButton>
@@ -117,26 +114,6 @@ export const AuctionList = (props: IAuctionListProps) => {
 
 export const SaleList = (props: ISaleListProps) => {
   const { announcements } = useContext(AnnouncementContext);
-
-  function scrollLeftCar() {
-    const leftCar = document.querySelector(".carouselSaleCars");
-    leftCar?.scrollBy(-350, 0);
-  }
-
-  function scrollRightCar() {
-    const right = document.querySelector(".carouselSaleCars");
-    right?.scrollBy(350, 0);
-  }
-
-  function scrollLeftMotorcycle() {
-    const leftMotorcycle = document.querySelector(".carouselSaleMotorcycle");
-    leftMotorcycle?.scrollBy(-350, 0);
-  }
-
-  function scrollRightMotorcycle() {
-    const right = document.querySelector(".carouselSaleMotorcycle");
-    right?.scrollBy(350, 0);
-  }
 
   return (
     <>
