@@ -10,6 +10,8 @@ import { ButtonGroup } from "@chakra-ui/react";
 import { Button } from "../Button";
 import { ModalAnnouncementUpdate } from "../ModalAnnouncementUpdate";
 import { IProfile } from "../../interfaces/user.interface";
+import { useContext } from "react";
+import { ProfileContext } from "../../contexts/profile.context";
 
 interface IProductCardAuctionProps{
   id : string
@@ -19,12 +21,12 @@ interface IProductCardAuctionProps{
   price : number
   year : string
   coverImage : string
-  user: IProfile
+  user_id: string
 }
 
 export function ProductCardAuction(props : IProductCardAuctionProps) {
 
-  const location = useLocation()
+  const {profile} = useContext(ProfileContext)
   const navigate = useNavigate()
 
   return (
@@ -36,7 +38,7 @@ export function ProductCardAuction(props : IProductCardAuctionProps) {
     }} className="content">
           <h3 className="content_title">{props.title}</h3>
           <p className="content_description">{props.description}</p>
-          <Avatar user_id={props.user.id} size="small" colorClass="avatarName-white"></Avatar>
+          <Avatar user_id={props.user_id} size="small" colorClass="avatarName-white"></Avatar>
           <InfoVehicle
             colorClass="vehiclePrice-white"
             km={props.km}
@@ -45,7 +47,7 @@ export function ProductCardAuction(props : IProductCardAuctionProps) {
           ></InfoVehicle>
         </div>
         <div className="navigation">
-          {location.pathname == "/profile" ? <ButtonGroup>
+          {profile.id == props.user_id ? <ButtonGroup>
             <ModalAnnouncementUpdate type="auction" vehicle_id={props.id}></ModalAnnouncementUpdate>
             <Button onClick={()=>{
       navigate(`/vehicle/${props.id}`)

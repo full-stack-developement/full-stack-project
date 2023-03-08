@@ -5,8 +5,10 @@ import {Text} from "../Text"
 
 export function VehiclePhotos(){
     return(
-        <Flex height={"max-content"} width={"max-content"} backgroundColor={"greyScale.grey10"} flexDirection={"column"} zIndex={1} padding={"2rem"} gap={"1rem"}>
-            <Text text="Fotos" variant="title-card"></Text>
+        <Flex alignItems={"center"} width={{phone : "351px",desktopLarge : "440px"}} height={"max-content"} backgroundColor={"greyScale.grey10"} flexDirection={"column"} zIndex={1} padding={"2rem"} gap={"1rem"}>
+            <Flex justifyContent={"flex-start"} width={"100%"}>
+                <Text text="Fotos" variant="title-card"></Text>
+            </Flex>
             <Wrap>
                 <WrapItem>
                     <CarImage background={true} galleryImage={true} image={image} ></CarImage>
