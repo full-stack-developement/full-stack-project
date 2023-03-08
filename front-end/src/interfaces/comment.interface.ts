@@ -9,3 +9,6 @@ export interface IComment{
     user : IProfile,
     vehicle : IAnnouncement
 }
+export interface ICommentUpdate{
+    content : string
+}

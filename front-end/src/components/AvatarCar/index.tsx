@@ -31,7 +31,7 @@ export function AvatarCar(props : IAvatarCarProps){
 
     return(
         <Flex flexDirection={"column"} zIndex={1} backgroundColor={"greyScale.grey10"} borderRadius={"5px"} width={{phone : "351px",desktopLarge : "440px"}} height={"max-content"} padding={"1rem"} position={"relative"} justifyContent={"center"} alignItems="center">
-            <AvatarIcon user_id={props.user_id} size={props.size} colorClass="avatarName-white"></AvatarIcon>
+            <AvatarIcon width="100%" user_id={props.user_id} size={props.size} colorClass="avatarName-white"></AvatarIcon>
             <Text textAlign="center" text={profileAuth?.description ? profileAuth.description : ""} variant="car-description"></Text>
             <Button size="small-auto" onClick={()=>{
                 navigate(`/profile/${profileAuth.id}`)

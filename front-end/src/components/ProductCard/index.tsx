@@ -4,8 +4,8 @@ import { Box, Text, Image, ButtonGroup } from "@chakra-ui/react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Button } from "../Button";
 import { ModalAnnouncementUpdate } from "../ModalAnnouncementUpdate";
-import { IProfile } from "../../interfaces/user.interface";
-import { useEffect } from "react";
+import { useContext } from "react";
+import { ProfileContext } from "../../contexts/profile.context";
 
 interface IProductCardProps {
   id: string;
@@ -15,11 +15,11 @@ interface IProductCardProps {
   price: number;
   year: string;
   coverImage: string;
-  user: IProfile;
+  user_id: string;
 }
 
 const ProductCard = (props: IProductCardProps) => {
-  const { profile_id } = useParams();
+  const { profile } = useContext(ProfileContext);
   const navigate = useNavigate();
 
   return (
@@ -86,7 +86,7 @@ const ProductCard = (props: IProductCardProps) => {
       )}
 
       <Avatar
-        user_id={props.user.id}
+        user_id={props.user_id}
         size="small"
         colorClass="avatarName-grey"
       />
@@ -96,7 +96,7 @@ const ProductCard = (props: IProductCardProps) => {
         price={props.price}
         year={props.year}
       />
-      {props.user.id == profile_id && (
+      {props.user_id == profile.id && (
         <ButtonGroup>
           <ModalAnnouncementUpdate
             type="sell"

@@ -4,7 +4,7 @@ import { AuctionList, SaleList } from "../../components/Lists";
 import { NavBar } from "../../components/NavBar";
 import Footer from "../../components/Footer";
 import { AnnouncementContext } from "../../contexts/announcement.context";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { apiAnnouncement } from "../../api";
 import { useParams } from "react-router-dom";
 import { getAnnouncementUser } from "../../utils/announcement.util";
@@ -19,6 +19,7 @@ export function Profile() {
     async function getAnnouncementsUser(){
         const response = await getAnnouncementUser(profile_id as string)
         if(response?.message == "success"){
+          console.log(response)
           setAnnouncements(response?.data)
         }
         if(response?.message == "error"){
@@ -26,7 +27,7 @@ export function Profile() {
         }
     }
     getAnnouncementsUser()
-  }, []);
+  }, [profile_id]);
 
   return (
     <>
