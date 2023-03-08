@@ -7,27 +7,27 @@ import { ModalAnnouncementUpdate } from "../ModalAnnouncementUpdate";
 import { useContext } from "react";
 import { ProfileContext } from "../../contexts/profile.context";
 
-interface IProductCardProps{
-  id : string
-  title : string
-  description? : string
-  km: number
-  price : number
-  year : string
-  coverImage : string
-  user_id: string
+interface IProductCardProps {
+  id: string;
+  title: string;
+  description?: string;
+  km: number;
+  price: number;
+  year: string;
+  coverImage: string;
+  user_id: string;
 }
 
 const ProductCard = (props: IProductCardProps) => {
+  const { profile } = useContext(ProfileContext);
+  const navigate = useNavigate();
 
-  const {profile} = useContext(ProfileContext)
-  const navigate = useNavigate()
-
-  return(
+  return (
     <Box
       width="300px"
       height="340px"
       marginTop="10px"
+      marginBottom="7px"
       display="flex"
       flexDirection="column"
       alignItems="flex-start"
@@ -47,8 +47,8 @@ const ProductCard = (props: IProductCardProps) => {
         }}
       >
         <Image
-          onClick={()=>{
-            navigate(`/vehicle/${props.id}`)
+          onClick={() => {
+            navigate(`/vehicle/${props.id}`);
           }}
           src={props.coverImage}
           alt="A car image"
@@ -68,40 +68,52 @@ const ProductCard = (props: IProductCardProps) => {
       >
         {props.title}
       </Text>
-      {props.description && <Text
-        width="100%"
-        height="48px"
-        textOverflow="ellipsis"
-        overflow="hidden"
-        whiteSpace="nowrap"
-        margin="0"
-        fontFamily="Inter, sans-serif"
-        fontWeight="400"
-        fontSize="14px"
-        color="greyScale.grey2"
-      >
-        {props.description}
-      </Text>}
+      {props.description && (
+        <Text
+          width="100%"
+          height="48px"
+          textOverflow="ellipsis"
+          overflow="hidden"
+          whiteSpace="nowrap"
+          margin="0"
+          fontFamily="Inter, sans-serif"
+          fontWeight="400"
+          fontSize="14px"
+          color="greyScale.grey2"
+        >
+          {props.description}
+        </Text>
+      )}
 
-      <Avatar user_id={props.user_id} size="small" colorClass="avatarName-grey" />
+      <Avatar
+        user_id={props.user_id}
+        size="small"
+        colorClass="avatarName-grey"
+      />
       <InfoVehicle
         colorClass="vehiclePrice-grey"
         km={props.km}
         price={props.price}
         year={props.year}
       />
-      {props.user_id == profile.id &&
+      {props.user_id == profile.id && (
         <ButtonGroup>
-            <ModalAnnouncementUpdate type="sell" vehicle_id={props.id}></ModalAnnouncementUpdate>
-             <Button onClick={()=>{
-      navigate(`/vehicle/${props.id}`)
-    }}  size="small-auto" text="Ver como" variant="vehicle-sell"></Button>
-       </ButtonGroup>
-      }
-
-     
+          <ModalAnnouncementUpdate
+            type="sell"
+            vehicle_id={props.id}
+          ></ModalAnnouncementUpdate>
+          <Button
+            onClick={() => {
+              navigate(`/vehicle/${props.id}`);
+            }}
+            size="small-auto"
+            text="Ver como"
+            variant="vehicle-sell"
+          ></Button>
+        </ButtonGroup>
+      )}
     </Box>
-  )
+  );
 };
 
 export default ProductCard;

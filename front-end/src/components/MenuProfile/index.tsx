@@ -1,10 +1,4 @@
-
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-} from "@chakra-ui/react";
+import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ProfileContext } from "../../contexts/profile.context";
@@ -16,30 +10,38 @@ import { ModalAddressUpdate } from "../ModalAddressUpdate";
 import { ModalUserUpdate } from "../ModalUserUpdate";
 
 export const MenuProfile = () => {
-
-  const navigate = useNavigate()
-  const {profile,setProfile} = useContext(ProfileContext)
+  const navigate = useNavigate();
+  const { profile, setProfile } = useContext(ProfileContext);
 
   return (
     <Menu>
       <MenuButton>
-        <AvatarProfile size="small" colorClass="avatarName-grey"/>
+        <AvatarProfile size="small" colorClass="avatarName-grey" />
       </MenuButton>
       <MenuList width="200px">
-          <ModalUserUpdate user_id={profile.id}></ModalUserUpdate>
-          <ModalAddressUpdate user_id={profile.id}></ModalAddressUpdate>
-          <MenuItem onClick={()=>{
-            navigate(`/profile/${profile.id}`)
-          }} pl="22px" py="8px">
-            {profile.accountType == "seller" ? "Meus anúncios" : "Minhas compras"}
-          </MenuItem>
-          <MenuItem onClick={()=>{
-            Logout()
-            setProfile({} as IProfile)
-            navigate("/login")     
-          }} pl="22px" py="8px">
-          </MenuItem>
-        </MenuList>
+        <ModalUserUpdate user_id={profile.id}></ModalUserUpdate>
+        <ModalAddressUpdate user_id={profile.id}></ModalAddressUpdate>
+        <MenuItem
+          onClick={() => {
+            navigate(`/profile/${profile.id}`);
+          }}
+          pl="22px"
+          py="8px"
+        >
+          {profile.accountType == "seller" ? "Meus anúncios" : "Minhas compras"}
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            Logout();
+            setProfile({} as IProfile);
+            navigate("/login");
+          }}
+          pl="22px"
+          py="8px"
+        >
+          Sair
+        </MenuItem>
+      </MenuList>
     </Menu>
   );
 };
