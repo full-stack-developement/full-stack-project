@@ -9,10 +9,11 @@ import { apiAnnouncement } from "../../api";
 import { useParams } from "react-router-dom";
 import { getAnnouncementUser } from "../../utils/announcement.util";
 import { IAnnouncement } from "../../interfaces/announcement.interface";
+import { Box, Text } from "@chakra-ui/react";
 
 export function Profile() {
 
-  const {setAnnouncements } = useContext(AnnouncementContext);
+  const {announcements, setAnnouncements } = useContext(AnnouncementContext);
   const {profile_id} = useParams()
 
   useEffect(() => {
@@ -35,8 +36,16 @@ export function Profile() {
         <>
           <AvatarContainer user_id={profile_id as string} size="big"></AvatarContainer>
           <AuctionList></AuctionList>
-          <SaleList vehicleType="Carros"></SaleList>
-          <SaleList vehicleType="Motos"></SaleList>
+          {announcements.length == 0 ? (
+            <Box marginTop={"2rem"} ml={"50rem"}>
+              <Text variant={"title"}>Sem anúncios no momento.</Text>
+            </Box>
+          ):(
+            <>
+            <SaleList vehicleType="Carros"></SaleList>
+            <SaleList vehicleType="Motos"></SaleList>
+            </>
+          )}
         </>
       </Background>
       <Footer />
