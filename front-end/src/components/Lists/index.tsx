@@ -51,17 +51,20 @@ export const AuctionList = (props: IAuctionListProps) => {
             justifyContent={"space-between"}
           >
             {/* Left Icon */}
-            <IconButton
-              marginRight={"10px"}
-              aria-label="left-arrow"
-              variant="select-type-announcement:disabled"
-              borderRadius="full"
-              transform={"translate(0%, -50%)"}
-              zIndex={2}
-              onClick={() => scrollLeftAuction()}
-            >
-              <BiLeftArrowAlt />
-            </IconButton>
+            {announcements.filter((el) => el.announcementType == "auction")
+              .length > 1 && (
+              <IconButton
+                marginRight={"10px"}
+                aria-label="left-arrow"
+                variant="select-type-announcement:disabled"
+                borderRadius="full"
+                transform={"translate(0%, -50%)"}
+                zIndex={2}
+                onClick={() => scrollLeftAuction()}
+              >
+                <BiLeftArrowAlt />
+              </IconButton>
+            )}
 
             <chakra.div
               className="carouselAuctionCardsContainer"
@@ -94,17 +97,20 @@ export const AuctionList = (props: IAuctionListProps) => {
             </chakra.div>
 
             {/* Right Icon */}
-            <IconButton
-              marginLeft={"10px"}
-              aria-label="right-arrow"
-              variant="select-type-announcement:disabled"
-              borderRadius="full"
-              transform={"translate(0%, -50%)"}
-              zIndex={2}
-              onClick={() => scrollRightAuction()}
-            >
-              <BiRightArrowAlt />
-            </IconButton>
+            {announcements.filter((el) => el.announcementType == "auction")
+              .length > 1 && (
+              <IconButton
+                marginLeft={"10px"}
+                aria-label="right-arrow"
+                variant="select-type-announcement:disabled"
+                borderRadius="full"
+                transform={"translate(0%, -50%)"}
+                zIndex={2}
+                onClick={() => scrollRightAuction()}
+              >
+                <BiRightArrowAlt />
+              </IconButton>
+            )}
           </Box>
         </chakra.section>
       )}
@@ -148,17 +154,24 @@ export const SaleList = (props: ISaleListProps) => {
             justifyContent={"space-between"}
           >
             {/* Left Icon */}
-            <IconButton
-              marginRight={"10px"}
-              aria-label="left-arrow"
-              variant="select-type-announcement:disabled"
-              borderRadius="full"
-              transform={"translate(0%, -50%)"}
-              zIndex={2}
-              onClick={() => scrollLeftCar()}
-            >
-              <BiLeftArrowAlt />
-            </IconButton>
+            {announcements.filter(
+              (el) =>
+                el.announcementType == "sale" &&
+                el.vehicleType == "car" &&
+                props.vehicleType == "Carros"
+            ).length > 3 && (
+              <IconButton
+                marginRight={"10px"}
+                aria-label="left-arrow"
+                variant="select-type-announcement:disabled"
+                borderRadius="full"
+                transform={"translate(0%, -50%)"}
+                zIndex={2}
+                onClick={() => scrollLeftCar()}
+              >
+                <BiLeftArrowAlt />
+              </IconButton>
+            )}
 
             <chakra.div
               className="carouselSaleCars"
@@ -193,17 +206,24 @@ export const SaleList = (props: ISaleListProps) => {
             </chakra.div>
 
             {/* Right Icon */}
-            <IconButton
-              marginLeft={"10px"}
-              aria-label="right-arrow"
-              variant="select-type-announcement:disabled"
-              borderRadius="full"
-              transform={"translate(0%, -50%)"}
-              zIndex={2}
-              onClick={() => scrollRightCar()}
-            >
-              <BiRightArrowAlt />
-            </IconButton>
+            {announcements.filter(
+              (el) =>
+                el.announcementType == "sale" &&
+                el.vehicleType == "car" &&
+                props.vehicleType == "Carros"
+            ).length > 3 && (
+              <IconButton
+                marginLeft={"10px"}
+                aria-label="right-arrow"
+                variant="select-type-announcement:disabled"
+                borderRadius="full"
+                transform={"translate(0%, -50%)"}
+                zIndex={2}
+                onClick={() => scrollRightCar()}
+              >
+                <BiRightArrowAlt />
+              </IconButton>
+            )}
           </Box>
         </chakra.section>
       )}
@@ -239,17 +259,24 @@ export const SaleList = (props: ISaleListProps) => {
             justifyContent={"space-between"}
           >
             {/* Left Icon */}
-            <IconButton
-              marginRight={"10px"}
-              aria-label="left-arrow"
-              variant="select-type-announcement:disabled"
-              borderRadius="full"
-              transform={"translate(0%, -50%)"}
-              zIndex={2}
-              onClick={() => scrollLeftMotorcycle()}
-            >
-              <BiLeftArrowAlt />
-            </IconButton>
+            {announcements.filter(
+              (el) =>
+                el.announcementType == "sale" &&
+                el.vehicleType == "motorcycle" &&
+                props.vehicleType == "Motos"
+            ).length > 3 && (
+              <IconButton
+                marginRight={"10px"}
+                aria-label="left-arrow"
+                variant="select-type-announcement:disabled"
+                borderRadius="full"
+                transform={"translate(0%, -50%)"}
+                zIndex={2}
+                onClick={() => scrollLeftMotorcycle()}
+              >
+                <BiLeftArrowAlt />
+              </IconButton>
+            )}
 
             <chakra.div
               className="carouselSaleMotorcycle"
@@ -284,17 +311,24 @@ export const SaleList = (props: ISaleListProps) => {
             </chakra.div>
 
             {/* Right Icon */}
-            <IconButton
-              marginLeft={"10px"}
-              aria-label="right-arrow"
-              variant="select-type-announcement:disabled"
-              borderRadius="full"
-              transform={"translate(0%, -50%)"}
-              zIndex={2}
-              onClick={() => scrollRightMotorcycle()}
-            >
-              <BiRightArrowAlt />
-            </IconButton>
+            {announcements.filter(
+              (el) =>
+                el.announcementType == "sale" &&
+                el.vehicleType == "motorcycle" &&
+                props.vehicleType == "Motos"
+            ).length > 3 && (
+              <IconButton
+                marginLeft={"10px"}
+                aria-label="right-arrow"
+                variant="select-type-announcement:disabled"
+                borderRadius="full"
+                transform={"translate(0%, -50%)"}
+                zIndex={2}
+                onClick={() => scrollRightMotorcycle()}
+              >
+                <BiRightArrowAlt />
+              </IconButton>
+            )}
           </Box>
         </chakra.section>
       )}
