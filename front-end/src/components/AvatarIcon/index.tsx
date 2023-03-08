@@ -9,6 +9,9 @@ import { Text } from "../Text";
 import { AvatarStyled } from "./style";
 import { ProfileContext } from "../../contexts/profile.context";
 import { useLocation, useParams } from "react-router-dom";
+import { DeleteComment } from "../../utils/comment.util";
+import { AnnouncementContext } from "../../contexts/announcement.context";
+import { CommentsContext } from "../../contexts/comments.context";
 
 export interface IAvatarProps {
   width?: string;
@@ -19,13 +22,15 @@ export interface IAvatarProps {
   user_id : string
   editable ? : boolean
   setIsEditable ? : Dispatch<SetStateAction<boolean>>
+  comment_id? : string
 }
 
 const AvatarIcon = (props: IAvatarProps) => {
 
   const [profileAuth,setProfileAuth] = useState({} as IProfile)
-  const {profile,setProfile} = useContext(ProfileContext)
+  const {profile} = useContext(ProfileContext)
   const {profile_id} = useParams()
+  const {setComments} = useContext(CommentsContext)
   useEffect(()=>{
     async function getProfile(){
       const response = await getSpecificUser(props.user_id)
@@ -58,7 +63,19 @@ const AvatarIcon = (props: IAvatarProps) => {
                     props.setIsEditable((value)=> !value)
                   }
                 }} size={"1.5rem"}></BiMessageAltEdit>
-                <AiFillDelete className="delete" size={"1.5rem"}></AiFillDelete>
+                <AiFillDelete onClick={async()=>{
+                  if(props.comment_id){
+                    const response = await DeleteComment(props.comment_id)
+                    if(response?.message == "success"){
+                      setComments((old)=>{
+                        const copy = [...old]
+                        const findComment = copy.findIndex((el)=> el.id == props.comment_id)
+                        copy.splice(findComment,1)
+                        return copy
+                      })
+                    }
+                  }
+                }} className="delete" size={"1.5rem"}></AiFillDelete>
               </>
                : <></>}
             </Flex>

@@ -83,7 +83,7 @@ export async function commentsDeleteController(req : Request,res : Response){
     try{
         const {id} = req.params
         await commentsDeleteService(id)
-        return res.status(204)
+        return res.status(204).json({message : "Comment has been deleted"})
     }
     catch(err){
         if(err instanceof ErrorResponse){
@@ -98,7 +98,7 @@ export async function commentsUpdateController(req : ICommentsRequest,res : Resp
         const {id} = req.params
         const data = req.data
         const response = await commentsUpdateService(id,data)
-        return res.json(response).status(200)
+        return res.json(response).status(204)
     }
     catch(err){
         if(err instanceof ErrorResponse){

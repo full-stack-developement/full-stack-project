@@ -45,7 +45,7 @@ export const AuctionList = (props : IAuctionListProps) => {
         >
           {announcements.map((announcement)=>{
             if(announcement.announcementType == "auction"){
-              return <ProductCardAuction user={announcement.user} id={announcement.id} coverImage={announcement.coverImage}
+              return <ProductCardAuction user_id={announcement.user.id} id={announcement.id} coverImage={announcement.coverImage}
               km={announcement.km} price={announcement.price} title={announcement.title} year={announcement.year} description={announcement.description}
               key={announcement.id}></ProductCardAuction>
             }

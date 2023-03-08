@@ -63,7 +63,8 @@ export async function updateComment(data: FieldValues,id_comment: string) {
       let responseDelete = {message : ""}
     try{
       const token = localStorage.getItem("$TOKEN")
-      await apiComment.delete(`/${id_comment}`,{headers : {Authorization : `Bearer ${token}`}});
+      const response = await apiComment.delete(`/${id_comment}`,{headers : {Authorization : `Bearer ${token}`}});
+      console.log(response)
       responseDelete.message = "success";
       return responseDelete;
     } catch (err) {

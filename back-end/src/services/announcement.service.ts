@@ -72,7 +72,7 @@ export const announcementListSpecificService = async (id: string) => {
 export const announcementUpdateService = async (id: string,data : IAnnouncement) => {
   try {
 
-  const announcement = await vehicleRepository.findOneBy({id : id})
+  const announcement = await vehicleRepository.findOne({where : {id : id},relations : {user  : true}})
 
   if (!announcement) {
     throw new Error("Announcement is not found"); //400
