@@ -89,7 +89,7 @@ export const SaleList = (props : ISaleListProps) => {
         >
           {announcements.map((announcement)=>{
             if(announcement.vehicleType == "car" && announcement.announcementType == "sale"){
-              return <ProductCard user={announcement.user} id={announcement.id} coverImage={announcement.coverImage}
+              return <ProductCard user_id={announcement.user.id} id={announcement.id} coverImage={announcement.coverImage}
               km={announcement.km} price={announcement.price} title={announcement.title} year={announcement.year} description={announcement.description}
               key={announcement.id}></ProductCard>
             }
@@ -125,7 +125,7 @@ export const SaleList = (props : ISaleListProps) => {
           >
             {announcements.map((announcement)=>{
               if(announcement.vehicleType == "motorcycle" && announcement.announcementType == "sale"){
-                return <ProductCard user={announcement.user} id={announcement.id} coverImage={announcement.coverImage}
+                return <ProductCard user_id={announcement.user.id} id={announcement.id} coverImage={announcement.coverImage}
                 km={announcement.km} price={announcement.price} title={announcement.title} year={announcement.year} description={announcement.description}
                 key={announcement.id}></ProductCard>
               }

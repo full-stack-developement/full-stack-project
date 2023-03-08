@@ -5,13 +5,13 @@ import { customTheme } from "../../theme";
 interface IDivProps{
   colorClass?: "avatarName-grey" | "avatarName-white";
   size : "big" | "small" | "medium"
+  width? : string;
 }
 
 export const AvatarStyled = styled.div<IDivProps>`
 
-
+  width : ${props=> props.width};
   display: flex;
-  width: max-content;
   flex-direction: ${props=>props.size != "small" ? "column" : "row"};
   align-items:  center;
   justify-content: center;
@@ -19,6 +19,20 @@ export const AvatarStyled = styled.div<IDivProps>`
   font-family: "Inter", sans-serif;
   font-weight: 500;
   font-size: 14px;
+
+  .edit{
+    :hover{
+      cursor : pointer;
+      opacity: 0.5;
+    }
+  }
+
+  .delete{
+    :hover{
+      cursor: pointer;
+      opacity: 0.5;
+    }
+  }
 
   .avatarLetter {
     ${props=> props.size == "big" &&

@@ -7,6 +7,7 @@ import { Text } from "../Text";
 interface ITextArea{
   text : string
   placeholder : string;
+  buttonText? : string;
   comment? : boolean
   register? : UseFormRegisterReturn<"description" | "content">
 }
@@ -30,7 +31,7 @@ export const TextArea = (props : ITextArea) => {
       </Textarea>
       {props.comment && 
       <Box bottom="0" right="0" position="absolute" padding={"0.5rem"}>
-        <Button type="submit" variant="select-type-announcement:enable" text="Comentar" size="small-auto"></Button>
+        <Button type="submit" variant="select-type-announcement:enable" text={props.buttonText ? props.buttonText : "Comentar"} size="small-auto"></Button>
       </Box>
       }
     </Box>
