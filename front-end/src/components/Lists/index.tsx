@@ -1,4 +1,4 @@
-import { chakra, Text } from "@chakra-ui/react";
+import { Box, chakra, Text } from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
 import { AnnouncementContext } from "../../contexts/announcement.context";
 import { ProductCardAuction } from "../../components/ProductCardAuction";
@@ -61,7 +61,11 @@ export const SaleList = (props : ISaleListProps) => {
 
   return (
     <>
-    {announcements.filter((el)=>el.announcementType == "sale" && el.vehicleType == "car" && props.vehicleType == "Carros").length > 0 &&
+    {announcements.length == 0 ?
+      <Box marginTop={"2rem"} ml={"50rem"}>
+        <Text variant={"title"}>Sem anúncios no momento.</Text>
+      </Box>:
+    announcements.filter((el)=>el.announcementType == "sale" && el.vehicleType == "car" && props.vehicleType == "Carros").length > 0 &&
       <chakra.section position={"relative"}
         mr={"2rem"}
         ml={"2rem"}
