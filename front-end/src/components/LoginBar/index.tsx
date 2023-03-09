@@ -57,10 +57,10 @@ export const LoginBar = () => {
             <GiHamburgerMenu size={"2rem"}></GiHamburgerMenu>
           </MenuButton>
           <MenuList width={"max-content"}>
-              <MenuItem>
+              <MenuItem onClick={() => navigate("/login")}>
                 Fazer Login
               </MenuItem>
-              <MenuItem>
+              <MenuItem onClick={() => navigate("/register")}>
                 Registrar
               </MenuItem>
           </MenuList>
