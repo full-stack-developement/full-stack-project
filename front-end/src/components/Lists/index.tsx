@@ -123,36 +123,7 @@ export const SaleList = (props: ISaleListProps) => {
 
   return (
     <>
-    {announcements.length == 0 ?
-      <Box marginTop={"2rem"} ml={"50rem"}>
-        <Text variant={"title"}>Sem anúncios no momento.</Text>
-      </Box>:
-    announcements.filter((el)=>el.announcementType == "sale" && el.vehicleType == "car" && props.vehicleType == "Carros").length > 0 &&
-      <chakra.section position={"relative"}
-        mr={"2rem"}
-        ml={"2rem"}
-        className="carousel"
-        overflowX="scroll"
-        overscroll="auto"
-      >
-        <Text
-          fontFamily="fonts.lexend"
-          fontWeight="600"
-          fontSize="24px"
-          lineHeight="30px"
-          marginTop="30px"
-          marginBottom="30px"
-        >
-          {props.vehicleType}
-        </Text>
-        <chakra.div
-          width="fit-content"
-          height="400px"
-          display="flex"
-          flexDirection="row"
-          flexWrap="nowrap"
-          gap="15px"
-      {announcements.filter(
+    {announcements.filter(
         (el) =>
           el.announcementType == "sale" &&
           el.vehicleType == "car" &&

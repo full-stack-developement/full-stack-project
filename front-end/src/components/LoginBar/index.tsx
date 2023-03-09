@@ -29,6 +29,7 @@ export const LoginBar = () => {
 
   return (
     <chakra.div
+      mr={"1rem"}
       pl="44px"
       borderLeft="2px solid"
       borderLeftColor={customTheme.colors.greyScale.grey6}

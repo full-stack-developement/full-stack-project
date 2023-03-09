@@ -42,7 +42,6 @@ const textTheme: ComponentStyleConfig = {
       fontSize: "Heading-6-600.size",
     },
     "title": {
-      position : "absolute",
       color: "greyScale.grey1",
       fontFamily: "lexend",
       fontWeight: "Heading-6-600.weight",
