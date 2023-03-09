@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledDiv = styled.div`
   position: relative;
-  width: 100%;
+  width: max-content;
 
   .box__content {
     z-index: 1;
@@ -38,6 +38,7 @@ export const StyledDiv = styled.div`
       }
     }
     .navigation {
+      width: 100%;
       padding: 1rem;
       background-color: ${(props) => props.theme.colors.brand.brand1};
       font-family: ${(props) => props.theme.fonts.inter};

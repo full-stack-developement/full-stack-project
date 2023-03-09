@@ -47,7 +47,7 @@ export function ProductCardAuction(props : IProductCardAuctionProps) {
           ></InfoVehicle>
         </div>
         <div className="navigation">
-          {profile.id == props.user_id ? <ButtonGroup>
+          {profile.id == props.user_id ? <ButtonGroup width={"100%"}>
             <ModalAnnouncementUpdate type="auction" vehicle_id={props.id}></ModalAnnouncementUpdate>
             <Button onClick={()=>{
       navigate(`/vehicle/${props.id}`)

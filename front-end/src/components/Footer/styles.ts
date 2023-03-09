@@ -13,10 +13,14 @@ export const Footer1 = styled.div`
 
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 45px 59px;
   gap: 10px;
+
+  @media (min-width : 800) {
+    justify-content: space-between;
+  }
 
   button {
     background-color: ${() => customTheme.colors.greyScale.grey1};

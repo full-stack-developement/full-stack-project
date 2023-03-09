@@ -26,10 +26,9 @@ export const AuctionList = (props: IAuctionListProps) => {
       {announcements.filter((el) => el.announcementType == "auction").length >
         0 && (
         <chakra.section
+        width={"100%"}
           className="carousel"
           position={"relative"}
-          mr={"2rem"}
-          ml={"2rem"}
           mb={"3rem"}
         >
           <Text
