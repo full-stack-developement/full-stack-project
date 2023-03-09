@@ -18,7 +18,7 @@ export interface IAvatarProps {
 
   return (
     <>{profile.full_name != undefined ? 
-      <Flex alignItems={"flex-end"} gap={"9px"}>
+      <Flex mr={"1rem"} alignItems={"flex-end"} gap={"9px"}>
         <AvatarStyled colorClass={props.colorClass} size={props.size}>
           <div className='avatarLetter'>{profile.full_name[0]}</div>
           {props.size == "medium" ? <Text mt="1.5rem" text={profile.full_name} variant="title-card" ></Text> : 
