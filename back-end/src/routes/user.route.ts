@@ -23,7 +23,7 @@ userRoute.post(
   userLoginController
 );
 userRoute.delete(routeName, AuthTokenCheck, userDeleteController);
-userRoute.get(routeName + "/:id", AuthTokenCheck, userListSpecificController); //
+userRoute.get(routeName + "/:id",userListSpecificController); //
 userRoute.get("/profile",AuthTokenCheck, userListSpecificProfileController);
 userRoute.patch(routeName,AuthTokenCheck,schemaValidationMiddleware(userUpdateSchema),userUpdateController);
 
