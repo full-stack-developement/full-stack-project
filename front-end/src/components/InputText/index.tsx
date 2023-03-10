@@ -4,6 +4,7 @@ import { customTheme } from "../../theme";
 
 interface IInputText{
   text : string
+  width? : string;
   placeholder : string;
   register? : UseFormRegisterReturn<"cep"|"state"|"city"|"complement"|"number"|"street"|"description"|"full_name"|"cpf"|"phone"|"birthDate"|"email"|"password"|"title"|"year"|"km"|"price"|"coverImage">
   type? : | 'button'
@@ -29,14 +30,16 @@ interface IInputText{
   | 'url'
   | 'week'
   | (string & {});
+  TextAlign? : "center" | "end" | "justify" | "left" | "match-parent" | "right" | "start";
 }
 
 
 export const InputText = (props: IInputText) => {
   return (
     <Box>
-      <FormLabel variant={"forms-label"} htmlFor={props.text}>{props.text}</FormLabel>
+      <FormLabel textAlign={props.TextAlign} variant={"forms-label"} htmlFor={props.text}>{props.text}</FormLabel>
       <Input
+        width={props.width}
         type={props.type}
         id={props.text}
         {...props.register}

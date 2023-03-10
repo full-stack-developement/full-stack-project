@@ -2,6 +2,7 @@ import { Box, MenuItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalF
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useContext, useEffect } from "react"
 import { useForm } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
 import { ProfileContext } from "../../contexts/profile.context"
 import { userUpdateSchema } from "../../schemas/user.schema"
 import { updateUser } from "../../utils/user.util"

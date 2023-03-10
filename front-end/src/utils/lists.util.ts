@@ -1,29 +1,47 @@
 export function scrollLeftAuction() {
   const left = document.querySelector(".carouselAuctionCardsContainer");
-  left?.scrollBy(-700, 0);
+  const childrenScroll = left?.children.item(1)?.scrollWidth
+  if(childrenScroll){
+    console.log(left)
+    left?.scrollBy(-childrenScroll as number, 0);
+  }
 }
 
 export function scrollRightAuction() {
   const right = document.querySelector(".carouselAuctionCardsContainer");
-  right?.scrollBy(700, 0);
+  const childrenScroll = right?.children.item(1)?.scrollWidth
+  if(childrenScroll){
+    right?.scrollBy(childrenScroll as number, 0);
+  }
 }
 
 export function scrollLeftCar() {
   const leftCar = document.querySelector(".carouselSaleCars");
-  leftCar?.scrollBy(-350, 0);
+  const childrenScroll = leftCar?.children.item(1)?.scrollWidth
+  if(childrenScroll){
+    leftCar?.scrollBy(-childrenScroll as number, 0);
+  }
 }
 
 export function scrollRightCar() {
-  const right = document.querySelector(".carouselSaleCars");
-  right?.scrollBy(350, 0);
+  const rightCar = document.querySelector(".carouselSaleCars");
+  const childrenScroll = rightCar?.children.item(1)?.scrollWidth
+  if(childrenScroll){
+    rightCar?.scrollBy(childrenScroll as number, 0);
+  }
 }
-
 export function scrollLeftMotorcycle() {
   const leftMotorcycle = document.querySelector(".carouselSaleMotorcycle");
-  leftMotorcycle?.scrollBy(-350, 0);
+  const childrenScroll = leftMotorcycle?.children.item(1)?.scrollWidth
+  if(childrenScroll){
+    leftMotorcycle?.scrollBy(-childrenScroll as number, 0);
+  }
 }
 
 export function scrollRightMotorcycle() {
-  const right = document.querySelector(".carouselSaleMotorcycle");
-  right?.scrollBy(350, 0);
+  const rightMotorcycle = document.querySelector(".carouselSaleMotorcycle");
+  const childrenScroll = rightMotorcycle?.children.item(1)?.scrollWidth
+  if(childrenScroll){
+    rightMotorcycle?.scrollBy(childrenScroll as number, 0);
+  }
 }

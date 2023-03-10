@@ -35,18 +35,21 @@ const Home = () => {
           flexDirection="column"
           alignItems="center"
           justifyContent="space-evenly"
+          padding={"1rem"}
+          gap={"1rem"}
         >
           <Flex
             flexDirection="column"
             alignItems="center"
+            justifyContent={"center"}
+            textAlign={"center"}
             fontFamily="fonts.lexend"
             color="greyScale.grey10"
-            fontSize="44px"
+            fontSize={{phone: "2rem", desktopSmall : "3rem"}}
             fontWeight="700"
-            lineHeight="55px"
           >
             <Text>Velocidade e experiência em um </Text>
-            <Text>{""} lugar feito para você</Text>
+            <Text>lugar feito para você</Text>
           </Flex>
           <Text
             textAlign="center"
@@ -78,7 +81,7 @@ const Home = () => {
           </Flex>
         </Flex>
       </Flex>
-      <chakra.main className="main" margin="0 auto 0 60px" overflow="hidden">
+      <chakra.main className="main" margin={{phone : "0 1rem", desktopLarge : "0 60px"}} overflow="hidden">
         <AuctionList />
         <Box id="carSale">
           <SaleList vehicleType="Carros" />

@@ -32,7 +32,7 @@ export function AvatarContainer(props : IAvatarContainerProps){
       if(props.user_id){
         getProfile()
       }
-    },[profile_id])
+    },[profile_id,profile])
 
     return( 
         <Flex position={"relative"} justifyContent={"center"}>

@@ -54,17 +54,17 @@ export function ModalAnnouncementCreate(){
                 <Text text="Informações do veículo" variant="title-content-form"></Text>
                     <InputText register={{...register("title")}} placeholder="Digitar título" text="Título"></InputText>
                     {errors.title && <Text variant="errors-form" text={errors.title.message as string}></Text> }
-                <Flex gap={"1rem"} mt={"1rem"}>
+                <Flex mt={"1rem"}>
                     <Box>
-                        <InputText register={{...register("year")}} placeholder="Digitar ano" text="Ano"></InputText>
+                        <InputText width="90%" register={{...register("year")}} placeholder="Digitar ano" text="Ano"></InputText>
                         {errors.year && <Text variant="errors-form" text={errors.year.message as string}></Text> }
                     </Box>
                     <Box>
-                        <InputText register={{...register("km")}} placeholder="0" text="Quilometragem"></InputText>
+                        <InputText width="90%" register={{...register("km")}} placeholder="0" text="Quilometragem"></InputText>
                         {errors.km && <Text variant="errors-form" text={errors.km.message as string}></Text> }
                     </Box>
                     <Box>
-                        <InputText register={{...register("price")}} placeholder={"0"} text={type == "sale" ? "Preço" : "Lance inicial"}></InputText>
+                        <InputText width="90%" TextAlign="center" register={{...register("price")}} placeholder={"0"} text={type == "sale" ? "Preço" : "Lance inicial"}></InputText>
                         {errors.price && <Text variant="errors-form" text={errors.price.message as string}></Text> }
                     </Box>
                 </Flex>

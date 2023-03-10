@@ -39,7 +39,7 @@ const AvatarIcon = (props: IAvatarProps) => {
       }
     }
     getProfile()
-  },[profile_id])
+  },[profile_id,profile])
 
   return (
     <>{profileAuth.full_name != undefined ? 

@@ -26,7 +26,8 @@ export const AuctionList = (props: IAuctionListProps) => {
       {announcements.filter((el) => el.announcementType == "auction").length >
         0 && (
         <chakra.section
-        width={"100%"}
+          width={"100%"}
+          height={"max-content"}
           className="carousel"
           position={"relative"}
           mb={"3rem"}
@@ -45,15 +46,19 @@ export const AuctionList = (props: IAuctionListProps) => {
           <Box
             className="carouselAuctionContainer"
             display={"flex"}
+            width={"100%"}
             flexDirection={"row"}
             alignItems={"center"}
-            justifyContent={"space-between"}
+            justifyContent={"flex-start"}
+            position={"relative"}
           >
             {/* Left Icon */}
             {announcements.filter((el) => el.announcementType == "auction")
               .length > 1 && (
               <IconButton
-                marginRight={"10px"}
+                opacity={0.2}
+                _hover={{opacity : 1}}
+                position={"absolute"}
                 aria-label="left-arrow"
                 variant="select-type-announcement:disabled"
                 borderRadius="full"
@@ -67,7 +72,6 @@ export const AuctionList = (props: IAuctionListProps) => {
 
             <chakra.div
               className="carouselAuctionCardsContainer"
-              maxWidth="fit-content"
               height="400px"
               display="flex"
               flexDirection="row"
@@ -99,7 +103,10 @@ export const AuctionList = (props: IAuctionListProps) => {
             {announcements.filter((el) => el.announcementType == "auction")
               .length > 1 && (
               <IconButton
-                marginLeft={"10px"}
+                position={"absolute"}
+                opacity={0.2}
+                _hover={{opacity : 1}}
+                right={0}
                 aria-label="right-arrow"
                 variant="select-type-announcement:disabled"
                 borderRadius="full"
@@ -130,8 +137,6 @@ export const SaleList = (props: ISaleListProps) => {
       ).length > 0 && (
         <chakra.section
           position={"relative"}
-          mr={"2rem"}
-          ml={"2rem"}
           className="carousel"
         >
           <Text
@@ -147,10 +152,12 @@ export const SaleList = (props: ISaleListProps) => {
 
           <Box
             className="carouselSaleContainer"
+            width={"100%"}
             display={"flex"}
             flexDirection={"row"}
             alignItems={"center"}
-            justifyContent={"space-between"}
+            justifyContent={"flex-start"}
+            position={"relative"}
           >
             {/* Left Icon */}
             {announcements.filter(
@@ -158,10 +165,12 @@ export const SaleList = (props: ISaleListProps) => {
                 el.announcementType == "sale" &&
                 el.vehicleType == "car" &&
                 props.vehicleType == "Carros"
-            ).length > 3 && (
+            ).length > 0 && (
               <IconButton
-                marginRight={"10px"}
-                aria-label="left-arrow"
+                opacity={0.2}
+                _hover={{opacity : 1}}
+                marginLeft={"10px"}
+                aria-label="right-arrow"
                 variant="select-type-announcement:disabled"
                 borderRadius="full"
                 transform={"translate(0%, -50%)"}
@@ -210,8 +219,10 @@ export const SaleList = (props: ISaleListProps) => {
                 el.announcementType == "sale" &&
                 el.vehicleType == "car" &&
                 props.vehicleType == "Carros"
-            ).length > 3 && (
+            ).length > 0 && (
               <IconButton
+                opacity={0.2}
+                _hover={{opacity : 1}}
                 marginLeft={"10px"}
                 aria-label="right-arrow"
                 variant="select-type-announcement:disabled"
@@ -235,8 +246,6 @@ export const SaleList = (props: ISaleListProps) => {
       ).length > 0 && (
         <chakra.section
           position={"relative"}
-          mr={"2rem"}
-          ml={"2rem"}
           className="carousel"
         >
           <Text
@@ -252,10 +261,12 @@ export const SaleList = (props: ISaleListProps) => {
 
           <Box
             className="carouselSaleContainer"
+            width={"100%"}
             display={"flex"}
             flexDirection={"row"}
             alignItems={"center"}
-            justifyContent={"space-between"}
+            justifyContent={"flex-start"}
+            position={"relative"}
           >
             {/* Left Icon */}
             {announcements.filter(
@@ -263,14 +274,16 @@ export const SaleList = (props: ISaleListProps) => {
                 el.announcementType == "sale" &&
                 el.vehicleType == "motorcycle" &&
                 props.vehicleType == "Motos"
-            ).length > 3 && (
+            ).length > 0 && (
               <IconButton
-                marginRight={"10px"}
-                aria-label="left-arrow"
-                variant="select-type-announcement:disabled"
-                borderRadius="full"
-                transform={"translate(0%, -50%)"}
-                zIndex={2}
+              opacity={0.2}
+              _hover={{opacity : 1}}
+              marginLeft={"10px"}
+              aria-label="right-arrow"
+              variant="select-type-announcement:disabled"
+              borderRadius="full"
+              transform={"translate(0%, -50%)"}
+              zIndex={2}
                 onClick={() => scrollLeftMotorcycle()}
               >
                 <BiLeftArrowAlt />
@@ -315,14 +328,16 @@ export const SaleList = (props: ISaleListProps) => {
                 el.announcementType == "sale" &&
                 el.vehicleType == "motorcycle" &&
                 props.vehicleType == "Motos"
-            ).length > 3 && (
+            ).length > 0 && (
               <IconButton
-                marginLeft={"10px"}
-                aria-label="right-arrow"
-                variant="select-type-announcement:disabled"
-                borderRadius="full"
-                transform={"translate(0%, -50%)"}
-                zIndex={2}
+              opacity={0.2}
+              _hover={{opacity : 1}}
+              marginLeft={"10px"}
+              aria-label="right-arrow"
+              variant="select-type-announcement:disabled"
+              borderRadius="full"
+              transform={"translate(0%, -50%)"}
+              zIndex={2}
                 onClick={() => scrollRightMotorcycle()}
               >
                 <BiRightArrowAlt />

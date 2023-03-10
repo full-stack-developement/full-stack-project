@@ -6,14 +6,14 @@ export const VehicleInfoContainer = styled.div`
 
   display: flex;
   flex-direction: row;
+  gap: 1rem;
+  flex-wrap: wrap;
   align-items: center;
 
   .vehicleInfoDetails {
     width: 100%;
-
     display: flex;
     flex-direction: row;
-
     gap: 10px;
   }
 
